@@ -1,0 +1,51 @@
+Report on 11/10/23
+By- Kavya sri
+ G-62
+
+Cryptocurrencies using Blockchain:
+sources:
+https://www.ibm.com/topics/blockchain
+https://www.youtube.com/watch?v=ENrjn-lD1e8
+https://www.forbes.com/sites/forbestechcouncil/2022/10/20/advantages-and-disadvantages-of-blockchain-technology/?sh=5b1569403453
+https://aws.amazon.com/blockchain/decentralization-in-blockchain/#:~:text=In%20blockchain%2C%20decentralization%20refers%20to,thereof)%20to%20a%20distributed%20network.
+
+       What is blockchain?
+  
+Blockchain is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a business network. An asset can be tangible (a house, car, cash, land) or intangible (intellectual property, patents, copyrights, branding). Virtually anything of value can be tracked and traded on a blockchain network, reducing risk and cutting costs for all involved.
+  It is basically a technique of storing information.                                                                                                                                          
+Blockchain stores data in decentralised manner
+Every block has a unique code which changes when any of the information changes in the block(Hash)
+Every block stores the hash of the previous block
+Tampering data will change the whole orientation of the block hence tampering can be identified and discarded
+
+
+
+        Purpose of Blockchain
+Every business runs on two factors: fast and accurate transfer of information
+Blockchain usage can lead to fast and accurate data transfer
+A blockchain network can track orders, payments, accounts, production and much more. And because members share a single view of the truth, you can see all details of a transaction end to end, giving you greater confidence, as well as new efficiencies and opportunities.
+
+
+   Advantages of Blockchain
+Accurate information can be received in a members only network by the member
+The data received by the member is confidential 
+Consensus on data accuracy is required from all network members, and all validated transactions are immutable because they are recorded permanently. No one, not even a system administrator, can delete a transaction.
+The time wasted on maintaining and  recording data/transactions is saved
+Blockchain technology is free from censorship since it does not have control of any single party. Therefore, no single authority (including governments) can interrupt the operation of the network
+
+
+
+
+Disadvantages of Blockchain
+
+High implementation cost. Blockchain is costlier compared to a traditional database. Additionally, businesses need proper planning and execution to integrate blockchain into their process.
+Data modification. Blockchain technology does not allow easy modification of data once recorded, and it requires rewriting the codes in all of the blocks, which is time-consuming and expensive. The downside of this feature is that it is hard to correct a mistake or make any necessary adjustments.
+Blockchain also relies on a consensus mechanism to validate transactions. Some consensus mechanisms, such as proof of work, have a low transaction throughput. Finally, there is redundancy, where the network requires each node to play a crucial role in verifying and storing each transaction.
+
+
+Decentralisation
+
+In blockchain, decentralisation refers to the transfer of control and decision-making from a centralised entity (individual, organisation, or group thereof) to a distributed network. Decentralised networks strive to reduce the level of trust that participants must place in one another, and deter their ability to exert authority or control over one another in ways that degrade the functionality of the network.Decentralization is not a new concept. When building a technology solution, three primary network architectures are typically considered: centralised, distributed, and decentralised. While blockchain technologies often make use of decentralised networks, a blockchain application itself cannot be categorised simply as being decentralised or not. Rather, decentralisation is a sliding scale and should be applied to all aspects of a blockchain application. By decentralising the management of and access to resources in an application, greater and fairer service can be achieved. Decentralisation typically has some tradeoffs such as lower transaction throughput, but ideally, the tradeoffs are worth the improved stability and service levels they produce.
+
+
+
