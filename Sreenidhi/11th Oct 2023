@@ -1,63 +1,72 @@
-Name: Sreenidhi
-Group: G62
-Date: 11-10-2023
+CRYPTOCURRENCY  USING  BLOCKCHAIN  [G - 62 ] 
+Daily Report
 
-My Work Summary Points
-( I have learnt these points, which I have summarised below )
-
-Important Points: 
-
-Every computer in the network must agree upon each new block and the chain as a whole.
-
-These computers are known as "nodes". Nodes ensure everyone interacting with the blockchain has the same data.
-
-Cryptocurrencies do not have centralized gatekeepers to verify the accuracy of new transactions and data that are added to the blockchain. Instead, they rely on a distributed network of participants to validate incoming transactions and add them as new blocks on the chain
-
-To accomplish this distributed agreement, blockchains need a 
-consensus mechanism.
-
-( But what is meant by Consensus Mechanism? 
-A consensus mechanism is any method used to achieve agreement, trust, and security across a decentralized computer network. 
-In the context of blockchains and cryptocurrencies, proof-of-work (PoW) and proof-of-stake (PoS) are two of the most prevalent consensus mechanisms.)
+Member: Sreenidhi 
+Date: 7th Oct 2023 
 
 
+My Contribution:
 
+I have browsed through various websites and youtube channels from where I gathered the following information from these sources :
 
-Proof of Work ( PoW ) : 
-Proof of work is a consensus mechanism to choose which of these network participants—called miners—are allowed to handle the lucrative task of verifying new data. 
-It’s lucrative because the miners are rewarded with new crypto when they accurately validate the new data and don’t cheat the system.
-The system requires miners to compete with each other to be the first to solve arbitrary mathematical puzzles to prevent anybody from gaming the system. The winner of this race is selected to add the newest batch of data or transactions to the blockchain.
-Winning miners only receive their reward of new cryptocurrency after other participants in the network verify that the data being added to the chain is correct and valid.
-Cryptocurrencies like Bitcoin, Dogecoin etc use Proof of Work.
+Source links: Source 1
+		    Source 2
+		    Source 3
+	              Source 4
+	              Source 5
 
+What is meant by Blockchain?
+Blockchain is a method of securely recording data or information which makes it hard to hack or change the system.
+Blockchain is simply a virtual record of transactions that is replicated and distributed throughout the blockchain’s complete network of computer systems
 
-Proof of Stake ( PoS ) : 
-It is a method used in blockchain technology to confirm new cryptocurrency transactions.
-It acts as a mechanism ensuring that the data stored on the network is valid and verified in the absence of centralised authority.
-Ethereum recently transitioned from PoW to PoS, cutting the energy consumption ( over 99 percent ).
-Ethereum is now the largest blockchain using PoS as its consensus mechanism.
+What is the Purpose of Blockchain?
+The purpose of blockchain technology is to provide a secure, transparent, and decentralized way to record transactions and manage data. 
+At its core, a blockchain is a distributed and tamper-proof digital ledger that can be used to store any type of data, not just financial transactions.
 
+What does a Block mean in Blockchain?
+Blocks are like Records that store valid transactions like a page of a record book and are hashed and encrypted into a Hash tree or Merkle tree.
 
+What does each Block in Blockchain comprise of?
+Each Block on the chain comprises a number of transactions and whenever a new transaction happens on blockchain, a record of that transaction is added to ledger of every participant.
+Each block consists if  1) Block Header 2) List of Transactions
+ 3) Block Hash  4) Previous Block’s Hash.
 
+What are the advantages of Blockchain? 
+Information HIstroy can be tracked
+Information tracking is easy
+Keeping Information Unique became easy
+Difficult to leak information
+Elimination of middle man work
+Added layers of security
 
-Few Differences Ethereum Vs Bitcoin : 
-Ethereum uses a Proof of Stake (POS) based consensus mechanism whereas Bitcoin uses Proof of Work (POW) based consensus mechanism.
-Ethereum Blockchain does not have a block limit, whereas Bitcoin Blockchain has a blocklimit of 1MB.
-The Block time of Ethereum is 14 to 15 seconds, whereas the Block time of Bitcoin is 10 minutes.
-Ethereum’s coin is called as Ether, whereas Bitcoin’s coin is called as BTC.
+What are the disadvantages of Blockchain?
+Scalability, one of the major drawback as it cannot be scaled due the standard fixed size of the information storing block.
+Time-Consuming, it is a time consuming process if we want to add the next block in the chain.
+Storage, increasing number of transactions will require more storage and hence there is a constraint for storage.
 
+Limitations of Database?
+Expensive
+High Complexity
+Vast Size
+Database Failure
+Need of Skilled Staff
+Lower Efficiency
 
-The source links which I have viewed:  
+What is meant by decentralization in cryptocurrency?
+Decentralized means it is controlled by several authorities rather than one single authority.
+In blockchain, decentralization refers to the transfer of control and decision-making from a centralized entity (individual, organization, or group thereof) to a distributed network.
 
-For Differences: 
-https://www.geeksforgeeks.org/difference-between-bitcoin-and-ethereum/
+Benefits of Decentralization?
+It provides a Trustless Environment.
+It optimizes resource distribution.
+Less Burden to Higher Management 
+Scope of specialisation
 
-Blockchain Developer: 
-https://www.simplilearn.com/tutorials/blockchain-tutorial/what-is-solidity-programming#:~:text=Solidity%20is%20an%20object%2Doriented,records%20in%20the%20blockchain%20system.
-
-I have also viewed Forbes Advisor Website for additional Information regarding Blockchain, Ethereum.
-
-
+Disadvantages of Decentralization?
+Requires huge capital
+Chances of Misunderstanding
+Difficult to maintain coordination
+Not appropriate for small companies
 
 
 
