@@ -147,5 +147,20 @@ contract RealEstate {
             }
             return userProductReviews;
         }
+
+    function getProperty(uint256 id) external view returns(uint256, address, uint256, string memory, string memory, string memory, string memory, string memory)
+    {
+        Property memory property = properties[id];
+        return(
+            property.productID,
+            property.owner,
+            property.price,
+            property.propertyTitle,
+            property.category,
+            property.images,
+            property.propertyAddress,
+            property.description
+        );
+    } 
    
 }
