@@ -67,5 +67,68 @@ event ReviewLiked(uint256 indexed productId,uint256 indexed reviewIndex, address
         property.description=_description;
         property.propertyTitle=_propertyTitle;
         return productId;
+    }
+ function buyProperty(uint256 id, address buyer) external payable{
+        uint256 amount = msg.value;
+        require(amount >= properties[id].price, "Insufficient funds");
+        Property storage property = properties[id];
+        (bool sent,) = payable(property.owner).call{value: amount}("");
+        if(sent){
+            property.owner = buyer;
+            emit PropertySold(id, property.owner, buyer, amount);
+        }
+            //shd add commission
+
+    }
+    function getAllProperties() public view returns(Property[] memory){
+        uint256 itemCount = propertyIndex;
+    
+        Property[] memory items = new Property[](itemCount);
+        for(uint256 currentIndex = 0; currentIndex < itemCount; currentIndex){
+            
+            Property storage currentItem = properties[currentIndex+1];
+            items[currentIndex]=currentItem;
+        }
+        return items;
     } 
+    function getUserProperties (address user) external view returns(Property [] memory){
+        uint256 totalItems=propertyIndex;
+        uint256 itemCount =0;
+        uint256 curr=0;
+        for(uint256 i=0;i<totalItems;i++)
+        {
+            if(properties[i+1].owner==user)
+            {
+                itemCount+=1;
+            }
+
+        }
+        Property[] memory item= new Property[](itemCount);
+        for(uint256 i=0;i<totalItems;i++)
+        {
+            if(properties[i+1].owner==user)
+            {
+                Property storage currentItem = properties[curr];
+                item[curr]=currentItem;
+                curr+=1;
+            }
+        }
+        return item;
+
+    }
+    function addReview(uint256 productId,uint256 rating,string calldata comment,address user)external{
+        Property storage property=properties[productId];
+        property.revieweers.push(user);
+        property.reviews.push(comment);
+        reviews[productId].push(Review(user,productId,rating,comment,0));
+        userReviews[user].push(productId);
+        products[productId].totalRating +=rating;
+        products[productId].totalRating+=rating;
+        products[productId].numReviews++;
+        emit ReviewAdded(productId,user,rating,comment);
+        reviewsCounter++;
+
+    }
+  
+    
 }
