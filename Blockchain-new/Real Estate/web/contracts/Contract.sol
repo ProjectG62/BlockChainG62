@@ -40,7 +40,7 @@ contract RealEstate {
     mapping(uint256 => Product) private products;
     uint256 public reviewsCounter;
     event ReviewAdded(uint256 indexed productId, address indexed reviewer,uint256 rating, string comment);
-event ReviewLiked(uint256 indexed productId,uint256 indexed reviewIndex, address indexed liker, uint256 likes);
+    event ReviewLiked(uint256 indexed productId,uint256 indexed reviewIndex, address indexed liker, uint256 likes);
 
     function listProperty(address owner, uint256 price,string memory _propertyTitle,string memory _category, string memory _images, string memory _propertyAddress,string memory _description)external returns(uint256)
     {
@@ -68,7 +68,7 @@ event ReviewLiked(uint256 indexed productId,uint256 indexed reviewIndex, address
         property.propertyTitle=_propertyTitle;
         return productId;
     }
- function buyProperty(uint256 id, address buyer) external payable{
+    function buyProperty(uint256 id, address buyer) external payable{
         uint256 amount = msg.value;
         require(amount >= properties[id].price, "Insufficient funds");
         Property storage property = properties[id];
@@ -129,6 +129,8 @@ event ReviewLiked(uint256 indexed productId,uint256 indexed reviewIndex, address
         reviewsCounter++;
 
     }
-  
-    
+    function getProductReviews(uint256 productId) external view returns(Review[] memory){
+        return reviews[productId];
+    }
+   
 }
