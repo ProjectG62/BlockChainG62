@@ -44,20 +44,21 @@ contract RealEstate {
 
     function listProperty(address owner, uint256 price,string memory _propertyTitle,string memory _category, string memory _images, string memory _propertyAddress,string memory _description)external returns(uint256)
     {
-    require(price>0,"Price must be greater than 0.");
-    uint256 productId = propertyIndex++;
-    Property storage property = properties[productId];
-    property.productID=productId;
-    property.owner =owner;
-    property.price=price;
-    property.propertyTitle=_propertyTitle;
-    property.category=_category;
-    property.images=_images;
-    property.propertyAddress=_propertyAddress;
-    property.description=_description;
-    emit PropertyListed(productId,owner,price);
-    return productId;
+        require(price>0,"Price must be greater than 0.");
+        uint256 productId = propertyIndex++;
+        Property storage property = properties[productId];
+        property.productID=productId;
+        property.owner =owner;
+        property.price=price;
+        property.propertyTitle=_propertyTitle;
+        property.category=_category;
+        property.images=_images;
+        property.propertyAddress=_propertyAddress;
+        property.description=_description;
+        emit PropertyListed(productId,owner,price);
+        return productId;
     }
+
     function updateProperty(address owner,uint256 productId,string memory _propertyTitle,string memory _category, string memory _images, string memory _propertyAddress,string memory _description)external returns(uint256){
         Property storage property = properties[productId];
         require(property.owner==owner,"you are not the owner");
@@ -68,6 +69,7 @@ contract RealEstate {
         property.propertyTitle=_propertyTitle;
         return productId;
     }
+
     function buyProperty(uint256 id, address buyer) external payable{
         uint256 amount = msg.value;
         require(amount >= properties[id].price, "Insufficient funds");
@@ -129,9 +131,11 @@ contract RealEstate {
         reviewsCounter++;
 
     }
+
     function getProductReviews(uint256 productId) external view returns(Review[] memory){
         return reviews[productId];
     }
+
     function getUserReviews(address user) external view returns (Review[] memory)
         {
             uint256 totalReviews = userReviews[user].length;
@@ -147,12 +151,14 @@ contract RealEstate {
             }
             return userProductReviews;
         }
+
     function likeReview(uint256 productId, uint256 reviewIndex, address user) external
     {
         Review storage review = reviews[productId][reviewIndex];
         review.likes++;
         emit ReviewLiked(productId, reviewIndex, user, review.likes);
     }
+
     function getHighestratedProduct() external view returns (uint256){
         uint256 highestRating = 0;
         uint256 highestRatedProductId = 0;
