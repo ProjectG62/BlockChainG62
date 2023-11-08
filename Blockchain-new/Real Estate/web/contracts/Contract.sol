@@ -28,6 +28,7 @@ contract RealEstate {
         string comment;
         uint256 likes;
     }
+
     struct Product{
         uint256 productId;
         uint256 totalRating;
@@ -44,19 +45,19 @@ contract RealEstate {
 
     function listProperty(address owner, uint256 price,string memory _propertyTitle,string memory _category, string memory _images, string memory _propertyAddress,string memory _description)external returns(uint256)
     {
-    require(price>0,"Price must be greater than 0.");
-    uint256 productId = propertyIndex++;
-    Property storage property = properties[productId];
-    property.productID=productId;
-    property.owner =owner;
-    property.price=price;
-    property.propertyTitle=_propertyTitle;
-    property.category=_category;
-    property.images=_images;
-    property.propertyAddress=_propertyAddress;
-    property.description=_description;
-    emit PropertyListed(productId,owner,price);
-    return productId;
+        require(price>0,"Price must be greater than 0.");
+        uint256 productId = propertyIndex++;
+        Property storage property = properties[productId];
+        property.productID=productId;
+        property.owner =owner;
+        property.price=price;
+        property.propertyTitle=_propertyTitle;
+        property.category=_category;
+        property.images=_images;
+        property.propertyAddress=_propertyAddress;
+        property.description=_description;
+        emit PropertyListed(productId,owner,price);
+        return productId;
     }
     function updateProperty(address owner,uint256 productId,string memory _propertyTitle,string memory _category, string memory _images, string memory _propertyAddress,string memory _description)external returns(uint256){
         Property storage property = properties[productId];
