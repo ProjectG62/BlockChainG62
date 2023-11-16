@@ -93,30 +93,26 @@ contract RealEstate {
         }
         return items;
     } 
-    function getUserProperties (address user) external view returns(Property [] memory){
-        uint256 totalItems=propertyIndex;
-        uint256 itemCount =0;
-        uint256 curr=0;
-        for(uint256 i=0;i<totalItems;i++)
-        {
-            if(properties[i].owner==user)
-            {
-                itemCount+=1;
-            }
-
-        }
-        Property[] memory item= new Property[](itemCount);
-        for(uint256 i=0;i<totalItems;i++)
-        {
-            if(properties[i].owner==user)
-            {
-                Property storage currentItem = properties[curr];
-                item[curr]=currentItem;
-                curr+=1;
+    function getUserProperties(address user) external view returns (Property[] memory) {
+        uint256 totalItems = propertyIndex;
+        uint256 itemCount = 0;
+        for (uint256 i = 0; i < totalItems; i++) {
+            if (properties[i].owner == user) {
+                itemCount += 1;
             }
         }
-        return item;
+    
+        Property[] memory userProperties = new Property[](itemCount);
+    
+        uint256 currentIndex = 0;
+        for (uint256 i = 0; i < totalItems; i++) {
+            if (properties[i].owner == user) {
+                userProperties[currentIndex] = properties[i];
+                currentIndex += 1;
+            }
+        }
 
+    return userProperties;
     }
     function addReview(uint256 productId,uint256 rating,string calldata comment,address user)external{
         Property storage property=properties[productId];
