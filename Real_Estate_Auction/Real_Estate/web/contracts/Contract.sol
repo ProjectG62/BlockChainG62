@@ -88,7 +88,7 @@ contract RealEstate {
 
         Property[] memory items = new Property[](itemCount);
         for(uint256 i = 0; i < itemCount; i++){
-            uint256 currentId=i+1;
+            uint256 currentId=i;
             Property storage currentItem = properties[currentId];
             items[currentIndex]=currentItem;
             currentIndex+=1;
@@ -101,7 +101,7 @@ contract RealEstate {
         uint256 curr=0;
         for(uint256 i=0;i<totalItems;i++)
         {
-            if(properties[i+1].owner==user)
+            if(properties[i].owner==user)
             {
                 itemCount+=1;
             }
@@ -110,7 +110,7 @@ contract RealEstate {
         Property[] memory item= new Property[](itemCount);
         for(uint256 i=0;i<totalItems;i++)
         {
-            if(properties[i+1].owner==user)
+            if(properties[i].owner==user)
             {
                 Property storage currentItem = properties[curr];
                 item[curr]=currentItem;
