@@ -1,0 +1,85 @@
+.h-wrapper{
+    background: black; /* colour of background in header*/
+    color: white; /*colour of text*/
+    display: flex;
+    margin: auto;   
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.h-container{
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    color: pink;
+    background-color: black;
+    margin-left: 4rem;
+
+}
+
+.h-menu{
+    gap: 2rem;
+    display: flex;
+    /* justify-content: space-between;
+    align-items: center; */
+}
+
+.h-menu>*:hover{
+    cursor:pointer;
+}
+
+.a-link{
+    color:white;
+    text-decoration: none;
+    padding-top: 2rem;
+    font-size: 14px;
+    font:bolder;
+    
+}
+a:hover{
+    color:grey;
+    opacity: 10px;
+}
+
+.button {
+    border: none;
+    height: 30px;
+    width: 10rem;
+    border-radius: 10px;
+    padding: 4px;
+    cursor: pointer;
+    margin-top: 1.6rem;  
+    background-color: inherit;
+    font-size: 13px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 8px;
+    text-align: center;
+    margin-right: 5rem;
+}
+
+.connect{
+    color:white;
+    height:30px;
+    width:10rem;
+    text-align: center;
+
+}
+.connect:hover {
+    background-color: grey;
+    color: white;
+    
+}
+.logo{
+    padding-left: 1rem;
+}
+
+.spacing{
+    padding-left: 10rem;
+}
+
+.Searchbtn{
+    margin-left: 1rem;
+    padding-bottom: 1px;
+    
+}
