@@ -1,6 +1,6 @@
 .h-wrapper{
-    background: black; /* colour of background in header*/
-    color: white; /*colour of text*/
+    background: beige; /* colour of background in header*/
+    color: rgb(0, 0, 0); /*colour of text*/
     display: flex;
     margin: auto;   
     padding-left: 120px;
@@ -12,7 +12,7 @@
     padding-top: 0.5rem;
     padding-bottom: 1rem;
     color: pink;
-    background-color: black;
+    background-color: beige;
     margin-left: 4rem;
 
 }
@@ -29,7 +29,7 @@
 }
 
 .a-link{
-    color:white;
+    color:rgb(0, 0, 0);
     text-decoration: none;
     padding-top: 2rem;
     font-size: 14px;
@@ -59,7 +59,7 @@ a:hover{
 }
 
 .connect{
-    color:white;
+    color:rgb(0, 0, 0);
     height:30px;
     width:10rem;
     text-align: center;

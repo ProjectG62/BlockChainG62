@@ -9,21 +9,11 @@
     justify-content: space-between;
     align-items: flex-end;
 }
-
-
-.img{
-    background-image: url("https://res.cloudinary.com/duwadnxwf/image/upload/v1700474948/final_big5pd.jpg");
-    margin: auto;
-    margin-left: 12rem;
-    width: 55rem;
-    height: 20rem;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.12);
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
+.logo{
+    position: left;
 }
+
+
 
 .centre{
     position: absolute;

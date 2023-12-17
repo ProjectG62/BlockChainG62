@@ -1,16 +1,36 @@
 import React from "react";
 import "./Navbar.css";
-const Navbar = () => {
+import { useState } from 'react';
+
+
+
+  const Navbar = () => {
+    const [walletAddress, setWallsetAddres] = useState("");
+
+  
+
+    const connectWallet = async() =>{
+      if (typeof window != "undefined" && typeof window.ethereum != "undefined")
+      { 
+        try{
+        const accounts = await window.ethereum.request({ method : "eth_requestAccounts"});
+        setWallsetAddres(accounts[0]);
+        console.log(accounts[0]);
+        } catch(err){
+         console.error(err.message)
+        }
+      }
+      else{
+        console.log("Please install Metamask");
+      }
+    }
+
+
   return (
     <section className="h-wrapper">
       <div className="flexCentre innerWidth h-container">
         <div className="flexCentre h-menu">
-          <img
-            src="../logo_final.png"
-            alt="logo"
-            className="logo"
-            width={160}
-          />
+          
           <div className="spacing"></div>
           <a href="" className="a-link">
             PROPERTIES
@@ -21,7 +41,13 @@ const Navbar = () => {
           <a href="" className="a-link">
             ABOUT US
           </a>
-          <button className="button connect">CONNECT WALLET</button>
+          <button className="button connect" onClick=  {connectWallet} >
+          <span >
+                  { walletAddress.length > 0
+                    ?  `Connected: ${walletAddress.substring(0,6)}...${walletAddress.substring(38)}`
+                  : 
+                    "Connect Wallet"}
+                </span></button>
         </div>
       </div>
     </section>
