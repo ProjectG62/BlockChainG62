@@ -1,11 +1,11 @@
-import React from "react";
-import SearchBar from "../SearchBar";
-const Buy_Property = () => {
+import React, { useEffect } from 'react';
+import Plist from '../Propertylist';
+
+
+const Buy_Properties = () => {
   return (
-    <div>
-      <SearchBar></SearchBar>
-    </div>
+    <Plist></Plist>
   );
 };
 
-export default Buy_Property;
+export default Buy_Properties;
