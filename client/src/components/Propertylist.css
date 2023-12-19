@@ -1,4 +1,8 @@
+body {
+  margin: 20px;
+}
 .properties-container {
+  margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
@@ -9,17 +13,20 @@
   .property-item {
     text-align: center;
   }
+  .attributes{
+    margin-top: 1px;
+  }
   
   .img {
-    width: 100%;
-    height: 100;
-    max-width: 100%; 
-    display: block;
+  max-width: 100%;
+  height: 150px; 
+  object-fit: cover;
+  border-radius: 10px;
   }
   .viewButton {
     font-weight: 400;
     font-size: 16px;
-    padding: 0.6rem 1.4rem;
+    padding: 0.4rem 1rem; 
     color: white;
     /* color: aquamarine; */
     background: rgb(76, 177, 240);
@@ -29,6 +36,6 @@
   }
   .viewButton:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform:scale(1.1);
   }
   
