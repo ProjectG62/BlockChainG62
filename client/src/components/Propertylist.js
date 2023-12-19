@@ -14,7 +14,7 @@ const Propertylist = () => {
           <p>{property.title}</p>
           <p>{property.price} MATIC</p>
           <p>{property.address}, {property.city}, {property.country}</p>
-          <button >view property </button>
+          <button className="viewButton" >view property </button>
         </div>
       ))}
     </div>
