@@ -1,85 +1,56 @@
-.h-wrapper{
-    background: beige; /* colour of background in header*/
-    color: rgb(0, 0, 0); /*colour of text*/
-    display: flex;
-    margin: auto;   
-    padding-left: 120px;
-    padding-right: 120px;
-}
-
-.h-container{
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
-    color: pink;
-    background-color: beige;
-    margin-left: 4rem;
-
-}
-
-.h-menu{
-    gap: 2rem;
-    display: flex;
-    /* justify-content: space-between;
-    align-items: center; */
-}
-
-.h-menu>*:hover{
-    cursor:pointer;
-}
-
-.a-link{
-    color:rgb(0, 0, 0);
-    text-decoration: none;
-    padding-top: 2rem;
-    font-size: 14px;
-    font:bolder;
-    
-}
-a:hover{
-    color:grey;
-    opacity: 10px;
-}
-
-.button {
-    border: none;
-    height: 30px;
-    width: 10rem;
-    border-radius: 10px;
-    padding: 4px;
+body{
+    background-color: #0F222D;
+  }
+  
+.logo_container:hover{
     cursor: pointer;
-    margin-top: 1.6rem;  
-    background-color: inherit;
-    font-size: 13px;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top: 8px;
-    text-align: center;
-    margin-right: 5rem;
+}
+.h-wrapper {
+    z-index: 99;
+    position: sticky;
+    top: 0;
+}
+.h-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: var(--secondary);
+    justify-content: space-between;
+    background: #0F222D;
 }
 
-.connect{
-    color:rgb(0, 0, 0);
-    height:30px;
-    width:10rem;
-    text-align: center;
-
+.h-menu {
+    gap: 2rem;
+    transition: all 300ms ease-in;
+    font-weight: 400;
+    font-size: 16px;
 }
-.connect:hover {
-    background-color: grey;
-    color: white;
-    
+.h-menu > *:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
-.logo{
-    padding-left: 1rem;
+.menu-icon {
+    display: none;
 }
 
-.spacing{
-    padding-left: 10rem;
-}
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+    .h-menu {
+        color: var(--black);
+        position: absolute;
+        gap: 2rem;
+        font-weight: 300;
+        flex-direction: column;
+        right: 4rem;
+        top: 3rem;
+        background: white;
+        display: flex;
+        border-radius: 10px;
+        transition: all 200ms ease;
+        align-items: flex-start;
+        padding: 3rem;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 
-.Searchbtn{
-    margin-left: 1rem;
-    padding-bottom: 1px;
-    
+    }
 }

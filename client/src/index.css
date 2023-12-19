@@ -1,15 +1,5 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+   background-color: #FFF5D0;
 }
 
 .flexCenter {
@@ -19,6 +9,40 @@ code {
   align-items: center;
   flex-wrap: wrap;
 }
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexColCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.flexColStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flexColEnd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+
+
+
 .paddings{
   padding: 25px 50px;
 }
@@ -27,13 +51,31 @@ code {
   width: 100%;
 }
 
-
-
-.button:hover{
-  cursor:pointer;
+.flex-item-right{
+  display: flex;
+  row-gap: 2rem;
+  justify-content: right ;
+}
+.button {
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0.6rem 1.4rem;
+  color: white;
+  /* color: aquamarine; */
+  background: rgb(76, 177, 240);
+  border: none;
+  border-radius: 4px;
+  transition: all 300ms ease-in;
+}
+.button:hover {
+  cursor: pointer;
   transform: scale(1.1);
 }
 
+.a-link{
+  color:white;
+  text-decoration-line: none;
+}
 @media (min-width: 1536px){
   .innerWidth{
     /* max-width: 1280px; */
