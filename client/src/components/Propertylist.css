@@ -1,5 +1,6 @@
 /* Propertylist.css */
 
+
 .properties-container {
   margin-top: 20px;
   margin-left: 40px;
@@ -71,6 +72,126 @@
 }
 
 .viewButton:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+ 
+.popup-body
+{
+  width: 70%;
+  height: 70%;
+  background-color: lightgray;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
+  max-height: 80vh; /* Set a maximum height for the popup body */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+}
+
+.popup-container 
+{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  padding-top: 1%;
+  align-items: center;
+  justify-content: center;
+  }
+    
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-align: right;
+}
+
+.popup-content {
+  padding: 20px;
+  /* text-align: left; */
+  display: inline;
+  /* align-items: center; */
+  align-items: flex-start;
+  float: right;
+  text-align: left;
+  /* flex: 1; */
+}
+
+/* .popup-content img 
+{ */
+  /*max-width: 40%;  */       /* Adjust the width of the image as needed */
+  /*margin-right: 20px; */     /* Adjust the margin between image and text */
+  /* flex-direction: column;
+} */
+
+.popupImg{
+  max-width: 40%; /* Adjust the width of the image as needed */
+  margin-right: 30px; /* Adjust the margin between image and text */
+  flex-direction: column;
+}
+
+.popup-content div {
+  flex: 1;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  /* justify-content: center; */
+  gap: 10px; /* Adjust the gap between buttons as needed */
+  padding-top: 20px;
+}
+
+.popup-content h2,
+.popup-content p {
+  margin: 0; /* Remove default margins */
+  margin-bottom: 10px; /* Add spacing between each text element */
+}
+
+.closeButton {
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0.7rem 1.4rem; 
+  margin-top: 5px;
+  color: white;
+  background: rgb(220, 53, 69); /* or crimson*/
+  border: none;
+  border-radius: 4px;
+  transition: all 300ms ease-in;
+}
+
+.BuyPropBtn {
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0.7rem 1.4rem;
+  color: white;
+  background: rgb(76, 177, 240);
+  border: none;
+  border-radius: 4px;
+  transition: all 300ms ease-in;
+  margin-top: 5px;
+}
+
+.BuyPropBtn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.closeButton:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
