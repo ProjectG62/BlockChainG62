@@ -14,6 +14,8 @@ body{
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: var(--secondary);
+    min-width: 100vw;
+    display: flex;
     justify-content: space-between;
     background: #0F222D;
 }

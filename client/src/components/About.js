@@ -4,7 +4,7 @@ function About() {
   return (
     <div className="r-wrapper">
       <div className="paddings innerWidth r-container">
-        <div className="flexColStart menu">
+        <div className="flexColCenter menu">
           <div className="menu-left">
             <h1 className="title">ABOUT US</h1>
             <p className="content">
@@ -24,7 +24,7 @@ function About() {
             </p>
           </div>
           <div className=" menu-right">
-            <img src="../bc.png" width={500} height={350} />
+            <img src="../bc.png" width={520} height={260} />
           </div>
         </div>
       </div>
