@@ -66,7 +66,7 @@ const Navbar = () => {
           <Link to="/Sell_Property" className="a-link">
             Sell Property
           </Link>
-          <Link to="/Profile" className="a-link">
+          <Link to="/user/activepage" className="a-link">
             Profile
           </Link>
           <button className="button" onClick={connectWallet}>
