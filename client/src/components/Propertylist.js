@@ -3,6 +3,7 @@ import data from "../data.json";
 import "./Propertylist.css";
 import SearchBar from "./SearchBar";
 import { AiFillHeart } from "react-icons/ai";
+import ImageSlider from './ImageSlider';
 
 const Propertylist = () => {
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -43,7 +44,7 @@ const Propertylist = () => {
 
       <div className="properties-container">
         {filteredProperties.map((property) => (
-          <div key={property._id} className="property-item property-card">
+          <div key={property._id} className="property-item property-card" onClick={() => openPopup(property)}>
             <AiFillHeart
               size={24}
               color={
@@ -88,16 +89,10 @@ const Propertylist = () => {
                 </p>
               </div>
 
-              <div className="popupImg">
-                <img
-                  src={selectedProperty.image}
-                  alt={selectedProperty.name}
-                  width={200}
-                  height={200}
-                ></img>
+              <div>
+              <ImageSlider slides={selectedProperty.sliderImages} />
               </div>
 
-              {/* Add other property details as needed */}
               <div className="popup-buttons">
                 <button className="BuyPropBtn"> Buy Property</button>
                 <button className="closeButton" onClick={closePopup}>

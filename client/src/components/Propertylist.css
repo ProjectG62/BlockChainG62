@@ -76,11 +76,26 @@
   transform: scale(1.1);
 }
 
+/*-----------------------------*/
  
-.popup-body
+/* .popup-body
 {
   width: 70%;
   height: 70%;
+  background-color: lightgray;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
+  max-height: 80vh; 
+  overflow-y: auto; 
+} */
+
+.popup-body
+{
+  width: 100%;
+  height: 100%;
   background-color: lightgray;
   background: #fff;
   padding: 20px;
@@ -91,7 +106,7 @@
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
 }
 
-.popup-container 
+/* .popup-container 
 {
   position: fixed;
   top: 0;
@@ -106,7 +121,26 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
-  }
+  } */
+
+  
+.popup-container 
+{
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  width: 70%;
+  height: 60%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  padding-top: 0%;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+
+}
     
 .popup-header {
   display: flex;
@@ -123,7 +157,10 @@
   align-items: flex-start;
   float: right;
   text-align: left;
-  /* flex: 1; */
+  display: grid;
+  gap: 20px; /* gap btw two parts */
+  flex: 1;
+  grid-template-columns: 1fr;
 }
 
 /* .popup-content img 
@@ -154,7 +191,8 @@
   display: flex;
   /* justify-content: center; */
   gap: 10px; /* Adjust the gap between buttons as needed */
-  padding-top: 20px;
+  padding-top: 40px;
+  margin-bottom: -100px;
 }
 
 .popup-content h2,
@@ -196,3 +234,55 @@
   cursor: pointer;
   transform: scale(1.1);
 }
+
+/* ------------------------------- */
+
+
+.slider {
+  position: relative;
+  height: 200px; /* Set a fixed height */
+  width: 400px;  /* Set a fixed width */
+  margin: 0 auto; /* Center the slider horizontally */
+  overflow: hidden; /* Ensure the images don't overflow */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+  border-radius: 10px;
+}
+
+/* Rest of your existing styles for arrows and slides remain unchanged */
+
+
+.right-arrow,
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 1.5rem; /* Adjust arrow font size */
+  color: #ea3e3e;
+  z-index: 10;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.right-arrow {
+  right: 10px; /* Adjust the right spacing */
+}
+
+.left-arrow {
+  left: 10px; /* Adjust the left spacing */
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+
