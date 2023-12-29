@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import connectWallet from "./FetchId";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -15,23 +16,9 @@ const Navbar = () => {
     }
   };
 
-  const connectWallet = async () => {
-    if (
-      typeof window !== "undefined" &&
-      typeof window.ethereum !== "undefined"
-    ) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setWalletAddress(accounts[0]);
-        console.log(accounts[0]);
-      } catch (err) {
-        console.error(err.message);
-      }
-    } else {
-      console.log("Please install Metamask");
-    }
+  const handleConnectWallet = async () => {
+    const address = await connectWallet();
+    setWalletAddress(address);
   };
 
   const refreshPage = () => {
@@ -69,7 +56,7 @@ const Navbar = () => {
           <Link to="/user/activepage" className="a-link">
             Profile
           </Link>
-          <button className="button" onClick={connectWallet}>
+          <button className="button" onClick={handleConnectWallet}>
             <span>
               {walletAddress.length > 0
                 ? `Connected: ${walletAddress.substring(

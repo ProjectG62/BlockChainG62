@@ -16,6 +16,32 @@
 // }
 
 // export default FetchId
+// const idPassed = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e"
+// export default idPassed;
+// walletUtils.js
 
-const idPassed = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e"
-export default idPassed;
+const connectWallet = async () => {
+    let walletAddress = "";
+  
+    if (
+      typeof window !== "undefined" &&
+      typeof window.ethereum !== "undefined"
+    ) {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        walletAddress = accounts[0];
+        console.log(walletAddress);
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      console.log("Please install Metamask");
+    }
+  
+    return walletAddress;
+  };
+  
+  export default connectWallet;
+  

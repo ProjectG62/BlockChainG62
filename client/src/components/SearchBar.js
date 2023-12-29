@@ -1,17 +1,29 @@
-import React from "react";
-import { HiLocationMarker } from "react-icons/hi";
+// Create a new file named SearchBar.js
+// This file will contain your search bar component
 
-const SearchBar = ({ filter, setFilter }) => {
+import React, { useState } from "react";
+
+const SearchBar = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = () => {
+    // Pass the search term to the parent component
+    onSearch(searchTerm);
+  };
+
   return (
-    <div className="flexCenter search-bar">
-      <HiLocationMarker color="var(--blue)" size={25} />
+    <div className="search-bar">
       <input
-        placeholder="Search by title/city/country..."
         type="text"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
+        placeholder="Search properties..."
+        value={searchTerm}
+        onChange={handleChange}
       />
-      <button className="button">Search</button>
+      <button className="button" onClick={handleSearch}>Search</button>
     </div>
   );
 };
