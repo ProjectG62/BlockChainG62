@@ -1,6 +1,5 @@
 /* Propertylist.css */
 
-
 .properties-container {
     margin-top: 20px;
     margin-left: 40px;
@@ -18,10 +17,12 @@
     border-radius: 10px;
     padding: 15px;
   }
+
   .property-card:hover{
     opacity: 1;
     background-color: rgba(212, 212, 218, 0.564);
   }
+
   .like-container {
     position: absolute;
     top: 20px;
@@ -85,10 +86,12 @@
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    display: flex;
     box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
-    max-height: 80vh; /* Set a maximum height for the popup body */
-    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+    max-height: 80vh; /* To Set a maximum height for the popup body */
+    overflow-y: auto; /* To Enable vertical scrolling when content overflows */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(850px, 1fr));
+    gap: 40px;
   }
   
   .popup-container 
@@ -128,14 +131,14 @@
   
   .popup-content img 
   {
-    max-width: 40%;      /* Adjust the width of the image as needed */
-    margin-right: 20px;     /* Adjust the margin between image and text */
+    max-width: 40%;      /* To Adjust the width of the image as needed */
+    margin-right: 20px;     /* To Adjust the margin between image and text */
     /* flex-direction: column; */
   } 
   
   .popupImg{
-    max-width: 40%; /* Adjust the width of the image as needed */
-    margin-right:30px; /* Adjust the margin between image and text */
+    max-width: 40%; /* To Adjust the width of the image as needed */
+    margin-right:30px; /* To Adjust the margin between image and text */
     flex-direction:column;
   }
   
@@ -148,28 +151,41 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 20px; /* Adjust the distance from the bottom as needed */
+    bottom: 20px; /* To Adjust the distance from the bottom as needed */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    /* justify-content: center; */
-    gap: 10px; /* Adjust the gap between buttons as needed */
+    gap: 10px; /* To Adjust the gap between buttons as needed */
     padding-top: 20px;
   }
   
   .popup-content h2,
   .popup-content p {
-    margin: 0; /* Remove default margins */
-    margin-bottom: 10px; /* Add spacing between each text element */
+    margin: 0; /* To Remove default margins */
+    margin-bottom: 10px; /* To Add spacing between each text element */
   }
   
   .closeButton {
     font-weight: 400;
-    font-size: 20px;
-    padding: 0.7rem 1.4rem; 
-    margin-top: 5px;
+    font-size: 20px; 
+    padding: 0.5rem 1rem;
+    margin-top: 10px; 
     color: white;
-    background: rgb(220, 53, 69); /* or crimson*/
+    background: rgb(220, 53, 69); 
+    border: none;
+    border-radius: 4px;
+    transition: all 300ms ease-in;
+  }
+  
+
+  .likeButton
+  {
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0.5rem 1rem;
+    margin-top: 10px;
+    color: white;
+    background: rgb(76, 177, 240);
     border: none;
     border-radius: 4px;
     transition: all 300ms ease-in;
@@ -178,16 +194,21 @@
   .BuyPropBtn {
     font-weight: 400;
     font-size: 20px;
-    padding: 0.7rem 1.4rem;
+    padding: 0.5rem 1rem;
+    margin-top: 10px;
     color: white;
     background: rgb(76, 177, 240);
     border: none;
     border-radius: 4px;
     transition: all 300ms ease-in;
-    margin-top: 5px;
   }
   
   .BuyPropBtn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  .likeButton:hover{
     cursor: pointer;
     transform: scale(1.1);
   }
@@ -212,10 +233,7 @@
     object-fit: cover; /* Ensure the image covers the entire container */
     border-radius: 10px;
   }
-  
-  /* Rest of your existing styles for arrows and slides remain unchanged */
-  
-  
+    
   .right-arrow,
   .left-arrow {
     position: absolute;
@@ -246,4 +264,12 @@
     transform: scale(1.08);
   }
   
-  
+  /* screens with min width of 10px */
+
+  @media (min-width: 10px) {
+    .popup-buttons {
+      font-size: 16px;
+      padding: 0.5rem 1rem;
+      margin-top: 3px;
+    }
+  }
