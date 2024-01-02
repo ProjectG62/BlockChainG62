@@ -44,7 +44,7 @@ const Propertylist = () => {
 
       <div className="properties-container">
         {filteredProperties.map((property) => (
-          <div key={property._id} className="property-item property-card" onClick={() => openPopup(property)}>
+          <div key={property._id} className="property-item property-card">
             <AiFillHeart
               size={24}
               color={
