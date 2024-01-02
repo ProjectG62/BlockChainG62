@@ -1,6 +1,6 @@
 import React from "react";
-import AddPropertyModal from "../AddPropertyModal";
-import { LabelContextProvider } from "../AddPropertyModal";
+import AddPropertyModal from "../AddProperty";
+import { LabelContextProvider } from "../AddProperty";
 
 function Sell_Property() {
   return (<LabelContextProvider>

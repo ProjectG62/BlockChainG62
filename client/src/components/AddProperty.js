@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext } from "react";
 import Stepper from "react-stepper-horizontal";
-import "./AddPropertyModal.css"
+import "./AddProperty.css"
 import AddLocation from "./AddLocation";
 import UploadImages from "./UploadImages";
-import PropertyDetails from "./PropertDetails";
+import PropertyDetails from "./PropertyDetails";
 import Facilities from "./Facilities";
 
 const LabelContext = createContext();
@@ -16,9 +16,13 @@ const LabelContextProvider = ({ children }) => {
     country: "",
     city: "",
     address: "",
+    title:"",
+    description:"",
+    price:0,
     numRooms:0,
     numBathrooms:0,
-    numParkingSpaces:0
+    numParkingSpaces:0,
+    images:[]
   });
 
   const handleChange = (prop) => (event) => {
@@ -34,11 +38,6 @@ const LabelContextProvider = ({ children }) => {
     handleChange,
 
     nextPage : () => {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        country: formData.country,
-        city: formData.city,
-        address: formData.address,}))
       setPage(page + 1);
     },
   

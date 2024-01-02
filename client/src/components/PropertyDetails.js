@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddPropertyModal";
+import { LabelContext } from "./AddProperty";
+import "./PropertyDetails.css"
 
 const PropertyDetails = () => {
   const value = useContext(LabelContext);
@@ -7,17 +8,24 @@ const PropertyDetails = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [error, setError] = useState("");
+
 
   const handleNextClick = () => {
-    // Update the context's formData state
-    value.setFormData({
-      ...value.formData,
-      title,
-      description,
-      price,
-    });
 
-    // Move to the next step
+    // value.setFormData({
+    //   ...value.formData,
+    //   title,
+    //   description,
+    //   price,
+    // });
+    // if (!value.formData.title || !value.formData.description || !value.formData.price) {
+    //   setError("Please fill in all the details before proceeding.");
+    //   return; // Do not proceed if any field is empty
+    // }
+
+    // setError(""); 
+
     value.nextPage();
   };
 
@@ -30,8 +38,8 @@ const PropertyDetails = () => {
         <br />
         <input
           id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={value.formData.title}
+          onChange={(e) => value.handleChange("title")(e)}
         />
       </div>
 
@@ -42,8 +50,8 @@ const PropertyDetails = () => {
           id="description"
           cols={50}
           rows={5}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={value.formData.description}
+          onChange={(e) => value.handleChange("description")(e)}
         />
       </div>
 
@@ -53,19 +61,22 @@ const PropertyDetails = () => {
         <input
           id="price"
           type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          value={value.formData.price}
+          onChange={(e) => value.handleChange("price")(e)}
         />
       </div>
     
-      <button onClick={() => value.prevPage()} style={{ margin: 25 }}>
+      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+
+      <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
         Previous
       </button>
 
       <button
         onClick={handleNextClick}
         style={{ margin: 25 }}
-        disabled={!title || !description || !price}
+        disabled={!value.formData.title || !value.formData.description || !value.formData.price}
+        className="next-button"
       >
         Next
       </button>
