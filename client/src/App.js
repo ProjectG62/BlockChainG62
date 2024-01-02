@@ -13,13 +13,13 @@ function App() {
   return (
     <Router>
       <LabelContextProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Buy_Property" element={<Buy_Property />} />
-        <Route path="/Sell_Property" element={<Sell_Property />} />
-        <Route path="/user/:activepage" element={<Profile />} />
-      </Routes>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Buy_Property" element={<Buy_Property />} />
+          <Route path="/Sell_Property" element={<Sell_Property />} />
+          <Route path="/user/activepage" element={<Profile />} />
+        </Routes>
       </LabelContextProvider>
     </Router>
   );

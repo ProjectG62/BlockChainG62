@@ -1,4 +1,4 @@
-body{
+/* body{
     background-color: #0F222D;
   }
   
@@ -10,6 +10,16 @@ body{
     position: sticky;
     top: 0;
 }
+
+
+.h-menu > *:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.menu-icon {
+    display: none;
+} */
+
 .h-container {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -25,15 +35,19 @@ body{
     transition: all 300ms ease-in;
     font-weight: 400;
     font-size: 16px;
+    /* margin-left: auto; */
 }
-.h-menu > *:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-}
-.menu-icon {
-    display: none;
-}
-
+  
+  
+.custom-toggler .custom-icon {
+    display: block;
+    width: 25px;
+    height: 2.5px;
+    margin-bottom: 5px;
+    background-color: white;
+    border: none;
+  }
+  
 @media (max-width: 768px) {
     .menu-icon {
         display: block;

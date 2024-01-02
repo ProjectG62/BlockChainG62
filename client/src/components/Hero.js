@@ -16,9 +16,6 @@ const Hero = () => {
           <br />
           using the secure and transparent blockchain network.
         </p>
-        <div className="search-box">
-          <SearchBar />
-        </div>
       </div>
     </>
   );

@@ -80,11 +80,13 @@ body {
  border-radius: 1rem;
  border: 3px solid rgba(120, 120, 120, 0.374);
  padding: 0.3rem 3.5rem; 
+ margin-top: 2rem;
  width: 100%;
  display: flex;
  justify-content: space-around; 
  align-items: center; 
 }
+
 .search-bar > input {
  flex: 1; 
  border: none;

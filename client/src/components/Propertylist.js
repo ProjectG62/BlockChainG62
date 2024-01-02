@@ -3,7 +3,7 @@ import data from "../data.json";
 import "./Propertylist.css";
 import SearchBar from "./SearchBar";
 import { AiFillHeart } from "react-icons/ai";
-import ImageSlider from './ImageSlider';
+import ImageSlider from "./ImageSlider";
 
 const Propertylist = () => {
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -29,11 +29,12 @@ const Propertylist = () => {
   };
 
   const handleSearch = (searchTerm) => {
-    const filtered = data.filter((property) =>
-      property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      property.price.toString().includes(searchTerm) ||
-      property.country.toString().includes(searchTerm) ||
-      property.city.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = data.filter(
+      (property) =>
+        property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.price.toString().includes(searchTerm) ||
+        property.country.toString().includes(searchTerm) ||
+        property.city.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProperties(filtered);
   };
@@ -44,12 +45,10 @@ const Propertylist = () => {
 
       <div className="properties-container">
         {filteredProperties.map((property) => (
-          <div key={property._id} className="property-item property-card" onClick={() => openPopup(property)}>
+          <div key={property._id} className="property-item property-card">
             <AiFillHeart
               size={24}
-              color={
-                likedProperties.includes(property._id) ? "red" : "white"
-              }
+              color={likedProperties.includes(property._id) ? "red" : "white"}
               onClick={() => handleLike(property._id)}
               className="like-container"
             />
@@ -83,14 +82,14 @@ const Propertylist = () => {
                 </p>{" "}
                 <br />
                 <p>
-                  Facilities: Bathrooms: {selectedProperty.facilities.bathrooms},
-                  Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                  Facilities: Bathrooms: {selectedProperty.facilities.bathrooms}
+                  , Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
                   {selectedProperty.facilities.bedrooms}
                 </p>
               </div>
 
               <div>
-              <ImageSlider slides={selectedProperty.sliderImages} />
+                <ImageSlider slides={selectedProperty.sliderImages} />
               </div>
 
               <div className="popup-buttons">
