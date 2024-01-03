@@ -1,6 +1,7 @@
 
 import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddPropertyModal";
+import { LabelContext } from "./AddProperty";
+import "./AddLocation.css"
 
 const AddLocation = () => {
   console.log("Rendering AddLocation");
@@ -9,23 +10,38 @@ const AddLocation = () => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
 
   const handleNextClick = () => {
+
+    if (!value.formData.country || !value.formData.city || !value.formData.address) {
+      setError("Please fill in all the fields before proceeding.");
+      return; 
+    }
+
+    // if (value.formData.images.length === 0) {
+    //   setError("Please select at least one image");
+    //   return;
+    // }
+
     console.log("Before update:", value.formData);
     value.setFormData((prevFormData)=>({
       ...prevFormData,
+      location:{
       country,
       city,
       address,
+    },
     }));
 
+    setError("");
     console.log("After update:", value.formData);
     value.nextPage(); 
   };
 
   return (
     <div>
-    <form className="width-50">
+    <form>
       <h4>Enter the address of the property</h4>
 
       <div className="input-fields">
@@ -33,8 +49,8 @@ const AddLocation = () => {
         <br />
         <input
           id="country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
+          value={value.formData.country}
+          onChange={(e) => value.handleChange("country")(e)}
         />
       </div>
 
@@ -43,8 +59,8 @@ const AddLocation = () => {
         <br />
         <input
           id="city"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+          value={value.formData.city}
+          onChange={(e) => value.handleChange("city")(e)}
         />
       </div>
 
@@ -53,15 +69,18 @@ const AddLocation = () => {
         <br />
         <input
           id="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          value={value.formData.address}
+          onChange={(e) => value.handleChange("address")(e)}
         />
       </div>
+
+      {error && (<p style={{ color: 'red' ,margin: 0 }}>{error}</p>)}
 
       <button
         onClick={handleNextClick}
         style={{ margin: 25 }}
-        disabled={!country || !city || !address}
+        // disabled={!value.formData.country || !value.formData.city || !value.formData.address}
+        className="next-button"
       >
         Next
       </button>

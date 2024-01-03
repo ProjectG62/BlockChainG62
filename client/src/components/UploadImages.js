@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddPropertyModal";
+import React, { useContext, useState , useRef } from "react";
+import { LabelContext } from "./AddProperty";
+import "./UploadImages.css"
 
 const UploadImages = () => {
   const value = useContext(LabelContext);
+  const fileInputRef = useRef(null);
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [error, setError] = useState("");
@@ -22,20 +24,28 @@ const UploadImages = () => {
       });
 
       Promise.all(imagesArray).then((images) => {
-        setSelectedImages(images);
+        // setSelectedImages(images);
+        value.setFormData((prevData) => ({
+          ...prevData,
+          images: [...prevData.images, ...images], // Append new images to existing ones
+        }));
       });
     }
   };
 
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleNextClick = () => {
-    if (selectedImages.length === 0) {
+    if (value.formData.images.length === 0) {
       setError("Please select at least one image");
       return;
     }
 
     value.setFormData((prevData) => ({
       ...prevData,
-      images: selectedImages,
+      images: value.formData.images,
     }));
 
     setError(""); // Clear the error if any
@@ -51,13 +61,22 @@ const UploadImages = () => {
         accept="image/*"
         multiple
         onChange={handleImageChange}
+        style={{ display: "none" }}
+        ref={fileInputRef}
       />
 
-      {selectedImages.length > 0 && (
+      <div className="custom-file-input-container">
+        <button onClick={handleClick} className="next-button">
+          Choose File
+        </button>
+      </div>
+
+
+      {value.formData.images.length > 0 && (
         <div>
           <h3>Selected Images:</h3>
           <div>
-            {selectedImages.map((image, index) => (
+            {value.formData.images.map((image, index) => (
               <img
                 key={index}
                 src={image}
@@ -77,11 +96,11 @@ const UploadImages = () => {
 
       <br/>
 
-      <button onClick={() => value.prevPage()} style={{ margin: 25 }}>
+      <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
         Previous
       </button>
 
-      <button onClick={handleNextClick} style={{ margin: 25 }}>
+      <button onClick={handleNextClick} style={{ margin: 25 }} className="next-button">
         Next
       </button>
     </div>

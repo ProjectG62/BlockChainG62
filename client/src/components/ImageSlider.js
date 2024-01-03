@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-// import { SliderData } from './SliderData';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import data from "../data.json";
 
-const ImageSlider = ({ slides }) => {
+const ImageSlider = ({ slides, handleLike, selectedProperty }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
@@ -32,6 +31,9 @@ const ImageSlider = ({ slides }) => {
             {index === current && (
               <img src={slide.image} alt='property image' className='image' />
             )}
+
+            <button className="likeButton" onClick={() => handleLike(selectedProperty._id)}>Like</button>
+
           </div>
         );
       })}

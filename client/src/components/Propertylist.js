@@ -19,15 +19,23 @@ const Propertylist = () => {
   };
 
   const handleLike = (propertyId) => {
-    setLikedProperties((prevLikedProperties) => {
-      if (prevLikedProperties.includes(propertyId)) {
-        return prevLikedProperties.filter((id) => id !== propertyId);
-      } else {
-        return [...prevLikedProperties, propertyId];
+    if (likedProperties.includes(propertyId)) {
+      // Property is already liked, ask for confirmation
+      const confirmation = window.confirm(
+        "Are you sure you want to remove this property from liked?"
+      );
+      if (confirmation) {
+        setLikedProperties((prevLikedProperties) => {
+          return prevLikedProperties.filter((id) => id !== propertyId);
+        });
       }
-    });
+    } else {
+      // Property is not liked, add it to the liked list
+      setLikedProperties((prevLikedProperties) => {
+        return [...prevLikedProperties, propertyId];
+      });
+    }
   };
-
   const handleSearch = (searchTerm) => {
     const filtered = data.filter(
       (property) =>
@@ -89,12 +97,23 @@ const Propertylist = () => {
               </div>
 
               <div>
-                <ImageSlider slides={selectedProperty.sliderImages} />
+                <ImageSlider
+                  slides={selectedProperty.sliderImages}
+                  handleLike={handleLike}
+                  selectedProperty={selectedProperty}
+                />
               </div>
 
               <div className="popup-buttons">
+                <button
+                  className="likeButton"
+                  onClick={() => handleLike(selectedProperty._id)}
+                >
+                  Like
+                </button>
                 <button className="BuyPropBtn"> Buy Property</button>
                 <button className="closeButton" onClick={closePopup}>
+                  {" "}
                   Close
                 </button>
               </div>

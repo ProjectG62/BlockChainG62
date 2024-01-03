@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddPropertyModal";
+import { LabelContext } from "./AddProperty";
+import "./Facilities.css"
 
 const Facilities = () => {
   const value = useContext(LabelContext);
@@ -10,12 +11,12 @@ const Facilities = () => {
 
   const handleSubmit = () => {
     // Update the context's formData state
-    value.setFormData({
-      ...value.formData,
-      numRooms,
-      numBathrooms,
-      numParkingSpaces,
-    });
+    // value.setFormData({
+    //   ...value.formData,
+    //   numRooms,
+    //   numBathrooms,
+    //   numParkingSpaces,
+    // });
 
     // Perform any additional actions, such as submitting the form data
     // ...
@@ -34,8 +35,8 @@ const Facilities = () => {
         <input
           id="numRooms"
           type="number"
-          value={numRooms}
-          onChange={(e) => setNumRooms(e.target.value)}
+          value={value.formData.numRooms}
+          onChange={(e) => value.handleChange("numRooms")(e)}
         />
       </div>
 
@@ -45,8 +46,8 @@ const Facilities = () => {
         <input
           id="numBathrooms"
           type="number"
-          value={numBathrooms}
-          onChange={(e) => setNumBathrooms(e.target.value)}
+          value={value.formData.numBathrooms}
+          onChange={(e) => value.handleChange("numBathrooms")(e)}
         />
       </div>
 
@@ -56,16 +57,16 @@ const Facilities = () => {
         <input
           id="numParkingSpaces"
           type="number"
-          value={numParkingSpaces}
-          onChange={(e) => setNumParkingSpaces(e.target.value)}
+          value={value.formData.numParkingSpaces}
+          onChange={(e) => value.handleChange("numParkingSpaces")(e)}
         />
       </div>
 
-      <button onClick={() => value.prevPage()} style={{ margin: 25 }}>
+      <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
         Previous
       </button>
 
-      <button onClick={handleSubmit} style={{ margin: 25 }}>
+      <button onClick={handleSubmit} style={{ margin: 25 }} className="submit-button" >
         Submit
       </button>
     </form>
