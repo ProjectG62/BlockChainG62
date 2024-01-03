@@ -1,10 +1,11 @@
 import React from 'react'
 import profile from '../profile.json'
 import data from '../data.json'
-import idPassed from './FetchId'
+
 
 
 const SoldProperty = () => {
+  const idPassed = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e";
   const selectedObject = profile.find(pro => pro.id === idPassed)
   const propertyObject=[]
   for(let i=0; i<selectedObject.soldproperty.length;i++)
@@ -15,7 +16,7 @@ const SoldProperty = () => {
     
     
   }
-  console.log(propertyObject)
+
   return(
     <div className="properties-container">
       {

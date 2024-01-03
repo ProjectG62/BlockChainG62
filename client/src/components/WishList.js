@@ -3,10 +3,33 @@ import './WishList.css'
 import profile from '../profile.json'
 import data from '../data.json'
 import idPassed from './FetchId'
+import connectWallet from './FetchId'
+import { useState,useEffect } from 'react'
 
 
 const WishList = () => {
-  const selectedObject = profile.find(pro => pro.id === idPassed)
+  // const [address, setAddress] = useState('');
+
+  // useEffect(() => {
+  //   const fetchWalletAddress = async () => {
+  //     try {
+  //       const walletAddress = await connectWallet();
+  //       setAddress(walletAddress); 
+  //     } catch (error) {
+  //       console.error("Error connecting to wallet:", error.message);
+  //     }
+  //   };
+
+  //   fetchWalletAddress();
+  // }, []);
+  // console.log("rirr",address)
+  const p = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e";
+  
+  const selectedObject = profile.find(pro => pro.id === p);
+
+  
+
+ 
   const propertyObject=[]
   for(let i=0; i<selectedObject.wishlist.length;i++)
   {
@@ -16,7 +39,6 @@ const WishList = () => {
     
     
   }
-  console.log(propertyObject)
   return(
     <div className="properties-container">
       {

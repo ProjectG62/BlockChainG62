@@ -21,27 +21,26 @@
 // walletUtils.js
 
 const connectWallet = async () => {
-    let walletAddress = "";
-  
-    if (
-      typeof window !== "undefined" &&
-      typeof window.ethereum !== "undefined"
-    ) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        walletAddress = accounts[0];
-        console.log(walletAddress);
-      } catch (err) {
-        console.error(err.message);
-      }
-    } else {
-      console.log("Please install Metamask");
+  let walletAddress = "";
+
+  if (
+    typeof window !== "undefined" &&
+    typeof window.ethereum !== "undefined"
+  ) {
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      walletAddress = accounts[0];
+      console.log(walletAddress);
+    } catch (err) {
+      console.error(err.message);
     }
-  
-    return walletAddress;
-  };
-  
-  export default connectWallet;
-  
+  } else {
+    console.log("Please install Metamask");
+  }
+
+  return walletAddress;
+};
+
+export default connectWallet;

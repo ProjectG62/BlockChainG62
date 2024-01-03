@@ -5,6 +5,7 @@ import idPassed from './FetchId'
 
 
 const BoughtProperty = () => {
+  const idPassed = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e";
   const selectedObject = profile.find(pro => pro.id === idPassed)
   const propertyObject=[]
   for(let i=0; i<selectedObject.boughtproperty.length;i++)
@@ -15,7 +16,6 @@ const BoughtProperty = () => {
     
     
   }
-  console.log(propertyObject)
   return(
     <div className="properties-container">
       {
