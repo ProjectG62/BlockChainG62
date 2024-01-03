@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Buy_Property" element={<Buy_Property />} />
           <Route path="/Sell_Property" element={<Sell_Property />} />
-          <Route path="/user/activepage" element={<Profile />} />
+          <Route path="/user/:activepage" element={<Profile />} />
         </Routes>
       </LabelContextProvider>
     </Router>

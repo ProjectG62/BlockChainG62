@@ -52,7 +52,7 @@ function NavScrollExample() {
               Sell Property
             </Nav.Link>
             <Nav.Link
-              href="//user/activepage"
+              href="/user/:activepage"
               className="a-link"
               style={{ color: "white" }}
             >
