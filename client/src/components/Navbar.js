@@ -58,6 +58,16 @@ function NavScrollExample() {
             >
               Profile
             </Nav.Link>
+
+            <Nav.Link
+              href="/LoginForm"
+              className="a-link"
+              style={{ color: "white" }}
+            >
+              Login
+            </Nav.Link>
+
+
             <Button className="a-link button" onClick={handleConnectWallet}>
               <span>
                 {walletAddress.length > 0
