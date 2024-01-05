@@ -11,18 +11,18 @@ const PropertyDetails = () => {
   const [error, setError] = useState("");
 
 
-  const handleNextClick = () => {
-
+  const handleNextClick = (e) => {
+    e.preventDefault();
     // value.setFormData({
     //   ...value.formData,
     //   title,
     //   description,
     //   price,
     // });
-    // if (!value.formData.title || !value.formData.description || !value.formData.price) {
-    //   setError("Please fill in all the details before proceeding.");
-    //   return; // Do not proceed if any field is empty
-    // }
+    if (!value.formData.title || !value.formData.price) {
+      setError("Please fill in the Property title and Property Price.");
+      return; // Do not proceed if any field is empty
+    }
 
     // setError(""); 
 
@@ -34,7 +34,7 @@ const PropertyDetails = () => {
       <h4>Enter Property Details</h4>
 
       <div className="input-fields">
-        <label htmlFor="title">Property Title</label>
+        <label htmlFor="title">Property Title<span style={{color:"red"}}>*</span></label>
         <br />
         <input
           id="title"
@@ -56,7 +56,7 @@ const PropertyDetails = () => {
       </div>
 
       <div className="input-fields">
-        <label htmlFor="price">Property Price</label>
+        <label htmlFor="price">Property Price<span style={{color:"red"}}>*</span></label>
         <br />
         <input
           id="price"
@@ -66,7 +66,7 @@ const PropertyDetails = () => {
         />
       </div>
     
-      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
         Previous
@@ -75,7 +75,7 @@ const PropertyDetails = () => {
       <button
         onClick={handleNextClick}
         style={{ margin: 25 }}
-        disabled={!value.formData.title || !value.formData.description || !value.formData.price}
+        // disabled={!value.formData.title || !value.formData.description || !value.formData.price}
         className="next-button"
       >
         Next

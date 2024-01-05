@@ -12,7 +12,8 @@ const AddLocation = () => {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
+    e.preventDefault();
 
     if (!value.formData.country || !value.formData.city || !value.formData.address) {
       setError("Please fill in all the fields before proceeding.");
@@ -45,7 +46,7 @@ const AddLocation = () => {
       <h4>Enter the address of the property</h4>
 
       <div className="input-fields">
-        <label htmlFor="country">Enter Country</label>
+        <label htmlFor="country">Enter Country<span style={{color:"red"}}>*</span></label>
         <br />
         <input
           id="country"
@@ -55,7 +56,7 @@ const AddLocation = () => {
       </div>
 
       <div className="input-fields">
-        <label htmlFor="city">Enter City</label>
+        <label htmlFor="city">Enter City<span style={{color:"red"}}>*</span></label>
         <br />
         <input
           id="city"
@@ -65,7 +66,7 @@ const AddLocation = () => {
       </div>
 
       <div className="input-fields">
-        <label htmlFor="address">Enter Address</label>
+        <label htmlFor="address">Enter Address<span style={{color:"red"}}>*</span></label>
         <br />
         <input
           id="address"
