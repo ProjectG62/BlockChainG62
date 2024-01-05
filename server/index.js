@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://g62:projectschool@cryptoestate.sm141an.mongodb.net/?retryWrites=true&w=majority";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/crypto_estate', {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -39,5 +41,5 @@ app.post('/api/storeWalletAddress', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("Server is running on port ${PORT}");
+  console.log(`Server is running on port ${PORT}`);
 });

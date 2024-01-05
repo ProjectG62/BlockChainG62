@@ -37,6 +37,7 @@ function NavScrollExample() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
+            <span></span>
             <Nav.Link
               href="/Buy_Property"
               className="a-link"
