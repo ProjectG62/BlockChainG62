@@ -19,7 +19,7 @@
 // const idPassed = "0x0d8354473582e24a71f61f4D9bFda41ca1f94b1e"
 // export default idPassed;
 // walletUtils.js
-
+import axios from 'axios';
 const connectWallet = async () => {
   let walletAddress = "";
 
@@ -33,6 +33,9 @@ const connectWallet = async () => {
       });
       walletAddress = accounts[0];
       console.log(walletAddress);
+      await axios.post('http://localhost:5000/api/storeWalletAddress', {
+          walletAddress: accounts[0],
+        });
     } catch (err) {
       console.error(err.message);
     }
