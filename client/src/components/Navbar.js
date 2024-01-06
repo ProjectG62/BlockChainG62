@@ -1,89 +1,77 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import React, { useState } from "react";
 import "./Navbar.css";
+import { Link, NavLink } from "react-router-dom";
 import connectWallet from "./FetchId";
 
-function NavScrollExample() {
+export const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+  const [currentImg, setCurrentImg] = useState({
+    src: "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png",
+  });
+
+  const handleClick = () => {
+    setCurrentImg((prevImg) => ({
+      src:
+        prevImg.src ===
+        "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png"
+          ? "https://res.cloudinary.com/duwadnxwf/image/upload/v1704550811/icons8-x-50_vc1cop.png"
+          : "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png",
+    }));
+  };
 
   const handleConnectWallet = async () => {
     const address = await connectWallet();
     setWalletAddress(address);
   };
+
   return (
-    <Navbar expand="lg" className="h-container">
-      <Container fluid>
-        <div className="spacing"></div>
-        <Navbar.Brand href="/">
-          <img
-            src="../logo.png"
-            className="logo_container"
-            width={100}
-            height={50}
-            alt="Logo"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" className="custom-toggler">
-          <span className="custom-icon"></span>
-          <span className="custom-icon"></span>
-          <span className="custom-icon"></span>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <span></span>
-            <Nav.Link
-              href="/Buy_Property"
-              className="a-link"
-              style={{ color: "white" }}
-            >
-              Buy Property
-            </Nav.Link>
-            <Nav.Link
-              href="/Sell_Property"
-              className="a-link"
-              style={{ color: "white" }}
-            >
-              Sell Property
-            </Nav.Link>
-            <Nav.Link
-              href="/user/:activepage"
-              className="a-link"
-              style={{ color: "white" }}
-            >
-              Profile
-            </Nav.Link>
-
-            <Nav.Link
-              href="/LoginForm"
-              className="a-link"
-              style={{ color: "white" }}
-            >
-              Login
-            </Nav.Link>
-
-
-            <Button className="a-link button" onClick={handleConnectWallet}>
-              <span>
-                {walletAddress.length > 0
-                  ? `Connected: ${walletAddress.substring(
-                      0,
-                      6
-                    )}...${walletAddress.substring(38)}`
-                  : "Connect"}
-              </span>
-            </Button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <nav>
+      <Link to="/" className="title">
+        <img
+          src="https://res.cloudinary.com/duwadnxwf/image/upload/v1704552262/logo_eazfqp.png"
+          className="logo_container"
+          width={100}
+          height={50}
+          alt="Logo"
+        />
+      </Link>
+      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <img
+          src={currentImg.src}
+          alt="ham"
+          className="ham"
+          onClick={handleClick}
+        ></img>
+      </div>
+      <ul className={menuOpen ? "open" : ""}>
+        <li>
+          <NavLink to="/Buy_Property">Buy Property</NavLink>
+        </li>
+        <li>
+          <NavLink to="/Sell_Property">Sell Property</NavLink>
+        </li>
+        <li>
+          <NavLink to="/user/activepage">Profile</NavLink>
+        </li>
+        <li>
+          <NavLink to="/LoginForm">Login</NavLink>
+        </li>
+        <li>
+          <button className="button" onClick={handleConnectWallet}>
+            <span>
+              {walletAddress.length > 0
+                ? `Connected: ${walletAddress.substring(
+                    0,
+                    6
+                  )}...${walletAddress.substring(38)}`
+                : "Connect"}
+            </span>
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
-}
+};
 
-export default NavScrollExample;
+export default Navbar;
