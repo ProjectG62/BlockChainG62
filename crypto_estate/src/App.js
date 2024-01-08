@@ -1,0 +1,36 @@
+import "./App.css";
+import "./index.css";
+import Home from "./components/pages/Home";
+import Navbar from "./components/Navbar";
+import LoginForm from "./components/pages/LoginForm";
+import Buy_Property from "./components/pages/Buy_Property";
+import Sell_Property from "./components/pages/Sell_Property";
+import Profile from "./components/pages/Profile";
+import { LabelContextProvider } from "./components/AddProperty";
+import { ThirdwebProvider ,useContract,useContractRead} from "@thirdweb-dev/react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+const activeChain = "MATIC_MUMBAI";
+
+function App() {
+  const { contract }=useContract("0x76bb7dFde99925457174a3e7803cAa861bFAb439")
+  return (
+
+    
+    <ThirdwebProvider>
+      
+      <Router>
+    <LabelContextProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Buy_Property" element={<Buy_Property />} />
+        <Route path="/Sell_Property" element={<Sell_Property />} />
+        <Route path="/user/:activepage" element={<Profile />} />
+        <Route path="/LoginForm" element={<LoginForm />} />
+      </Routes>
+    </LabelContextProvider>
+  </Router></ThirdwebProvider>
+  );
+}
+
+export default App;
