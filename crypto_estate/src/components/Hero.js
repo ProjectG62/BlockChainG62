@@ -1,6 +1,5 @@
 import React from "react";
 import "./Hero.css";
-import SearchBar from "./SearchBar";
 const Hero = () => {
   return (
     <>
@@ -13,8 +12,7 @@ const Hero = () => {
         </h1>
         <p className="flexCenter text-on-img-mini">
           revolutionizing the world of Real Estate
-          <br />
-          using the secure and transparent blockchain network.
+          <br /> using the secure and transparent blockchain network.
         </p>
       </div>
     </>

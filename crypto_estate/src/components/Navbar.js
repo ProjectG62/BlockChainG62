@@ -7,16 +7,16 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [currentImg, setCurrentImg] = useState({
-    src: "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png",
+    src: "https://res.cloudinary.com/duwadnxwf/image/upload/v1704645765/icons8-hamburger-50_1_n0orei.png",
   });
 
   const handleClick = () => {
     setCurrentImg((prevImg) => ({
       src:
         prevImg.src ===
-        "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png"
+        "https://res.cloudinary.com/duwadnxwf/image/upload/v1704645765/icons8-hamburger-50_1_n0orei.png"
           ? "https://res.cloudinary.com/duwadnxwf/image/upload/v1704550811/icons8-x-50_vc1cop.png"
-          : "https://res.cloudinary.com/duwadnxwf/image/upload/v1704551085/icons8-hamburger-50_iko72s.png",
+          : "https://res.cloudinary.com/duwadnxwf/image/upload/v1704645765/icons8-hamburger-50_1_n0orei.png",
     }));
   };
 
@@ -50,6 +50,9 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink to="/Sell_Property">Sell Property</NavLink>
+        </li>
+        <li>
+          <NavLink to="/AboutUs">About Us</NavLink>
         </li>
         <li>
           <NavLink to="/user/activepage">Profile</NavLink>
