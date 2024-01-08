@@ -7,16 +7,16 @@ import Buy_Property from "./components/pages/Buy_Property";
 import Sell_Property from "./components/pages/Sell_Property";
 import Profile from "./components/pages/Profile";
 import { LabelContextProvider } from "./components/AddProperty";
-import { ThirdwebProvider ,useContract,useContractRead} from "@thirdweb-dev/react";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-const activeChain = "MATIC_MUMBAI";
+const activeChain = "mumbai";
 
 function App() {
-  const { contract }=useContract("0x76bb7dFde99925457174a3e7803cAa861bFAb439")
   return (
 
     
-    <ThirdwebProvider>
+    <ThirdwebProvider clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
+    activeChain={activeChain}>
       
       <Router>
     <LabelContextProvider>
