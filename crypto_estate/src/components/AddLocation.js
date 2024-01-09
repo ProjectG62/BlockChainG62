@@ -1,94 +1,110 @@
-
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { LabelContext } from "./AddProperty";
-import "./AddLocation.css"
+import "./AddLocation.css";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+
+// ... (your imports)
 
 const AddLocation = () => {
-  console.log("Rendering AddLocation");
   const value = useContext(LabelContext);
 
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
+  const mapContainer = useRef(null);
+
+  useEffect(() => {
+    if (mapContainer.current && !mapContainer.current.hasChildNodes()) {
+      // Initialize Leaflet map
+      const map = L.map(mapContainer.current).setView([51.505, -0.09], 13);
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+    }
+  }, [mapContainer.current]);
 
   const handleNextClick = (e) => {
     e.preventDefault();
 
     if (!value.formData.country || !value.formData.city || !value.formData.address) {
       setError("Please fill in all the fields before proceeding.");
-      return; 
+      return;
     }
 
-    // if (value.formData.images.length === 0) {
-    //   setError("Please select at least one image");
-    //   return;
-    // }
-
-    console.log("Before update:", value.formData);
-    value.setFormData((prevFormData)=>({
+    value.setFormData((prevFormData) => ({
       ...prevFormData,
-      location:{
-      country,
-      city,
-      address,
-    },
+      location: {
+        country,
+        city,
+        address,
+      },
     }));
 
     setError("");
-    console.log("After update:", value.formData);
-    value.nextPage(); 
+    value.nextPage();
   };
 
   return (
-    <div>
-    <form>
-      <h4>Enter the address of the property</h4>
+    <div className="location">
+      <form style={{width:"50vh"}}>
+        <h4>Enter the address of the property</h4>
 
-      <div className="input-fields">
-        <label htmlFor="country">Enter Country<span style={{color:"red"}}>*</span></label>
-        <br />
-        <input
-          id="country"
-          value={value.formData.country}
-          onChange={(e) => value.handleChange("country")(e)}
-        />
-      </div>
+        <div className="input-fields">
+          <label htmlFor="country">
+            Enter Country<span style={{ color: "red" }}>*</span>
+          </label>
+          <br />
+          <input
+            id="country"
+            value={value.formData.country}
+            onChange={(e) => value.handleChange("country")(e)}
+            className="input-element"
+          />
+        </div>
 
-      <div className="input-fields">
-        <label htmlFor="city">Enter City<span style={{color:"red"}}>*</span></label>
-        <br />
-        <input
-          id="city"
-          value={value.formData.city}
-          onChange={(e) => value.handleChange("city")(e)}
-        />
-      </div>
+        <div className="input-fields">
+          <label htmlFor="city">
+            Enter City<span style={{ color: "red" }}>*</span>
+          </label>
+          <br />
+          <input
+            id="city"
+            value={value.formData.city}
+            onChange={(e) => value.handleChange("city")(e)}
+            className="input-element"
+          />
+        </div>
 
-      <div className="input-fields">
-        <label htmlFor="address">Enter Address<span style={{color:"red"}}>*</span></label>
-        <br />
-        <input
-          id="address"
-          value={value.formData.address}
-          onChange={(e) => value.handleChange("address")(e)}
-        />
-      </div>
+        <div className="input-fields">
+          <label htmlFor="address">
+            Enter Address<span style={{ color: "red" }}>*</span>
+          </label>
+          <br />
+          <input
+            id="address"
+            value={value.formData.address}
+            onChange={(e) => value.handleChange("address")(e)}
+            className="input-element"
+          />
+        </div>
 
-      {error && (<p style={{ color: 'red' ,margin: 0 }}>{error}</p>)}
+        {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
 
-      <button
-        onClick={handleNextClick}
-        style={{ margin: 25 }}
-        // disabled={!value.formData.country || !value.formData.city || !value.formData.address}
-        className="next-button"
-      >
-        Next
-      </button>
-    </form>
-    <div className="map">
-
-    </div>
+        <button
+          onClick={handleNextClick}
+          style={{ margin: 25 }}
+          className="next-button"
+        >
+          Next
+        </button>
+      </form>
+      <div id="map" ref={mapContainer} style={{ height: "400px",width:"40vw" }}></div>
     </div>
   );
 };
