@@ -52,7 +52,7 @@ const AddLocation = () => {
 
   return (
     <div className="location">
-      <form style={{width:"50vh"}}>
+      <form className="form-map"style={{width:"50vh"}}>
         <h4>Enter the address of the property</h4>
 
         <div className="input-fields">
