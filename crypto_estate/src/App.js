@@ -10,6 +10,7 @@ import AboutUs from "./components/pages/AboutUs";
 import { LabelContextProvider } from "./components/AddProperty";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Registration from "./components/pages/Registration";
 const activeChain = "mumbai";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/user/:activepage" element={<Profile />} />
             <Route path="/LoginForm" element={<LoginForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
+            <Route path="/Reg" element={<Registration />} />
           </Routes>
         </LabelContextProvider>
       </Router>
