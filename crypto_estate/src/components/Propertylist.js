@@ -36,6 +36,7 @@ const Propertylist = () => {
       });
     }
   };
+
   const handleSearch = (searchTerm) => {
     const filtered = data.filter(
       (property) =>
@@ -78,51 +79,55 @@ const Propertylist = () => {
 
       {selectedProperty && (
         <div className="popup-container">
-          <div className="popup-body">
-            <div className="popup-header">
-              <div className="popup-content">
-                <h2>{selectedProperty.title}</h2> <br />
-                <p>{selectedProperty.description}</p> <br />
-                <p>Price: {selectedProperty.price} MATIC</p> <br />
-                <p>
-                  Address: {selectedProperty.address}, {selectedProperty.city},{" "}
-                  {selectedProperty.country}
-                </p>{" "}
-                <br />
-                <p>
-                  Facilities: Bathrooms: {selectedProperty.facilities.bathrooms}
-                  , Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
-                  {selectedProperty.facilities.bedrooms}
-                </p>
-              </div>
+            <div className="popup-body">
+              <div className="popup-header">
+                <div className="popup-content">
+                  <h2>{selectedProperty.title}</h2> <br />
+                  <p>{selectedProperty.description}</p> <br />
+                  <p>Price: {selectedProperty.price} MATIC</p> <br />
+                  <p>
+                    Address: {selectedProperty.address}, {selectedProperty.city},{" "}
+                    {selectedProperty.country}
+                  </p>{" "}
+                  <br />
+                  <p>
+                    Facilities: Bathrooms: {selectedProperty.facilities.bathrooms}
+                    , Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                    {selectedProperty.facilities.bedrooms}
+                  </p>
+                </div>
 
-              <div>
-                <ImageSlider
-                  slides={selectedProperty.sliderImages}
-                  handleLike={handleLike}
-                  selectedProperty={selectedProperty}
-                />
-              </div>
+                <div>
+                  <ImageSlider
+                    slides={selectedProperty.sliderImages}
+                    handleLike={handleLike}
+                    selectedProperty={selectedProperty}
+                  />
+                </div>
 
-              <div className="popup-buttons">
-                <button
-                  className="likeButton"
-                  onClick={() => handleLike(selectedProperty._id)}
-                >
-                  Like
-                </button>
-                <button className="BuyPropBtn"> Buy Property</button>
-                <button className="closeButton" onClick={closePopup}>
-                  {" "}
-                  Close
-                </button>
+                <div className="popup-buttons">
+
+                  <button
+                    className="likeButton"
+                    onClick={() => handleLike(selectedProperty._id)}>
+                    Like
+                  </button>
+
+                  <button className="BuyPropBtn"> Buy Property</button>
+                  <button className="closeButton" onClick={closePopup}>
+                    {" "}
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
       )}
     </div>
   );
 };
 
 export default Propertylist;
+
+
+

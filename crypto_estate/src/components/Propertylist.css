@@ -82,18 +82,35 @@
   {
     width: 70%;
     height: 70%;
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    background-color: transparent;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
-    max-height: 80vh; /* To Set a maximum height for the popup body */
-    overflow-y: auto; /* To Enable vertical scrolling when content overflows */
+    max-height: 80vh; 
+    overflow-y: auto; 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(850px, 1fr));
     gap: 40px;
+    /* filter: blur(8px);  */
+    position: relative; 
   }
   
+  /* .popup-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    filter: blur(8px); 
+    z-index: -1;
+    opacity: 0.6; 
+    border-radius: 10px;
+  } */
+
   .popup-container 
   {
     position: fixed;
@@ -117,7 +134,21 @@
     width: 100%;
     text-align: right;
   }
-  
+
+  .popup-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://lovehomedesigns.com/wp-content/uploads/2022/01/cute-house-012522.jpg'); 
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.6;
+    border-radius: 10px; 
+  }
+
   .popup-content {
     padding: 20px;
     /* text-align: left; */
