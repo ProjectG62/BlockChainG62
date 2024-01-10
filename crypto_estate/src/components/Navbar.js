@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import connectWallet from "./FetchId";
+import { Navigate } from "react-router-dom";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,11 +56,15 @@ export const Navbar = () => {
           <NavLink to="/AboutUs">About Us</NavLink>
         </li>
         <li>
-          <NavLink to="/user/activepage">Profile</NavLink>
-        </li>
-        <li>
           <NavLink to="/LoginForm">Login</NavLink>
         </li>
+        {walletAddress&&
+        <li>
+          <NavLink to="/user/activepage">Profile</NavLink>
+        </li>
+        
+        }
+  
         <li>
           <button className="button" onClick={handleConnectWallet}>
             <span>
