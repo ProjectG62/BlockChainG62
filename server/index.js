@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://g62:projectschool@cryptoestate.sm141an.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb://localhost:27017/";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
