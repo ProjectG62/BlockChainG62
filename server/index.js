@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb://localhost:27017/";
+const uri = "mongodb+srv://g62:projectschool@cluster0.gbjrhhp.mongodb.net/";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,8 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  
 });
 
 const connection = mongoose.connection;
