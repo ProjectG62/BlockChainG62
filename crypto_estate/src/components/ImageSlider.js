@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import {SlArrowRight, SlArrowLeft } from "react-icons/sl";
+
 
 const ImageSlider = ({ selectedProperty }) => {
   const [current, setCurrent] = useState(0);
@@ -19,8 +20,8 @@ const ImageSlider = ({ selectedProperty }) => {
 
   return (
     <section className='slider'>
-      <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-      <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+      <SlArrowLeft className='left-arrow' onClick={prevSlide} />
+      <SlArrowRight className='right-arrow' onClick={nextSlide} />
       {selectedProperty.sliderImages.map((slide, index) => {
         return (
           <div
