@@ -2,8 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color:#0F222D; */
-    background-color: black;
+    background-color:#0F222D;
     color: white;
     top: 0;
     padding-top: 0.5rem;
@@ -11,19 +10,15 @@ nav {
     overflow: hidden;
     z-index: 100;
 }
-.title{
-    padding-left: 2.5rem;
-    padding-top: 0.2rem;
-}
+
 nav ul {
     display: flex;
     align-items: center;
-    padding-right: 1.5rem;
 }
 
 nav ul li {
    list-style: none; 
-   padding-right: 1.7rem;
+   padding-right: 2rem;
    padding-top: 0.5rem;
 }
 
@@ -31,7 +26,7 @@ nav ul li a {
     display: block;
     text-decoration: none;
     color: white;
-    /* padding: 0.5rem; */
+    padding: 0.5rem;
     margin: 0 0.5rem;
     border-radius: 0.5rem;
 }
@@ -40,14 +35,16 @@ nav li a {
     text-decoration: none;
     position: relative;
     font-size: 18px;
+    margin: 0 15px;
+    transition: color 0.3s;
   }
 
-nav li a:hover {
+  nav li a:hover {
     color: white;
-}
+  }
 
-nav li a::before,
-nav li a::after {
+  nav li a::before,
+  nav li a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -55,20 +52,20 @@ nav li a::after {
     background-color: white;
     bottom: -4px;
     transition: all 0.3s ease-in-out;
-}
+  }
 
-nav li a::before {
+  nav li a::before {
     left: 0;
-}
+  }
 
-nav li a::after {
+  nav li a::after {
     right: 0;
-}
+  }
 
-nav li a:hover::before,
-nav li a:hover::after {
+  nav li a:hover::before,
+  nav li a:hover::after {
     width: 50%;
-}
+  }
 
 .ham-container{
     padding-bottom: 1rem;

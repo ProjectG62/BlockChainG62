@@ -36,7 +36,6 @@ const Propertylist = () => {
       });
     }
   };
-
   const handleSearch = (searchTerm) => {
     const filtered = data.filter(
       (property) =>
@@ -49,7 +48,7 @@ const Propertylist = () => {
   };
 
   return (
-    <div className="property-page">
+    <div>
       <SearchBar onSearch={handleSearch} />
 
       <div className="properties-container">
@@ -112,7 +111,6 @@ const Propertylist = () => {
                 >
                   Like
                 </button>
-
                 <button className="BuyPropBtn"> Buy Property</button>
                 <button className="closeButton" onClick={closePopup}>
                   {" "}

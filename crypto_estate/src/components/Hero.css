@@ -1,13 +1,13 @@
-body{
+/* body{
     background-color: #0F222D;
-  }
+  } */
   
   .background-container {
-      background-image: url('https://res.cloudinary.com/duwadnxwf/image/upload/v1703055605/2_mq3fyt.jpg'); /* Replace with the path to your background image */
+      background-image: url('https://res.cloudinary.com/duwadnxwf/image/upload/v1704955893/skyscrapers-450793_1280_qu6gxv.jpg'); /* Replace with the path to your background image */
       background-size: cover;
       background-position: center;
       box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
-      height: 690px; 
+      height: 645px; 
       text-align: justify;
   }
    
@@ -16,9 +16,10 @@ body{
       position: relative;
       z-index: 1;
       font-weight: 600;
-      font-size: 4.8rem;
-      line-height: 4.5rem;
-      color: #FFF5D0;
+      font-family:'Franklin Gothic Medium';
+      font-size: 6.5rem;
+      line-height: 6rem;
+      color:white;
       padding-top: 10rem;
   }
   
@@ -26,10 +27,9 @@ body{
       position: relative;
       z-index: 1;
       font-weight: 400;
-      color: #FFF5D0;
+      font-size: 18px;
+      color: white;
       padding-top: 0.5rem;
-      padding-right: 12.4rem;
-  
   }
   
   @media (max-width: 768px) {

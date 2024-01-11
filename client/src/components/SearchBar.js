@@ -38,10 +38,8 @@
 // };
 
 // export default SearchBar;
-
 import React, { useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import "./SearchBar.css";
 
 const SearchBar = ({ onSearch, onClear }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,23 +65,20 @@ const SearchBar = ({ onSearch, onClear }) => {
   };
 
   return (
-    <div className="search-container">
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="property/price/country..."
-          value={searchTerm}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyPress}
-          style={{ fontSize: "18px" }}
-        />
-        <button
-          className="search-button"
-          onClick={searchTerm ? handleClearClick : handleSearchClick}
-        >
-          {searchTerm ? <FaTimes /> : <FaSearch />}
-        </button>
-      </div>
+    <div className="search-bar">
+      <input
+        type="text"
+        placeholder="property/price/country..."
+        value={searchTerm}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
+      />
+      <button
+        className="button"
+        onClick={searchTerm ? handleClearClick : handleSearchClick}
+      >
+        {searchTerm ? <FaTimes /> : <FaSearch />}
+      </button>
     </div>
   );
 };

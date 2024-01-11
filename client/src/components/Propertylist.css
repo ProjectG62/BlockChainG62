@@ -1,7 +1,5 @@
-.property-page{
-  background-color: rgb(246, 244, 244);
-  padding-top: 0.2px;
-}
+/* Propertylist.css */
+
 .properties-container {
     margin-top: 20px;
     margin-left: 40px;
@@ -22,7 +20,7 @@
 
   .property-card:hover{
     opacity: 1;
-    background-color: rgba(194, 194, 196, 0.413);
+    background-color: rgba(212, 212, 218, 0.564);
   }
 
   .like-container {
@@ -64,31 +62,19 @@
   }
   
   .viewButton {
-    /* font-weight: 400;
+    font-weight: 400;
     font-size: 16px;
     padding: 0.4rem 1rem;
     color: white;
-    background: rgb(0, 0, 0);
+    background: rgb(76, 177, 240);
     border: none;
     border-radius: 4px;
-    transition: all 300ms ease-in; */
-    display: inline-block;
-    padding: 6px 12px;
-    font-size: 18px;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 0.5rem;
-    background-color: black;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    transition: all 300ms ease-in;
   }
   
   .viewButton:hover {
-    /* cursor: pointer;
-    transform: scale(1.1); */
-    background-color: rgb(255, 255, 255); 
-  color: rgb(0, 0, 0); 
-  border-color: rgb(0, 0, 0); 
+    cursor: pointer;
+    transform: scale(1.1);
   }
   
    
@@ -96,35 +82,18 @@
   {
     width: 70%;
     height: 70%;
-    /* background-color: lightgray; */
-    background-color: transparent;
+    background-color: lightgray;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.2);
-    max-height: 80vh; 
-    overflow-y: auto; 
+    max-height: 80vh; /* To Set a maximum height for the popup body */
+    overflow-y: auto; /* To Enable vertical scrolling when content overflows */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(850px, 1fr));
     gap: 40px;
-    /* filter: blur(8px);  */
-    position: relative; 
   }
   
-  /* .popup-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: cover;
-    filter: blur(8px); 
-    z-index: -1;
-    opacity: 0.6; 
-    border-radius: 10px;
-  } */
-
   .popup-container 
   {
     position: fixed;
@@ -148,21 +117,7 @@
     width: 100%;
     text-align: right;
   }
-
-  .popup-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('https://lovehomedesigns.com/wp-content/uploads/2022/01/cute-house-012522.jpg'); 
-    background-size: cover;
-    filter: blur(8px);
-    z-index: -1;
-    opacity: 0.6;
-    border-radius: 10px; 
-  }
-
+  
   .popup-content {
     padding: 20px;
     /* text-align: left; */

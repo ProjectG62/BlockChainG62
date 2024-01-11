@@ -4,7 +4,6 @@ import "./AddLocation.css";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-
 // ... (your imports)
 
 const AddLocation = () => {
@@ -21,7 +20,7 @@ const AddLocation = () => {
       // Initialize Leaflet map
       const map = L.map(mapContainer.current).setView([51.505, -0.09], 13);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -31,12 +30,15 @@ const AddLocation = () => {
 
   const handleNextClick = (e) => {
     e.preventDefault();
-
-    if (!value.formData.country || !value.formData.city || !value.formData.address) {
-      setError("Please fill in all the fields before proceeding.");
+    e.target.form.reportValidity(); //added this line to show error message before moving to the next page
+    if (
+      !value.formData.country ||
+      !value.formData.city ||
+      !value.formData.address
+    ) {
+      // setError("Please fill in all the fields before proceeding.");
       return;
     }
-
     value.setFormData((prevFormData) => ({
       ...prevFormData,
       location: {
@@ -52,7 +54,7 @@ const AddLocation = () => {
 
   return (
     <div className="location">
-      <form className="form-map"style={{width:"50vh"}}>
+      <form className="form-map" style={{ width: "50vh" }}>
         <h4>Enter the address of the property</h4>
 
         <div className="input-fields">
@@ -65,6 +67,7 @@ const AddLocation = () => {
             value={value.formData.country}
             onChange={(e) => value.handleChange("country")(e)}
             className="input-element"
+            required //added required
           />
         </div>
 
@@ -78,6 +81,7 @@ const AddLocation = () => {
             value={value.formData.city}
             onChange={(e) => value.handleChange("city")(e)}
             className="input-element"
+            required //added required
           />
         </div>
 
@@ -91,6 +95,7 @@ const AddLocation = () => {
             value={value.formData.address}
             onChange={(e) => value.handleChange("address")(e)}
             className="input-element"
+            required //added required
           />
         </div>
 
@@ -104,7 +109,11 @@ const AddLocation = () => {
           Next
         </button>
       </form>
-      <div id="map" ref={mapContainer} style={{ height: "400px",width:"40vw" }}></div>
+      <div
+        id="map"
+        ref={mapContainer}
+        style={{ height: "400px", width: "40vw" }}
+      ></div>
     </div>
   );
 };

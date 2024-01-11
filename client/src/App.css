@@ -1,0 +1,17 @@
+body{
+  background-color: #0F222D;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    overflow-x: hidden; /* Hide horizontal overflow on larger screens */
+  }
+}
+
+/* Apply styles for smaller screens */
+@media screen and (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+}
