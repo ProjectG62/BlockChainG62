@@ -1,0 +1,72 @@
+.team-card {
+    border: 2px solid rgba(0, 0, 0, 0.591);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    width: 80%;
+    height: 80%;
+    opacity: 0; /* Initial opacity set to 0 */
+    transform: translateY(20px); /* Initial position below the viewport */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transition properties */
+    will-change: opacity, transform; /* Optimize for better performance */
+}
+
+.team-member-img {
+    max-width: 100%;
+    border-radius: 10%;
+}
+/* .team-wrapper{
+    background-color: rgb(243, 222, 196);
+    padding-right:5%;
+    padding-left: 5%;
+    padding-bottom: 2%;    
+} */
+.team-wrapper{
+    height:100%;
+    width: 100%;
+    /* background-color:rgb(255, 242, 220) ; */
+    background-color: white;
+    padding-top: 5rem;
+}
+.team-container {
+    padding-left: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    /* padding:5%; */
+    justify-content: center;
+    height: 120vh;
+    width: 100vw;
+    /* background-color: rgb(255, 242, 220); */
+    background-color: white;
+}
+  
+
+@media (max-width: 768px) {
+    .team-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+  
+@media (max-width: 480px) {
+    .team-container {
+        grid-template-columns: 1fr;
+        padding-top: 7rem;
+    }
+    /* .team-wrapper{
+        height:200vh
+    } */
+}
+  
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the reveal animation to the team-card class */
+.team-card.reveal {
+    animation: reveal 0.8s ease forwards;
+}
+

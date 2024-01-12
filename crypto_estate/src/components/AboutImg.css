@@ -1,0 +1,24 @@
+body {
+    margin: 0; 
+    background-color: black;
+  } 
+  
+  .meet-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+  }
+  
+  .meet-container h1 {
+    font-size: 150px;
+    color: rgba(225, 225, 225, 0.01);
+    background-image: url("https://res.cloudinary.com/duwadnxwf/image/upload/v1705062611/texture-1504364_1280_g5myzd.jpg");
+    background-clip: text;
+    -webkit-background-clip: text; 
+    text-align: center;
+    font-weight: 900;
+  }
+  
