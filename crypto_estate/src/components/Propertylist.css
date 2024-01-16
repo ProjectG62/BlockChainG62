@@ -210,7 +210,6 @@
   transition: all 300ms ease-in;
 }
 
-
 .likeButton
 {
   font-weight: 400;
@@ -251,44 +250,41 @@
   transform: scale(1.1);
 }
 
-
 .slider {
   position: relative;
-  height: 200px; /* Set a fixed height */
-  width: 400px;  /* Set a fixed width */
-  margin: 0 auto; /* Center the slider horizontally */
-  overflow: hidden; /* Ensure the images don't overflow */
+  height: 500px; 
+  width: 500px; 
+  margin: auto;
+  overflow: hidden; 
 }
 
 .image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure the image covers the entire container */
+  width: 70%;
+  height: 60%;
+  object-fit: cover;
   border-radius: 10px;
+  /* margin-left: 30%; */
 }
-  
-
 
 .right-arrow,
 .left-arrow {
   position: absolute;
-  top: 50%;
+  top: 55%;
   font-size: 2rem; 
   color: black;
   z-index: 10;
   cursor: pointer;
   transform: translateY(-50%);
+  gap: 20%;
 
 }
 
-
-
 .right-arrow {
-  right: 10px; /* Adjust the right spacing */
+  right: 100px; /* Adjust the right spacing */
 }
 
 .left-arrow {
-  left: 10px; /* Adjust the left spacing */
+  left: 250px; /* Adjust the left spacing */
 }
 
 .slide {
@@ -302,7 +298,6 @@
   transform: scale(1.08);
 }
 
-/* screens with min width of 10px */
 
 @media (min-width: 10px) {
   .popup-buttons {
