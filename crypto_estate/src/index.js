@@ -4,11 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+
+const activeChain = "mumbai";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThirdwebProvider
+      clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
+      activeChain={activeChain}
+    >
+      <App />
+    </ThirdwebProvider>
   </React.StrictMode>
 );
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { LabelContext } from "./AddProperty";
+import { LabelContext } from "./ConfirmDetails";
 import "./AddLocation.css";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -39,14 +39,14 @@ const AddLocation = () => {
       // setError("Please fill in all the fields before proceeding.");
       return;
     }
-    value.setFormData((prevFormData) => ({
-      ...prevFormData,
-      location: {
-        country,
-        city,
-        address,
-      },
-    }));
+    // value.setFormData((prevFormData) => ({
+    //   ...prevFormData,
+    //   location: {
+    //     country,
+    //     city,
+    //     address,
+    //   },
+    // }));
 
     setError("");
     value.nextPage();

@@ -1,5 +1,5 @@
 import React, { useContext, useState , useRef } from "react";
-import { LabelContext } from "./AddProperty";
+import { LabelContext } from "./ConfirmDetails";
 import "./UploadImages.css"
 
 const UploadImages = () => {

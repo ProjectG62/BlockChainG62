@@ -7,7 +7,7 @@ import Buy_Property from "./components/pages/Buy_Property";
 import Sell_Property from "./components/pages/Sell_Property";
 import Profile from "./components/pages/Profile";
 import AboutUs from "./components/pages/AboutUs";
-import { LabelContextProvider } from "./components/AddProperty";
+import { LabelContextProvider } from "./components/ConfirmDetails";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Registration from "./components/pages/Registration";

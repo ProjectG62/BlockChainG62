@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddProperty";
+import { LabelContext } from "./ConfirmDetails";
 import "./PropertyDetails.css"
 
 const PropertyDetails = () => {
@@ -13,18 +13,10 @@ const PropertyDetails = () => {
 
   const handleNextClick = (e) => {
     e.preventDefault();
-    // value.setFormData({
-    //   ...value.formData,
-    //   title,
-    //   description,
-    //   price,
-    // });
     if (!value.formData.title || !value.formData.price) {
       setError("Please fill in the Property title and Property Price.");
-      return; // Do not proceed if any field is empty
+      return; 
     }
-
-    // setError(""); 
 
     value.nextPage();
   };

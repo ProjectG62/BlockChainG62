@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
-import connectWallet from "./FetchId";
+// import connectWallet from "./FetchId";
+import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [walletAddress, setWalletAddress] = useState("");
   const [currentImg, setCurrentImg] = useState({
     src: "https://res.cloudinary.com/duwadnxwf/image/upload/v1704953273/icons8-hamburger-50_2_c837d6.png",
   });
@@ -19,11 +19,11 @@ export const Navbar = () => {
           : "https://res.cloudinary.com/duwadnxwf/image/upload/v1704953273/icons8-hamburger-50_2_c837d6.png",
     }));
   };
-
-  const handleConnectWallet = async () => {
-    const address = await connectWallet();
-    setWalletAddress(address);
-  };
+  const address = useAddress();
+  // const handleConnectWallet = async () => {
+  //   const address = await connectWallet();
+  //   setWalletAddress(address);
+  // };
 
   return (
     <nav>
@@ -57,27 +57,18 @@ export const Navbar = () => {
         <li>
           <NavLink to="/LoginForm">Login</NavLink>
         </li>
-        {walletAddress && (
+        {address && (
           <li>
             <NavLink to="/user/activepage">Profile</NavLink>
           </li>
         )}
 
         <li>
-          <button className="button" onClick={handleConnectWallet}>
-            <span>
-              {walletAddress.length > 0
-                ? `Connected: ${walletAddress.substring(
-                    0,
-                    6
-                  )}...${walletAddress.substring(38)}`
-                : "Connect"}
-            </span>
-          </button>
+          <ConnectWallet />
         </li>
       </ul>
     </nav>
   );
 };
 
-export default Navbar;
+export default Navbar;

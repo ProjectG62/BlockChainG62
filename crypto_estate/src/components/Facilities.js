@@ -1,32 +1,59 @@
 import React, { useContext, useState } from "react";
-import { LabelContext } from "./AddProperty";
-import "./Facilities.css"
+import { LabelContext } from "./ConfirmDetails";
+import "./Facilities.css";
+import { Web3Button, useAddress } from "@thirdweb-dev/react";
+import { CONTRACT_ADDRESS } from "./pages/addresses";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
 
 const Facilities = () => {
   const value = useContext(LabelContext);
+  const address = useAddress();
+  const [error, setError] = useState("");
 
-  const [numRooms, setNumRooms] = useState("");
-  const [numBathrooms, setNumBathrooms] = useState("");
-  const [numParkingSpaces, setNumParkingSpaces] = useState("");
+  // const [numRooms, setNumRooms] = useState("");
+  // const [numBathrooms, setNumBathrooms] = useState("");
+  // const [numParkingSpaces, setNumParkingSpaces] = useState("");
 
-  const handleSubmit = () => {
-    // Update the context's formData state
-    // value.setFormData({
-    //   ...value.formData,
-    //   numRooms,
-    //   numBathrooms,
-    //   numParkingSpaces,
-    // });
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // value.setFormData({
+  //   //   ...value.formData,
+  //   //   numRooms,
+  //   //   numBathrooms,
+  //   //   numParkingSpaces,
+  //   // });
+  //   console.log("Form Data:", value.formData);
+  // };
 
-    // Perform any additional actions, such as submitting the form data
-    // ...
+  const handleNextClick = (e) => {
+    e.preventDefault();
+    e.target.form.reportValidity(); //added this line to show error message before moving to the next page
+    if (
+      !value.formData.country ||
+      !value.formData.city ||
+      !value.formData.address
+    ) {
+      // setError("Please fill in all the fields before proceeding.");
+      return;
+    }
+    // value.setFormData((prevFormData) => ({
+    //   ...prevFormData,
+    //   location: {
+    //     country,
+    //     city,
+    //     address,
+    //   },
+    // }));
 
-    // For this example, let's log the form data to the console
-    console.log("Form Data:", value.formData);
+    setError("");
+    value.nextPage();
   };
 
+  const { contract } = useContract(
+    "0xA21438A8654A85EEABa5b3715c239105C466CaF9"
+  );
   return (
-    <form>
+    <form onSubmit={value.handleSubmit}>
       <h4>Enter Property Details</h4>
 
       <div className="input-fields">
@@ -62,15 +89,23 @@ const Facilities = () => {
         />
       </div>
 
-      <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
+      <button
+        onClick={() => value.prevPage()}
+        style={{ margin: 25 }}
+        className="previous-button"
+      >
         Previous
       </button>
 
-      <button onClick={handleSubmit} style={{ margin: 25 }} className="submit-button" >
-        Submit
-      </button>
+      <button
+          onClick={handleNextClick}
+          style={{ margin: 25 }}
+          className="next-button"
+        >
+          Next
+        </button>
     </form>
   );
 };
 
-export default Facilities;
+export default Facilities;
