@@ -1,14 +1,63 @@
-import React, { useState } from "react";
-import data from "../data.json";
+import React, { useState, useEffect } from "react";
+import { AiFillHeart } from "react-icons/ai";
+import { useContract, useContractRead } from "@thirdweb-dev/react";
+import axios from "axios";
 import "./Propertylist.css";
 import SearchBar from "./SearchBar";
-import { AiFillHeart } from "react-icons/ai";
 import ImageSlider from "./ImageSlider";
 
 const Propertylist = () => {
+  const { contract } = useContract(
+    "0xA21438A8654A85EEABa5b3715c239105C466CaF9"
+  );
+  const [JsonData, setJsonData] = useState([]);
+  const { data, isLoading } = useContractRead(contract, "getAllProperties");
+
+  useEffect(() => {
+    // Check if data is still loading
+    if (isLoading) {
+      // Data is still loading, do nothing for now
+      return;
+    }
+
+    // Data has been loaded, process and save
+    const tempJsonData = data.map((propertyData) => ({
+      _id: parseInt(propertyData[0]._hex, 16),
+      title: propertyData[5],
+      description: propertyData.description,
+      price: parseInt(propertyData[2]._hex, 16),
+      address: propertyData.propertyAddress,
+      city: propertyData.city,
+      country: propertyData.country,
+      image:
+        "https://images.pexels.com/photos/7031406/pexels-photo-7031406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      facilities: {
+        bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
+        parking: parseInt(propertyData.nParking._hex, 16),
+        bedrooms: parseInt(propertyData.nRooms._hex, 16),
+      },
+    }));
+
+    setJsonData(tempJsonData);
+
+    axios
+      .post("http://localhost:5000/saveJson", tempJsonData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  }, [data, isLoading]);
+
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [likedProperties, setLikedProperties] = useState([]);
-  const [filteredProperties, setFilteredProperties] = useState(data);
+  const [filteredProperties, setFilteredProperties] = useState(JsonData);
+
+  useEffect(() => {
+    // Update filteredProperties with processed data
+    setFilteredProperties(JsonData);
+  }, [JsonData]);
 
   const openPopup = (property) => {
     setSelectedProperty(property);
@@ -20,7 +69,6 @@ const Propertylist = () => {
 
   const handleLike = (propertyId) => {
     if (likedProperties.includes(propertyId)) {
-      // Property is already liked, ask for confirmation
       const confirmation = window.confirm(
         "Are you sure you want to remove this property from liked?"
       );
@@ -30,7 +78,6 @@ const Propertylist = () => {
         });
       }
     } else {
-      // Property is not liked, add it to the liked list
       setLikedProperties((prevLikedProperties) => {
         return [...prevLikedProperties, propertyId];
       });
@@ -38,7 +85,7 @@ const Propertylist = () => {
   };
 
   const handleSearch = (searchTerm) => {
-    const filtered = data.filter(
+    const filtered = JsonData.filter(
       (property) =>
         property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         property.price.toString().includes(searchTerm) ||
@@ -61,7 +108,7 @@ const Propertylist = () => {
               onClick={() => handleLike(property._id)}
               className="like-container"
             />
-            <img src={property.image} alt={property.name} className="img" />
+            <img src={property.image} alt={property.title} className="img" />
             <div className="attributes">
               <div className="propTitle">{property.title}</div>
               <div className="price">{property.price} MATIC</div>
@@ -83,26 +130,40 @@ const Propertylist = () => {
             <div className="popup-header">
               <div className="popup-content">
                 <h2>{selectedProperty.title}</h2> <br />
-                <p>{selectedProperty.description}</p> <br />
-                <p>Price: {selectedProperty.price} MATIC</p> <br />
+                <p>{selectedProperty.description}</p>
                 <p>
-                  Address: {selectedProperty.address}, {selectedProperty.city},{" "}
-                  {selectedProperty.country}
+                  <br />
+                  Address:<br></br> {selectedProperty.address},{" "}
+                  {selectedProperty.city}, {selectedProperty.country}
                 </p>{" "}
                 <br />
                 <p>
-                  Facilities: Bathrooms: {selectedProperty.facilities.bathrooms}
-                  , Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                  Facilities:<br></br> Bathrooms:{" "}
+                  {selectedProperty.facilities.bathrooms}, Parking:{" "}
+                  {selectedProperty.facilities.parking}, Bedrooms:{" "}
                   {selectedProperty.facilities.bedrooms}
                 </p>
               </div>
 
               <div>
-                <ImageSlider
-                  slides={selectedProperty.sliderImages}
-                  handleLike={handleLike}
-                  selectedProperty={selectedProperty}
-                />
+                {/* Assuming sliderImages is part of selectedProperty */}
+                <ImageSlider selectedProperty={selectedProperty} />
+                <p
+                  style={{
+                    fontWeight: "bolder",
+                    textAlign: "center",
+                    paddingTop: "1rem",
+                    fontSize: "30px",
+                  }}
+                >
+                  Price: {selectedProperty.price} MATIC{" "}
+                  <img
+                    src="https://res.cloudinary.com/duwadnxwf/image/upload/v1704972760/icons8-polygon-64_kpqfrj.png"
+                    width={30}
+                    height={30}
+                    alt="matic"
+                  ></img>
+                </p>
               </div>
 
               <div className="popup-buttons">

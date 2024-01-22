@@ -1,16 +1,16 @@
 [
   {
-    "_id": "64392d39dfd90fb29e464fb7",
+    "_id": 0,
     "sliderImages": [
       "https://3.bp.blogspot.com/-84l-BoUL090/VTDHcQzSTNI/AAAAAAAAuHI/Khftta_CF5E/s1920/wow-home-design.jpg",
       "https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/3/2021/10/18115838/modern-house-design.jpg",
-      "https://www.decorpot.com/images/399934808best-open-kitchen-ideas-for-your-home.jpg",
-      "https://thumbs.dreamstime.com/b/real-estate-garage-parking-house-home-interior-exterior-148937554.jpg"
+      "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg",
+      "https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     ]
   },
   {
-    "_id": "64392e0bdfd90fb29e464fbc",
+    "_id": 1,
     "sliderImages": [
       "https://3.bp.blogspot.com/-84l-BoUL090/VTDHcQzSTNI/AAAAAAAAuHI/Khftta_CF5E/s1920/wow-home-design.jpg",
       "https://www.google.com/url?sa=i&url=https%3A%2F%2Fbonito.in%2Fblog%2F11-tips-for-luxurious-bedroom-interior-design%2F&psig=AOvVaw31udBv7HqC3xR7XG8Xehv_&ust=1703144817981000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDVqoPDnYMDFQAAAAAdAAAAABAE",
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "_id": "6439001c74446601d6fce96d",
+    "_id": 2,
     "sliderImages": [
       "https://tse1.mm.bing.net/th?id=OIP.iIuT3a8Gcx0rIWQ0KpuVAgHaE8&pid=Api&P=0&h=180",
       "https://www.dkorinteriors.com/wp-content/uploads/2017/01/4-ContemporaryTwilight-MasterBedroom-2.jpg",
@@ -30,7 +30,7 @@
     ]
   },
   {
-    "_id": "64392e1edfd90fb29e464fbd",
+    "_id": 3,
     "sliderImages": [
       "https://e0.pxfuel.com/wallpapers/12/377/desktop-wallpaper-beautiful-houses-beautiful-mansion.jpg",
       "https://i.ytimg.com/vi/K6b28JSjCyY/maxresdefault.jpg",
@@ -40,7 +40,7 @@
     ]
   },
   {
-    "_id": "64392d67dfd90fb29e464fb8",
+    "_id": 4,
     "sliderImages": [
       "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg",
       "https://st.hzcdn.com/simgs/a441d91303ce7f65_3-5276/home-design.jpg",
@@ -50,7 +50,7 @@
     ]
   },
   {
-    "_id": "64392df2dfd90fb29e464fbb",
+    "_id": 5,
     "sliderImages": [
       "https://www.hollywoodreporter.com/wp-content/uploads/2023/03/image_h_01-H-2023.jpg",
       "https://i.ytimg.com/vi/K6b28JSjCyY/maxresdefault.jpg",
@@ -60,83 +60,13 @@
     ]
   },
   {
-    "_id": "64392e32dfd90fb29e464fbe",
+    "_id": 6,
     "sliderImages": [
       "https://st.hzcdn.com/simgs/pictures/exteriors/builders-in-kochi-creo-homes-pvt-ltd-img~a751d25e0d2ef808_4-0254-1-cb5c87b.jpg",
       "https://www.home-designing.com/wp-content/uploads/2018/08/modern-platform-bedroom-sets.jpg",
       " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUK0II_SHoj4cO8wd7pb7JjUet751WmfVb_A&usqp=CAU",
       " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr2uYuTe6KWVJsbq1tVo2Yz3OkJcahQLG7bQ&usqp=CAU",
       " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRedc0mFxk2AiI_0gc6ThcdmzqwdYWOwNAnyQ&usqp=CAU"
-    ]
-  },
-  {
-    "_id": "64392e46dfd90fb29e464fbf",
-    "sliderImages": [
-      "https://i.pinimg.com/originals/89/56/5c/89565c305737e1da2a1a5b62600fbcd4.jpg",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz8U6U4yNjqQ_AcB2UlAcxz2fUb8kA2w-L19Rk3JwB19Y3QsiKqEFuaxUB17OXF4Mehfo&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTymSiNF54xCEi9rez5UPOxoaZd08BawEo0Ew&usqp=CAU",
-      "https://5.imimg.com/data5/SELLER/Default/2021/3/AA/QJ/IT/42773687/home-car-parking-shed-500x500.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVlGa1ZpB2NMdHcqgWj0MyAkWh7AhBCvxU7cBFx_ShXctIZ87hF_9vOzMQm2u12SEI-Bw&usqp=CAU "
-    ]
-  },
-  {
-    "_id": "64392e57dfd90fb29e464fc0",
-    "sliderImages": [
-      "https://cutewallpaper.org/24/house-images/1819611997.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7_PrT8DifV75eW8X7HeoPMJUftMga9uH90Q&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQirB4JTy70BQTOjgaSnlLw_oltwis1KsDIvg&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVlGa1ZpB2NMdHcqgWj0MyAkWh7AhBCvxU7cBFx_ShXctIZ87hF_9vOzMQm2u12SEI-Bw&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs0Mx5Zyrjb9Vgq1Pcai5q3smJfzZui6GOlfMCPX5Bxe26QOx2DM8jo3C6gV_blWZy7ng&usqp=CAU  "
-    ]
-  },
-  {
-    "_id": "64392e69dfd90fb29e464fc1",
-    "sliderImages": [
-      "https://media.istockphoto.com/id/1184625380/photo/large-modern-expensive-home.jpg?s=612x612&w=0&k=20&c=TuX7dnAQvrxt02_BMnlgtVMMdvBLmh3gcXL1bPnobP8=",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGpCm0ARhugEe1K02LE5rHY9YJwd3oouuohA&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlWCEQNfK-215MDRp7Q7y_kehWdR6RDfP1g&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9paX_N3G0s-Uv6ukqq2EVxYXCnFdRi3-BCw&usqp=CAU",
-      "https://www.home-designing.com/wp-content/uploads/2011/08/car-in-home-maserati-compiettion1.jpg"
-    ]
-  },
-  {
-    "_id": "643a30b60c4348510952923a",
-    "sliderImages": [
-      "https://media.istockphoto.com/id/1184625380/photo/large-modern-expensive-home.jpg?s=612x612&w=0&k=20&c=TuX7dnAQvrxt02_BMnlgtVMMdvBLmh3gcXL1bPnobP8=",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGpCm0ARhugEe1K02LE5rHY9YJwd3oouuohA&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlWCEQNfK-215MDRp7Q7y_kehWdR6RDfP1g&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9paX_N3G0s-Uv6ukqq2EVxYXCnFdRi3-BCw&usqp=CAU",
-      "https://www.home-designing.com/wp-content/uploads/2011/08/car-in-home-maserati-compiettion1.jpg"
-    ]
-  },
-  {
-    "_id": "643900fa74446601d6fce96e",
-    "sliderImages": [
-      "https://images.pexels.com/photos/1127119/pexels-photo-1127119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTRl3W41cteR9wVvEStMzqsVh6_ItKUn_N1w&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyRRAKTxNbRkY22d-9M8C5dy126ogDV9lQKA&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjtfjjaZUQdloIivpMTN0A5-tHHFl-CDQfGdKjzfcdNRwGK8biDrfx26Lv-pHNHaIMM1o&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPcwq_bZkxy-xCNpS2OCpzDRJ5P9O9eWziKg&usqp=CAU"
-    ]
-  },
-  {
-    "_id": "6439011d74446601d6fce96f",
-    "sliderImages": [
-      "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGI20xmqrK_FXgrd0y_ZN5QDyL8xsKseeyZg&usqp=CAU",
-      "https://img.freepik.com/free-psd/bathroom-interior-design-with-matte-black-bath-generative-ai_587448-2146.jpg",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiR1ZsMJx0PdCTrRoraYEfwMtqFzKniHDMsg&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUWdKlDh1evxp4vYckESrBY1w6sBzvr3DqnA&usqp=CAU"
-    ]
-  },
-  {
-    "_id": "64392ddddfd90fb29e464fba",
-    "sliderImages": [
-      "https://lovehomedesigns.com/wp-content/uploads/2022/01/cute-house-012522.jpg",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPFq55bTSn90rFtRQz3sxWn8EzkvsSlQkpxTB4dXLFd-2h9pglnkEIbZvumcfl_dxSWKs&usqp=CAU",
-      " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiG3gPrFa5tVIyjGwmuF3g4kFfzd1VG1J-_Q&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuJD9PZlhA9V4jJdX9AdeW7oBuLdbW7UBb3IZTVBI3PkoSdVrAeCVJoltdXptWW6krR0w&usqp=CAU",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTy_KrIajo4EKKweyl4Jv_mdkfWtTux3D06Q&usqp=CAU"
     ]
   }
 ]
