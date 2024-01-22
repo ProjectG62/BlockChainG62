@@ -2,25 +2,31 @@ import { Web3Button, useAddress } from "@thirdweb-dev/react";
 import React, { createContext, useState, useContext } from "react";
 import { CONTRACT_ADDRESS } from "./pages/addresses";
 
-
+const { ethers } = require("ethers");
 const LabelContext = createContext();
 
 const LabelContextProvider = ({ children }) => {
   const [page, setPage] = useState(0);
-  const steps = ['Add Location', 'Add Images', 'Basic Details', 'Facilities','Confirm Details'];
+  const steps = [
+    "Add Location",
+    "Add Images",
+    "Basic Details",
+    "Facilities",
+    "Confirm Details",
+  ];
 
   const [formData, setFormData] = useState({
-    owner:"",
+    owner: "",
     country: "",
     city: "",
     address: "",
-    title:"",
-    description:"",
-    price:0,
-    numRooms:0,
-    numBathrooms:0,
-    numParkingSpaces:0,
-    images:[]
+    title: "",
+    description: "",
+    price: 0,
+    numRooms: 0,
+    numBathrooms: 0,
+    numParkingSpaces: 0,
+    images: [],
   });
 
   const handleChange = (prop) => (event) => {
@@ -28,9 +34,9 @@ const LabelContextProvider = ({ children }) => {
   };
 
   const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Property Details Submitted:", formData);
-      };
+    e.preventDefault();
+    console.log("Property Details Submitted:", formData);
+  };
 
   const contextValue = {
     page,
@@ -41,44 +47,45 @@ const LabelContextProvider = ({ children }) => {
     handleChange,
     handleSubmit,
 
-    nextPage : () => {
+    nextPage: () => {
       setPage(page + 1);
     },
-  
-    prevPage : () => {
+
+    prevPage: () => {
       setPage(page - 1);
-    }
-  
+    },
   };
 
-  return <LabelContext.Provider value={contextValue}>{children}</LabelContext.Provider>;
+  return (
+    <LabelContext.Provider value={contextValue}>
+      {children}
+    </LabelContext.Provider>
+  );
 };
 
 function ConfirmDetails() {
-    const value = useContext(LabelContext);
-    const address = useAddress();
-
-    value.formData.owner = address;
-
-    const handleWeb3ButtonAction = async (contract) => {
-      try {
-        // Make sure to pass the parameters in the correct order
-        await contract.call("listProperty",[
-          value.formData.owner,
-          value.formData.price,
-          value.formData.country,
-          value.formData.city,
-          value.formData.title,
-          value.formData.numBathrooms,
-          value.formData.numRooms,
-          value.formData.numParkingSpaces,
-          value.formData.address,
-          value.formData.description
-        ]);
-        console.log("Property listed successfully!");
-        } catch (error) {
-        console.error("Error listing property:", error);
-        // Handle error appropriately
+  const value = useContext(LabelContext);
+  const address = useAddress();
+  value.formData.owner = address;
+  const handleWeb3ButtonAction = async (contract) => {
+    try {
+      // Make sure to pass the parameters in the correct order
+      await contract.call("listProperty", [
+        value.formData.owner,
+        ethers.utils.parseUnits(value.formData.price.toString(), 18),
+        value.formData.country,
+        value.formData.city,
+        value.formData.title,
+        value.formData.numBathrooms,
+        value.formData.numRooms,
+        value.formData.numParkingSpaces,
+        value.formData.address,
+        value.formData.description,
+      ]);
+      console.log("Property listed successfully!");
+    } catch (error) {
+      console.error("Error listing property:", error);
+      // Handle error appropriately
     }
   };
 
@@ -207,7 +214,11 @@ function ConfirmDetails() {
         SUBMIT
       </Web3Button> */}
 
-      <button onClick={() => value.prevPage()} style={{ margin: 25 }} className="previous-button">
+      <button
+        onClick={() => value.prevPage()}
+        style={{ margin: 25 }}
+        className="previous-button"
+      >
         Previous
       </button>
 
@@ -217,8 +228,8 @@ function ConfirmDetails() {
       >
         SUBMIT
       </Web3Button>
-</form>
-);
+    </form>
+  );
 }
 
-export { LabelContext,LabelContextProvider, ConfirmDetails as default };
+export { LabelContext, LabelContextProvider, ConfirmDetails as default };

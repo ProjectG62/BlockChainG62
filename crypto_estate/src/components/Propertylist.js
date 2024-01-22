@@ -25,12 +25,11 @@ const Propertylist = () => {
       _id: parseInt(propertyData[0]._hex, 16),
       title: propertyData[5],
       description: propertyData.description,
-      price: parseInt(propertyData[2]._hex, 16),
+      price: parseInt(propertyData[2]._hex, 16) * 10 ** -18,
       address: propertyData.propertyAddress,
       city: propertyData.city,
       country: propertyData.country,
-      image:
-        "https://images.pexels.com/photos/7031406/pexels-photo-7031406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: "https://wallpaperaccess.com/full/2315968.jpg",
       facilities: {
         bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
         parking: parseInt(propertyData.nParking._hex, 16),
