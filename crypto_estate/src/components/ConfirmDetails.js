@@ -7,6 +7,8 @@ const LabelContext = createContext();
 
 const LabelContextProvider = ({ children }) => {
   const [page, setPage] = useState(0);
+  const [updateMapFlag, setUpdateMapFlag] = useState(0);
+
   const steps = [
     "Add Location",
     "Add Images",
@@ -38,14 +40,22 @@ const LabelContextProvider = ({ children }) => {
     console.log("Property Details Submitted:", formData);
   };
 
+  const updateMap = () => {
+    setUpdateMapFlag(true); // Set the flag to trigger map update
+  };
+
+
   const contextValue = {
     page,
     setPage,
     steps,
     formData,
+    updateMapFlag,
+    setUpdateMapFlag,
     setFormData,
     handleChange,
     handleSubmit,
+    updateMap,
 
     nextPage: () => {
       setPage(page + 1);
@@ -55,6 +65,12 @@ const LabelContextProvider = ({ children }) => {
       setPage(page - 1);
     },
   };
+
+  
+  if (updateMapFlag) {
+    setUpdateMapFlag(false);
+  }
+
 
   return (
     <LabelContext.Provider value={contextValue}>

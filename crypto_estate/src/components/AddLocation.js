@@ -3,8 +3,7 @@ import { LabelContext } from "./ConfirmDetails";
 import "./AddLocation.css";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
-// ... (your imports)
+import Map from './Map.js'
 
 const AddLocation = () => {
   const value = useContext(LabelContext);
@@ -13,20 +12,6 @@ const AddLocation = () => {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
-  const mapContainer = useRef(null);
-
-  useEffect(() => {
-    if (mapContainer.current && !mapContainer.current.hasChildNodes()) {
-      // Initialize Leaflet map
-      const map = L.map(mapContainer.current).setView([51.505, -0.09], 13);
-
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(map);
-    }
-  }, [mapContainer.current]);
 
   const handleNextClick = (e) => {
     e.preventDefault();
@@ -39,18 +24,14 @@ const AddLocation = () => {
       // setError("Please fill in all the fields before proceeding.");
       return;
     }
-    // value.setFormData((prevFormData) => ({
-    //   ...prevFormData,
-    //   location: {
-    //     country,
-    //     city,
-    //     address,
-    //   },
-    // }));
-
     setError("");
     value.nextPage();
   };
+
+  const handleLocation = (e) => {
+    e.preventDefault();
+    value.updateMap();
+  }
 
   return (
     <div className="location">
@@ -101,6 +82,14 @@ const AddLocation = () => {
 
         {error && <p style={{ color: "red", margin: 0 }}>{error}</p>}
 
+
+        <button
+          onClick={handleLocation}
+          style={{ margin: 25 }}
+        >
+          Check your location
+        </button>
+
         <button
           onClick={handleNextClick}
           style={{ margin: 25 }}
@@ -109,11 +98,7 @@ const AddLocation = () => {
           Next
         </button>
       </form>
-      <div
-        id="map"
-        ref={mapContainer}
-        style={{ height: "400px", width: "40vw" }}
-      ></div>
+      <Map></Map>
     </div>
   );
 };
