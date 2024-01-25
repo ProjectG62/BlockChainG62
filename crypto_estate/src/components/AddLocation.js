@@ -86,6 +86,7 @@ const AddLocation = () => {
         <button
           onClick={handleLocation}
           style={{ margin: 25 }}
+          className="check-location-button"
         >
           Check your location
         </button>

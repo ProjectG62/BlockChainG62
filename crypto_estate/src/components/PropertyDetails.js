@@ -13,8 +13,9 @@ const PropertyDetails = () => {
 
   const handleNextClick = (e) => {
     e.preventDefault();
-    if (!value.formData.title || !value.formData.price) {
-      setError("Please fill in the Property title and Property Price.");
+    e.target.form.reportValidity();
+    if (value.formData.price <= 0) {
+      setError("Price should be greater than 0.");
       return; 
     }
 
@@ -32,11 +33,12 @@ const PropertyDetails = () => {
           id="title"
           value={value.formData.title}
           onChange={(e) => value.handleChange("title")(e)}
+          required
         />
       </div>
 
       <div className="input-fields">
-        <label htmlFor="description">Property Description</label>
+        <label htmlFor="description">Property Description<span style={{color:"red"}}>*</span></label>
         <br />
         <textarea
           id="description"
@@ -44,6 +46,7 @@ const PropertyDetails = () => {
           rows={5}
           value={value.formData.description}
           onChange={(e) => value.handleChange("description")(e)}
+          required
         />
       </div>
 
@@ -55,6 +58,7 @@ const PropertyDetails = () => {
           type="number"
           value={value.formData.price}
           onChange={(e) => value.handleChange("price")(e)}
+          required
         />
       </div>
     

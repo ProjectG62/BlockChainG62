@@ -1,96 +1,40 @@
+
 import React, { useContext, useState , useRef } from "react";
 import { LabelContext } from "./ConfirmDetails";
 import "./UploadImages.css"
 
 const UploadImages = () => {
   const value = useContext(LabelContext);
-  const fileInputRef = useRef(null);
 
-  const [selectedImages, setSelectedImages] = useState([]);
   const [error, setError] = useState("");
+  const [imageUrlInput, setImageUrlInput] = useState("");
 
-  const handleImageChange = (event) => {
-    const files = event.target.files;
-
-    if (files) {
-      const imagesArray = Array.from(files).map((file) => {
-        const reader = new FileReader();
-        return new Promise((resolve) => {
-          reader.onloadend = () => {
-            resolve(reader.result);
-          };
-          reader.readAsDataURL(file);
-        });
-      });
-
-      Promise.all(imagesArray).then((images) => {
-        // setSelectedImages(images);
-        value.setFormData((prevData) => ({
-          ...prevData,
-          images: [...prevData.images, ...images], // Append new images to existing ones
-        }));
-      });
-    }
-  };
-
-  const handleClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleNextClick = () => {
-    if (value.formData.images.length === 0) {
-      setError("Please select at least one image");
+  const handleNextClick = (e) => {
+    e.preventDefault();
+    if (value.formData.images === "") {
+      setError("Please enter a valid image URL");
       return;
     }
 
-    value.setFormData((prevData) => ({
-      ...prevData,
-      images: value.formData.images,
-    }));
-
-    setError(""); // Clear the error if any
-    value.nextPage(); // Move to the next step
+    setError("");
+    value.nextPage(); 
   };
+
 
   return (
     <div>
-      <h4>Upload images of the property</h4>
-
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={handleImageChange}
-        style={{ display: "none" }}
-        ref={fileInputRef}
-      />
-
+      <h4>Upload image URL of the property</h4>
+    <form>
       <div className="custom-file-input-container">
-        <button onClick={handleClick} className="next-button">
-          Choose File
-        </button>
+        <input
+          id="imageUrlInput"
+         
+          value={value.formData.images}
+          onChange={(e) => value.handleChange("images")(e)}
+          placeholder="Enter Image URL"
+          required
+        />
       </div>
-
-
-      {value.formData.images.length > 0 && (
-        <div>
-          <h3>Selected Images:</h3>
-          <div>
-            {value.formData.images.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Selected ${index + 1}`}
-                style={{
-                  maxWidth: "100%",
-                  marginRight: "10px",
-                  marginBottom: "10px",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -103,8 +47,10 @@ const UploadImages = () => {
       <button onClick={handleNextClick} style={{ margin: 25 }} className="next-button">
         Next
       </button>
+      </form>
     </div>
   );
 };
 
 export default UploadImages;
+

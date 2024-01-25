@@ -1,13 +1,22 @@
-import { Web3Button, useAddress } from "@thirdweb-dev/react";
+import { Web3Button, useAddress , useContract , useContractRead} from "@thirdweb-dev/react";
 import React, { createContext, useState, useContext } from "react";
 import { CONTRACT_ADDRESS } from "./pages/addresses";
+import "./ConfirmDetails.css";
 
 const { ethers } = require("ethers");
 const LabelContext = createContext();
 
+
 const LabelContextProvider = ({ children }) => {
   const [page, setPage] = useState(0);
   const [updateMapFlag, setUpdateMapFlag] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [submit,setsubmit] = useState(false);
+
+  const { contract } = useContract("0x93E8DD8a558ea662791751FAAE4354EDb5399A91");
+  const { data, isLoading } = useContractRead(contract, "getAllProperties");
+  console.log(data);
+
 
   const steps = [
     "Add Location",
@@ -18,7 +27,6 @@ const LabelContextProvider = ({ children }) => {
   ];
 
   const [formData, setFormData] = useState({
-    owner: "",
     country: "",
     city: "",
     address: "",
@@ -28,7 +36,7 @@ const LabelContextProvider = ({ children }) => {
     numRooms: 0,
     numBathrooms: 0,
     numParkingSpaces: 0,
-    images: [],
+    images: "",
   });
 
   const handleChange = (prop) => (event) => {
@@ -56,6 +64,10 @@ const LabelContextProvider = ({ children }) => {
     handleChange,
     handleSubmit,
     updateMap,
+    showPopup,
+    setShowPopup,
+    data,
+    submit,setsubmit,
 
     nextPage: () => {
       setPage(page + 1);
@@ -70,7 +82,7 @@ const LabelContextProvider = ({ children }) => {
   if (updateMapFlag) {
     setUpdateMapFlag(false);
   }
-
+  //  console.log(lastProperty);
 
   return (
     <LabelContext.Provider value={contextValue}>
@@ -87,7 +99,6 @@ function ConfirmDetails() {
     try {
       // Make sure to pass the parameters in the correct order
       await contract.call("listProperty", [
-        value.formData.owner,
         ethers.utils.parseUnits(value.formData.price.toString(), 18),
         value.formData.country,
         value.formData.city,
@@ -97,8 +108,14 @@ function ConfirmDetails() {
         value.formData.numParkingSpaces,
         value.formData.address,
         value.formData.description,
+        value.formData.images,
       ]);
       console.log("Property listed successfully!");
+      value.setsubmit(true);
+      {
+        value.setsubmit &&
+        value.setShowPopup(true);
+      }
     } catch (error) {
       console.error("Error listing property:", error);
       // Handle error appropriately
@@ -210,25 +227,6 @@ function ConfirmDetails() {
           required
         />
       </div>
-      {/* <Web3Button
-        contractAddress={CONTRACT_ADDRESS}
-        action={(contract) =>
-          contract.call("listProperty", [
-            value.formData.price,
-            value.formData.country,
-            value.formData.city,
-            value.formData.title,
-            value.formData.numBathrooms,
-            value.formData.numRooms,
-            value.formData.numParkingSpaces,
-            value.formData.address,
-            value.formData.description,
-          ])
-        }
-        type="submit"
-      >
-        SUBMIT
-      </Web3Button> */}
 
       <button
         onClick={() => value.prevPage()}
@@ -241,9 +239,18 @@ function ConfirmDetails() {
       <Web3Button
         contractAddress={CONTRACT_ADDRESS}
         action={handleWeb3ButtonAction}
+
       >
         SUBMIT
       </Web3Button>
+
+      {value.showPopup && (
+        <div className="popup">
+        <div className="popup-content">
+          <p>Property added successfully! &#10004;</p>
+        </div>
+      </div>
+      )}
     </form>
   );
 }
