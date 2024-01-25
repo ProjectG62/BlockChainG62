@@ -19,16 +19,20 @@ const Propertylist = () => {
   const { contract } = useContract(
     "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
   );
-  const capturedLikeList = LikedArray();
+
+  // Note: LikedArray is a component, not a function. It should be rendered to get its data.
+  const { likeList } = LikedArray();
+  const [likedProperties, setLikedProperties] = useState([]);
 
   useEffect(() => {
-    console.log("hello", capturedLikeList);
-  }, [capturedLikeList]);
+    // Initialize likedProperties after likeList is available
+    setLikedProperties(likeList);
+  }, [likeList]);
 
   const a = useAddress();
   const [JsonData, setJsonData] = useState([]);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
-  console.log(data);
+
   const buyer = useAddress();
   useEffect(() => {
     // Check if data is still loading
@@ -68,9 +72,7 @@ const Propertylist = () => {
   }, [data, isLoading]);
 
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [likedProperties, setLikedProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState(JsonData);
-  console.log(likedProperties, "soni");
 
   useEffect(() => {
     // Update filteredProperties with processed data
@@ -86,40 +88,30 @@ const Propertylist = () => {
   };
 
   const handleLike = async (propertyId) => {
-    setLikedProperties(cur);
-    if (likedProperties.includes(propertyId)) {
-      const confirmation = window.confirm(
-        "Are you sure you want to remove this property from liked?"
-      );
-      if (confirmation) {
-        try {
-          const tx = await contract.call("removeLike", [selectedProperty._id]);
-
-          // Wait for the transaction to be mined
+    try {
+      if (likedProperties.includes(propertyId)) {
+        const confirmation = window.confirm(
+          "Are you sure you want to remove this property from liked?"
+        );
+        if (confirmation) {
+          const tx = await contract.call("removeLike", [propertyId]);
           await tx.wait();
 
-          setLikedProperties((prevLikedProperties) => {
-            return prevLikedProperties.filter(
-              (id) => id !== selectedProperty._id
-            );
-          });
-        } catch (error) {
-          console.error("Error removing like:", error);
+          setLikedProperties((prevLikedProperties) =>
+            prevLikedProperties.filter((id) => id !== propertyId)
+          );
         }
-      }
-    } else {
-      try {
-        const tx = await contract.call("addLike", [selectedProperty._id]);
-
-        // Wait for the transaction to be mined
+      } else {
+        const tx = await contract.call("addLike", [propertyId]);
         await tx.wait();
 
-        setLikedProperties((prevLikedProperties) => {
-          return [...prevLikedProperties, selectedProperty._id];
-        });
-      } catch (error) {
-        console.error("Error adding like:", error);
+        setLikedProperties((prevLikedProperties) => [
+          ...prevLikedProperties,
+          propertyId,
+        ]);
       }
+    } catch (error) {
+      console.error("Error handling like:", error);
     }
   };
 
@@ -137,12 +129,8 @@ const Propertylist = () => {
   const { mutate: transferNativeToken, error } = useTransferNativeToken();
 
   if (error) {
-    console.error("failed to transfer tokens", error);
+    console.error("Failed to transfer tokens", error);
   }
-
-  const [isPropertyLiked, setIsPropertyLiked] = useState(
-    likedProperties.includes(selectedProperty?._id)
-  );
 
   return (
     <div className="property-page">
@@ -219,9 +207,10 @@ const Propertylist = () => {
                 <Web3Button
                   contractAddress="0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
                   action={(contract) => handleLike(selectedProperty._id)}
-                  onSuccess={() => setIsPropertyLiked(!isPropertyLiked)}
                 >
-                  {isPropertyLiked ? "Remove Like" : "Like"}
+                  {likedProperties.includes(selectedProperty._id)
+                    ? "Remove Like"
+                    : "Like"}
                 </Web3Button>
 
                 <Web3Button

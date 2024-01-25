@@ -52,7 +52,7 @@ const LikedArray = () => {
 
   console.log(likeList, "jjj");
 
-  return likeList;
+  return { likeList, setLikeList };
 };
 
 export default LikedArray;
