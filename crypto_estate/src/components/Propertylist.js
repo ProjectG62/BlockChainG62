@@ -20,16 +20,13 @@ const Propertylist = () => {
     "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
   );
 
-  // Note: LikedArray is a component, not a function. It should be rendered to get its data.
   const { likeList } = LikedArray();
   const [likedProperties, setLikedProperties] = useState([]);
 
   useEffect(() => {
-    // Initialize likedProperties after likeList is available
     setLikedProperties(likeList);
   }, [likeList]);
 
-  const a = useAddress();
   const [JsonData, setJsonData] = useState([]);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
 
@@ -126,10 +123,14 @@ const Propertylist = () => {
     setFilteredProperties(filtered);
   };
 
-  const { mutate: transferNativeToken, error } = useTransferNativeToken();
+  const {
+    mutate: transferNativeToken,
+
+    error,
+  } = useTransferNativeToken();
 
   if (error) {
-    console.error("Failed to transfer tokens", error);
+    console.error("failed to transfer tokens", error);
   }
 
   return (
@@ -183,7 +184,6 @@ const Propertylist = () => {
               </div>
 
               <div>
-                {/* Assuming sliderImages is part of selectedProperty */}
                 <ImageSlider selectedProperty={selectedProperty} />
                 <p
                   style={{
@@ -215,19 +215,16 @@ const Propertylist = () => {
 
                 <Web3Button
                   contractAddress={CONTRACT_ADDRESS}
-                  action={async (contract) => {
+                  action={(contract) => {
                     try {
-                      const tx = await transferNativeToken({
+                      transferNativeToken({
                         to: selectedProperty.owner,
                         amount: selectedProperty.price,
                       });
 
-                      // Wait for the transaction to be mined
-                      await tx.wait();
-
                       // If no error occurred, print "Hello, World!"
                       // Call your buyProperty function after successful transfer
-                      await contract.call("buyProperty", [
+                      contract.call("buyProperty", [
                         selectedProperty._id,
                         buyer,
                       ]);
