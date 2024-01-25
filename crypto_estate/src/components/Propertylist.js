@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { AiFillHeart } from "react-icons/ai";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import {
+  useTransferNativeToken,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
 import axios from "axios";
 import "./Propertylist.css";
 import SearchBar from "./SearchBar";
 import ImageSlider from "./ImageSlider";
+import { Web3Button } from "@thirdweb-dev/react";
+import { CONTRACT_ADDRESS } from "./pages/addresses";
+import Loading from "./Loading";
+import LikedArray from "./LikedArray";
 
 const Propertylist = () => {
   const { contract } = useContract(
-    "0xA21438A8654A85EEABa5b3715c239105C466CaF9"
+    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
   );
+  const capturedLikeList = LikedArray();
+
+  useEffect(() => {
+    console.log("hello", capturedLikeList);
+  }, [capturedLikeList]);
+
+  const a = useAddress();
   const [JsonData, setJsonData] = useState([]);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
-
+  console.log(data);
+  const buyer = useAddress();
   useEffect(() => {
     // Check if data is still loading
     if (isLoading) {
@@ -22,6 +39,7 @@ const Propertylist = () => {
 
     // Data has been loaded, process and save
     const tempJsonData = data.map((propertyData) => ({
+      owner: propertyData.owner,
       _id: parseInt(propertyData[0]._hex, 16),
       title: propertyData[5],
       description: propertyData.description,
@@ -29,7 +47,7 @@ const Propertylist = () => {
       address: propertyData.propertyAddress,
       city: propertyData.city,
       country: propertyData.country,
-      image: "https://wallpaperaccess.com/full/2315968.jpg",
+      image: propertyData.images[0],
       facilities: {
         bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
         parking: parseInt(propertyData.nParking._hex, 16),
@@ -52,6 +70,7 @@ const Propertylist = () => {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [likedProperties, setLikedProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState(JsonData);
+  console.log(likedProperties, "soni");
 
   useEffect(() => {
     // Update filteredProperties with processed data
@@ -66,20 +85,41 @@ const Propertylist = () => {
     setSelectedProperty(null);
   };
 
-  const handleLike = (propertyId) => {
+  const handleLike = async (propertyId) => {
+    setLikedProperties(cur);
     if (likedProperties.includes(propertyId)) {
       const confirmation = window.confirm(
         "Are you sure you want to remove this property from liked?"
       );
       if (confirmation) {
-        setLikedProperties((prevLikedProperties) => {
-          return prevLikedProperties.filter((id) => id !== propertyId);
-        });
+        try {
+          const tx = await contract.call("removeLike", [selectedProperty._id]);
+
+          // Wait for the transaction to be mined
+          await tx.wait();
+
+          setLikedProperties((prevLikedProperties) => {
+            return prevLikedProperties.filter(
+              (id) => id !== selectedProperty._id
+            );
+          });
+        } catch (error) {
+          console.error("Error removing like:", error);
+        }
       }
     } else {
-      setLikedProperties((prevLikedProperties) => {
-        return [...prevLikedProperties, propertyId];
-      });
+      try {
+        const tx = await contract.call("addLike", [selectedProperty._id]);
+
+        // Wait for the transaction to be mined
+        await tx.wait();
+
+        setLikedProperties((prevLikedProperties) => {
+          return [...prevLikedProperties, selectedProperty._id];
+        });
+      } catch (error) {
+        console.error("Error adding like:", error);
+      }
     }
   };
 
@@ -94,11 +134,21 @@ const Propertylist = () => {
     setFilteredProperties(filtered);
   };
 
+  const { mutate: transferNativeToken, error } = useTransferNativeToken();
+
+  if (error) {
+    console.error("failed to transfer tokens", error);
+  }
+
+  const [isPropertyLiked, setIsPropertyLiked] = useState(
+    likedProperties.includes(selectedProperty?._id)
+  );
+
   return (
     <div className="property-page">
       <SearchBar onSearch={handleSearch} />
-
       <div className="properties-container">
+        {isLoading && <Loading></Loading>}
         {filteredProperties.map((property) => (
           <div key={property._id} className="property-item property-card">
             <AiFillHeart
@@ -166,14 +216,39 @@ const Propertylist = () => {
               </div>
 
               <div className="popup-buttons">
-                <button
-                  className="likeButton"
-                  onClick={() => handleLike(selectedProperty._id)}
+                <Web3Button
+                  contractAddress="0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+                  action={(contract) => handleLike(selectedProperty._id)}
+                  onSuccess={() => setIsPropertyLiked(!isPropertyLiked)}
                 >
-                  Like
-                </button>
+                  {isPropertyLiked ? "Remove Like" : "Like"}
+                </Web3Button>
 
-                <button className="BuyPropBtn"> Buy Property</button>
+                <Web3Button
+                  contractAddress={CONTRACT_ADDRESS}
+                  action={async (contract) => {
+                    try {
+                      const tx = await transferNativeToken({
+                        to: selectedProperty.owner,
+                        amount: selectedProperty.price,
+                      });
+
+                      // Wait for the transaction to be mined
+                      await tx.wait();
+
+                      // If no error occurred, print "Hello, World!"
+                      // Call your buyProperty function after successful transfer
+                      await contract.call("buyProperty", [
+                        selectedProperty._id,
+                        buyer,
+                      ]);
+                    } catch (error) {
+                      console.error("Error transferring tokens:", error);
+                    }
+                  }}
+                >
+                  Buy Property
+                </Web3Button>
                 <button className="closeButton" onClick={closePopup}>
                   {" "}
                   Close

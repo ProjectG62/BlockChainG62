@@ -50,7 +50,7 @@ const Facilities = () => {
   };
 
   const { contract } = useContract(
-    "0xA21438A8654A85EEABa5b3715c239105C466CaF9"
+    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
   );
   return (
     <form onSubmit={value.handleSubmit}>
@@ -98,14 +98,14 @@ const Facilities = () => {
       </button>
 
       <button
-          onClick={handleNextClick}
-          style={{ margin: 25 }}
-          className="next-button"
-        >
-          Next
-        </button>
+        onClick={handleNextClick}
+        style={{ margin: 25 }}
+        className="next-button"
+      >
+        Next
+      </button>
     </form>
   );
 };
 
-export default Facilities;
+export default Facilities;
