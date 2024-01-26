@@ -17,7 +17,7 @@ import LikedArray from "./LikedArray";
 
 const Propertylist = () => {
   const { contract } = useContract(
-    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
   );
 
   const { likeList } = LikedArray();
@@ -44,7 +44,7 @@ const Propertylist = () => {
       _id: parseInt(propertyData[0]._hex, 16),
       title: propertyData[5],
       description: propertyData.description,
-      price: parseInt(propertyData[2]._hex, 16) * 10 ** -18,
+      price: Number( (parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)),
       address: propertyData.propertyAddress,
       city: propertyData.city,
       country: propertyData.country,
@@ -205,7 +205,7 @@ const Propertylist = () => {
 
               <div className="popup-buttons">
                 <Web3Button
-                  contractAddress="0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+                  contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
                   action={(contract) => handleLike(selectedProperty._id)}
                 >
                   {likedProperties.includes(selectedProperty._id)

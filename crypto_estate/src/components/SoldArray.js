@@ -4,7 +4,7 @@ import { useAddress, useContractRead, useContract } from "@thirdweb-dev/react";
 const SoldArray = () => {
   const [soldList, setSoldList] = useState([]);
   const { contract } = useContract(
-    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
   );
   const a = useAddress();
   const { data, isLoading } = useContractRead(contract, "getSoldProperties", [

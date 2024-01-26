@@ -13,7 +13,7 @@ const LabelContextProvider = ({ children }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [submit,setsubmit] = useState(false);
 
-  const { contract } = useContract("0x93E8DD8a558ea662791751FAAE4354EDb5399A91");
+  const { contract } = useContract("0xECc91bBec0c259ed3F4B6F84914274a363da7ffe");
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
   console.log(data);
 

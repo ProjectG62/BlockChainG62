@@ -50,7 +50,7 @@ const Facilities = () => {
   };
 
   const { contract } = useContract(
-    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
   );
   return (
     <form onSubmit={value.handleSubmit}>

@@ -8,12 +8,12 @@ import SoldArray from "./SoldArray";
 const SoldProperty = () => {
   const x = useAddress();
   const { contract } = useContract(
-    "0x93E8DD8a558ea662791751FAAE4354EDb5399A91"
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
   );
 
   // Fetch all properties from the contract
   const { data: allProperties, isLoading: isAllPropertiesLoading } =
-    useContractRead(contract, "getAllProperties");
+    useContractRead(contract, "getEveryListedProperty");
 
   // Fetch the list of sold properties
   const { soldList } = SoldArray();
@@ -64,7 +64,7 @@ const SoldProperty = () => {
               />
               <div className="attributes">
                 <div className="propTitle">{property.propertyTitle}</div>
-                <div className="price">{property.price * 10 ** -18} MATIC</div>
+                <div className="price">{Number((property.price * 10 ** -18).toFixed(2))} MATIC</div>
                 <div className="address">
                   {property.propertyAddress}, {property.city},{" "}
                   {property.country}

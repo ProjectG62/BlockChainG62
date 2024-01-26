@@ -1,58 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import profileData from '../profile.json';
-import data from '../data.json';
+import React, { useState, useEffect } from "react";
+import "./WishList.css";
+
+import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
+
+import BoughtArray from "./BoughtArray";
 
 const BoughtProperty = () => {
-  const [address, setAddress] = useState('');
-  const [selectedObject, setSelectedObject] = useState(null);
+  const x = useAddress();
+  const { contract } = useContract(
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
+  );
+
+  // Fetch all properties from the contract
+  const { data: allProperties, isLoading: isAllPropertiesLoading } =
+    useContractRead(contract, "getEveryListedProperty");
+
+  // Fetch the list of sold properties
+  const { boughtList } = BoughtArray();
+
+  // State to store liked properties
+  const [boughtProperties, setboughtProperties] = useState([]);
 
   useEffect(() => {
-    const fetchWalletAddress = async () => {
-      try {
-        const accounts = await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        });
-        setAddress(accounts[0]);
-      } catch (error) {
-        console.error('Error connecting to wallet:', error.message);
-      }
-    };
+    // Update liked properties when likeList changes
+    setboughtProperties(boughtList);
+  }, [boughtList]);
 
-    fetchWalletAddress();
-  }, []);
-
-  useEffect(() => {
-    // Search for the profile based on the lowercase Metamask account ID
-    if (address) {
-      const lowercasedAddress = address.toLowerCase();
-      const profile = profileData.find((pro) => pro.id.toLowerCase() === lowercasedAddress);
-      setSelectedObject(profile);
-    }
-  }, [address]);
-
-  if (!selectedObject) {
-    return <div>ID not found.</div>;
+  if (isAllPropertiesLoading) {
+    return <div>Loading...</div>;
   }
 
-  const propertyObject = selectedObject?.boughtproperty?.map((boughtPropertyId) =>
-    data.find((dat) => dat._id.$oid === boughtPropertyId)
-  );
+  // // Check if there are no liked properties
+  // if (likedProperties.length === 0) {
+  //   return <div>No Properties in your Favourites!</div>;
+  // }
+
+  // Check if there are no liked properties or no intersection with allProperties
+  if (
+    boughtProperties.length === 0 ||
+    boughtProperties.every(
+      (propertyId) =>
+        allProperties.findIndex(
+          (prop) => parseInt(prop[0]._hex, 16) === propertyId
+        ) === -1
+    )
+  ) {
+    return <div>No Properties  are Bought!</div>;
+  }
 
   return (
     <div className="properties-container">
-      {propertyObject &&
-        propertyObject.map((property) => (
-          <div key={property._id} className="property-item property-card">
-            <img src={property.image} alt={property.name} className="img" />
-            <div className="attributes">
-              <div className="propTitle">{property.title}</div>
-              <div className="price">{property.price} MATIC</div>
-              <div className="address">
-                {property.address}, {property.city}, {property.country}
+      {allProperties.map((property) => {
+        const propertyId = parseInt(property[0]._hex, 16); // Extract property ID from the nested structure
+        const isPropertybought = boughtProperties.includes(propertyId);
+
+        if (isPropertybought) {
+          return (
+            <div key={propertyId} className="property-item property-card">
+              <img
+                src={property.images[0]}
+                alt={property.propertyTitle}
+                className="img"
+              />
+              <div className="attributes">
+                <div className="propTitle">{property.propertyTitle}</div>
+                <div className="price">{Number((property.price * 10 ** -18).toFixed(2))} MATIC</div>
+                <div className="address">
+                  {property.propertyAddress}, {property.city},{" "}
+                  {property.country}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        } else {
+          // You can remove the else block since the message is displayed outside the mapping loop
+          return null;
+        }
+      })}
     </div>
   );
 };
