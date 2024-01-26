@@ -6,6 +6,7 @@ import LoginForm from "./components/pages/LoginForm";
 import Buy_Property from "./components/pages/Buy_Property";
 import Sell_Property from "./components/pages/Sell_Property";
 import Profile from "./components/pages/Profile";
+import Ledger from "./components/pages/Ledger";
 import AboutUs from "./components/pages/AboutUs";
 import { LabelContextProvider } from "./components/ConfirmDetails";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/LoginForm" element={<LoginForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Reg" element={<Registration />} />
+            <Route path="/Ledger" element={<Ledger/>}/>
           </Routes>
         </LabelContextProvider>
       </Router>
