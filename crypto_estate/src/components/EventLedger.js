@@ -9,7 +9,7 @@ const EventLedger = () =>{
 const { contract } = useContract("0x93E8DD8a558ea662791751FAAE4354EDb5399A91");
 const { data: allEvents ,isLoading} = useContractEvents(contract)
 // const { data: event,isLoading} = useContractEvents(contract, "PropertyListed")
-const address = "0x0a075e5df7DCc299c68f456E59d65bf23F815813";
+const address = useAddress();
 const [filteredEvents, setFilteredEvents] = useState([]);
 useEffect(() => {
   if(isLoading){
