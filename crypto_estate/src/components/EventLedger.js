@@ -6,7 +6,7 @@ import "./EventLedger.css";
 import Loading from "./Loading";
 
 const EventLedger = () =>{
-const { contract } = useContract("0x93E8DD8a558ea662791751FAAE4354EDb5399A91");
+const { contract } = useContract("0xECc91bBec0c259ed3F4B6F84914274a363da7ffe");
 const { data: allEvents ,isLoading} = useContractEvents(contract)
 // const { data: event,isLoading} = useContractEvents(contract, "PropertyListed")
 const address = useAddress();
