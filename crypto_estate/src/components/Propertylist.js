@@ -30,21 +30,19 @@ const Propertylist = () => {
   const [JsonData, setJsonData] = useState([]);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
 
-  const buyer = useAddress();
   useEffect(() => {
-    // Check if data is still loading
     if (isLoading) {
-      // Data is still loading, do nothing for now
       return;
     }
 
-    // Data has been loaded, process and save
     const tempJsonData = data.map((propertyData) => ({
       owner: propertyData.owner,
       _id: parseInt(propertyData[0]._hex, 16),
       title: propertyData[5],
       description: propertyData.description,
-      price: Number( (parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)),
+      price: Number(
+        (parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)
+      ),
       address: propertyData.propertyAddress,
       city: propertyData.city,
       country: propertyData.country,
@@ -72,7 +70,6 @@ const Propertylist = () => {
   const [filteredProperties, setFilteredProperties] = useState(JsonData);
 
   useEffect(() => {
-    // Update filteredProperties with processed data
     setFilteredProperties(JsonData);
   }, [JsonData]);
 
@@ -123,21 +120,18 @@ const Propertylist = () => {
     setFilteredProperties(filtered);
   };
 
-  const {
-    mutate: transferNativeToken,
-
-    error,
-  } = useTransferNativeToken();
+  const { mutate: transferNativeToken, error } = useTransferNativeToken();
+  const buyer = useAddress(); // Move useAddress outside of the callback
 
   if (error) {
-    console.error("failed to transfer tokens", error);
+    console.error("Failed to transfer tokens", error);
   }
 
   return (
     <div className="property-page">
       <SearchBar onSearch={handleSearch} />
       <div className="properties-container">
-        {isLoading && <Loading></Loading>}
+        {isLoading && <Loading />}
         {filteredProperties.map((property) => (
           <div key={property._id} className="property-item property-card">
             <AiFillHeart
@@ -154,7 +148,6 @@ const Propertylist = () => {
                 {property.address}, {property.city}, {property.country}
               </div>
             </div>
-
             <button className="viewButton" onClick={() => openPopup(property)}>
               View Property
             </button>
@@ -206,7 +199,17 @@ const Propertylist = () => {
               <div className="popup-buttons">
                 <Web3Button
                   contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
-                  action={(contract) => handleLike(selectedProperty._id)}
+                  action={async (contract) => {
+                    try {
+                      await handleLike(selectedProperty._id);
+                    } catch (error) {
+                      if (error.message === "user rejected transaction") {
+                        console.log("User rejected transaction");
+                      } else {
+                        console.error("Error handling like:", error);
+                      }
+                    }
+                  }}
                 >
                   {likedProperties.includes(selectedProperty._id)
                     ? "Remove Like"
@@ -215,26 +218,32 @@ const Propertylist = () => {
 
                 <Web3Button
                   contractAddress={CONTRACT_ADDRESS}
-                  action={(contract) => {
+                  action={async (contract) => {
                     try {
                       transferNativeToken({
                         to: selectedProperty.owner,
                         amount: selectedProperty.price,
                       });
 
-                      // If no error occurred, print "Hello, World!"
-                      // Call your buyProperty function after successful transfer
-                      contract.call("buyProperty", [
+                      await contract.call("buyProperty", [
                         selectedProperty._id,
-                        buyer,
+                        buyer, // Use the variable here
                       ]);
                     } catch (error) {
-                      console.error("Error transferring tokens:", error);
+                      if (error.message === "user rejected transaction") {
+                        console.log("User rejected transaction");
+                      } else {
+                        console.error(
+                          "Error transferring tokens or buying property:",
+                          error
+                        );
+                      }
                     }
                   }}
                 >
                   Buy Property
                 </Web3Button>
+
                 <button className="closeButton" onClick={closePopup}>
                   {" "}
                   Close

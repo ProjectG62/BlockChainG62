@@ -45,7 +45,24 @@ const BoughtProperty = () => {
         ) === -1
     )
   ) {
-    return <div>No Properties  are Bought!</div>;
+    return (
+      <div
+        style={{
+          fontSize: "20px",
+          textAlign: "center",
+          padding: "3rem",
+        }}
+      >
+        No Properties are Bought!
+        <div>
+          <img
+            src="https://res.cloudinary.com/duwadnxwf/image/upload/v1706375714/empty-box_rw29yi.png"
+            height={90}
+            width={90}
+          ></img>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -64,7 +81,9 @@ const BoughtProperty = () => {
               />
               <div className="attributes">
                 <div className="propTitle">{property.propertyTitle}</div>
-                <div className="price">{Number((property.price * 10 ** -18).toFixed(2))} MATIC</div>
+                <div className="price">
+                  {Number((property.price * 10 ** -18).toFixed(2))} MATIC
+                </div>
                 <div className="address">
                   {property.propertyAddress}, {property.city},{" "}
                   {property.country}

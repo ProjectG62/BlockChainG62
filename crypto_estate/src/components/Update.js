@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { AiFillHeart } from "react-icons/ai";
 import {
   useTransferNativeToken,
@@ -14,6 +13,7 @@ import { Web3Button } from "@thirdweb-dev/react";
 import { CONTRACT_ADDRESS } from "./pages/addresses";
 import Loading from "./Loading";
 const { ethers } = require("ethers");
+
 const Update = () => {
   const { contract } = useContract(
     "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
@@ -21,45 +21,62 @@ const Update = () => {
 
   const x = useAddress();
   const [JsonData, setJsonData] = useState([]);
-  const { data, isLoading } = useContractRead(contract, "getUserProperties", [x]);
+  const { data, isLoading } = useContractRead(contract, "getUserProperties", [
+    x,
+  ]);
 
-  const { mutateAsync: updateImage } = useContractWrite(contract, "updateImage");
-  const { mutateAsync: updateDescription } = useContractWrite(contract, "updateDescription");
-  const { mutateAsync: updatePrice } = useContractWrite(contract, "updatePrice");
-  const { mutateAsync: updateTitle } = useContractWrite(contract, "updateTitle");
+  const { mutateAsync: updateImage } = useContractWrite(
+    contract,
+    "updateImage"
+  );
+  const { mutateAsync: updateDescription } = useContractWrite(
+    contract,
+    "updateDescription"
+  );
+  const { mutateAsync: updatePrice } = useContractWrite(
+    contract,
+    "updatePrice"
+  );
+  const { mutateAsync: updateTitle } = useContractWrite(
+    contract,
+    "updateTitle"
+  );
 
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [popupInput, setPopupInput] = useState("");
   const [selectedUpdateType, setSelectedUpdateType] = useState(null);
 
   useEffect(() => {
-    if (!isLoading) {
-      const tempJsonData = data.map((propertyData) => ({
-        sold: propertyData.sold,
-        _id: parseInt(propertyData[0]._hex, 16),
-        title: propertyData[5],
-        description: propertyData.description,
-        price: Number((parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)),
-        address: propertyData.propertyAddress,
-        city: propertyData.city,
-        country: propertyData.country,
-        image: propertyData.images[0],
-        facilities: {
-          bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
-          parking: parseInt(propertyData.nParking._hex, 16),
-          bedrooms: parseInt(propertyData.nRooms._hex, 16),
-        },
-      }));
-      const filteredProperties = tempJsonData.filter((property) => !property.sold);
-      setJsonData(filteredProperties);
+    try {
+      if (!isLoading) {
+        const tempJsonData = data.map((propertyData) => ({
+          sold: propertyData.sold,
+          _id: parseInt(propertyData[0]._hex, 16),
+          title: propertyData[5],
+          description: propertyData.description,
+          price: Number(
+            (parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)
+          ),
+          address: propertyData.propertyAddress,
+          city: propertyData.city,
+          country: propertyData.country,
+          imageArray: propertyData.images, // Added propertyData.images as imageArray
+          facilities: {
+            bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
+            parking: parseInt(propertyData.nParking._hex, 16),
+            bedrooms: parseInt(propertyData.nRooms._hex, 16),
+          },
+        }));
+        const filteredProperties = tempJsonData.filter(
+          (property) => !property.sold
+        );
+        setJsonData(filteredProperties);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   }, [data, isLoading]);
 
- 
-
-      
-    
- 
   const openPopup = (property, updateType) => {
     setSelectedProperty(property);
     setSelectedUpdateType(updateType);
@@ -69,7 +86,7 @@ const Update = () => {
     setSelectedProperty(null);
     setSelectedUpdateType(null);
   };
-  
+
   const handleUpdate = async () => {
     try {
       switch (selectedUpdateType) {
@@ -80,7 +97,12 @@ const Update = () => {
           await updateDescription({ args: [selectedProperty._id, popupInput] });
           break;
         case "updatePrice":
-          await updatePrice({ args: [selectedProperty._id, ethers.utils.parseUnits(popupInput.toString(), 18)] });
+          await updatePrice({
+            args: [
+              selectedProperty._id,
+              ethers.utils.parseUnits(popupInput.toString(), 18),
+            ],
+          });
           break;
         case "updateTitle":
           await updateTitle({ args: [selectedProperty._id, popupInput] });
@@ -88,20 +110,27 @@ const Update = () => {
         default:
           break;
       }
-
+      resetForm();
       closePopup();
     } catch (error) {
       console.error("Failed to update:", error);
     }
   };
-  
+
+  const resetForm = () => {
+    setPopupInput("");
+  };
 
   return (
     <div className="property-page">
       <div className="properties-container">
-        { JsonData.map((property) => (
+        {JsonData.map((property) => (
           <div key={property._id} className="property-item property-card">
-            <img src={property.image} alt={property.title} className="img" />
+            <img
+              src={property.imageArray[0]}
+              alt={property.title}
+              className="img"
+            />
             <div className="attributes">
               <div className="propTitle">{property.title}</div>
               <div className="price">{property.price} MATIC</div>
@@ -110,19 +139,63 @@ const Update = () => {
               </div>
             </div>
 
-            <button className="viewButton" onClick={() => openPopup(property, "updateImage")}>
+            <button
+              className="viewButton"
+              onClick={() => openPopup(property, "updateImage")}
+              style={{
+                padding: "10px 15px",
+                margin: "5px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Update Image
             </button>
 
-            <button className="viewButton" onClick={() => openPopup(property, "updateDescription")}>
+            <button
+              className="viewButton"
+              onClick={() => openPopup(property, "updateDescription")}
+              style={{
+                padding: "10px 15px",
+                margin: "5px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Update Description
             </button>
 
-            <button className="viewButton" onClick={() => openPopup(property, "updatePrice")}>
+            <button
+              className="viewButton"
+              onClick={() => openPopup(property, "updatePrice")}
+              style={{
+                padding: "10px 15px",
+                margin: "5px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Update Price
             </button>
 
-            <button className="viewButton" onClick={() => openPopup(property, "updateTitle")}>
+            <button
+              className="viewButton"
+              onClick={() => openPopup(property, "updateTitle")}
+              style={{
+                padding: "10px 15px",
+                margin: "5px",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
               Update Title
             </button>
           </div>
@@ -138,19 +211,29 @@ const Update = () => {
                 <p>{selectedProperty.description}</p>
                 <p>
                   <br />
-                  Address:<br></br> {selectedProperty.address}, {selectedProperty.city},{" "}
-                  {selectedProperty.country}
+                  Address:<br></br> {selectedProperty.address},{" "}
+                  {selectedProperty.city}, {selectedProperty.country}
                 </p>{" "}
                 <br />
                 <p>
-                  Facilities:<br></br> Bathrooms: {selectedProperty.facilities.bathrooms},
-                  Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                  Facilities:<br></br> Bathrooms:{" "}
+                  {selectedProperty.facilities.bathrooms}, Parking:{" "}
+                  {selectedProperty.facilities.parking}, Bedrooms:{" "}
                   {selectedProperty.facilities.bedrooms}
                 </p>
               </div>
 
               <div>
-                <ImageSlider selectedProperty={selectedProperty} />
+                {selectedProperty.imageArray.length === 1 ? (
+                  <img
+                    src={selectedProperty.imageArray[0]}
+                    alt={`property image ${selectedProperty._id}`}
+                    className="single-image"
+                    style={{ width: "400px", height: "250px" }}
+                  />
+                ) : (
+                  <ImageSlider selectedProperty={selectedProperty} />
+                )}
                 <p
                   style={{
                     fontWeight: "bolder",
@@ -173,9 +256,10 @@ const Update = () => {
                 <input
                   type="text"
                   value={popupInput}
+                  placeholder="Enter value"
                   onChange={(e) => setPopupInput(e.target.value)}
                 />
-                <button className="updateButton" onClick={handleUpdate}>
+                <button className="viewButton" onClick={handleUpdate}>
                   Update
                 </button>
                 <button className="closeButton" onClick={closePopup}>

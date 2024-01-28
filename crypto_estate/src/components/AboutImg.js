@@ -3,7 +3,7 @@ import "./AboutImg.css";
 const AboutImg = () => {
   return (
     <div className="meet-container">
-      <h1>MEET THE TEAM</h1>
+      <h1>FEATUERS</h1>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 .about-container{
     padding:10rem;
-    /* background-color: rgb(255, 242, 220); */
-    background-color: white;
+    background-color: rgb(246, 244, 244);
 }
 .about-wrapper{
     display: flex;

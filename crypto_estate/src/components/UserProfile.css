@@ -1,6 +1,7 @@
 .userprofile{
     display: flex;
     flex-direction: column;
+    background-color: rgb(246, 244, 244);
 }
 
 .userprofilein{
@@ -28,7 +29,7 @@
 }
 .header {
     /* background-color: #f0f0f0; */
-    background-color: rgb(245, 241, 235);
+    background-color: rgb(246, 244, 244);
     padding: 10px;
     width: 100%;
     height: 90px;
@@ -36,6 +37,7 @@
     padding-left: 20vh;
     display : flex;
     justify-content: space-between;
+    padding-top: 3rem;
     
 
 }
