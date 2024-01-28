@@ -15,6 +15,7 @@ import { CONTRACT_ADDRESS } from "./pages/addresses";
 import Loading from "./Loading";
 import LikedArray from "./LikedArray";
 import PopupMap from "./PopupMap";
+import "./ConfirmDetails.css";
 
 const Propertylist = () => {
   const { contract } = useContract(
@@ -29,6 +30,7 @@ const Propertylist = () => {
   }, [likeList]);
 
   const [JsonData, setJsonData] = useState([]);
+  const [showBuySuccessPopup ,setShowBuySuccessPopup] = useState(false);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
 
   const buyer = useAddress();
@@ -274,6 +276,7 @@ const Propertylist = () => {
         selectedProperty._id,
         buyer, // Use the variable here
       ]);
+      setShowBuySuccessPopup(true);
     } catch (error) {
       if (error.message === "user rejected transaction") {
         console.log("User rejected transaction");
@@ -285,6 +288,7 @@ const Propertylist = () => {
 >
   Buy Property
 </Web3Button>
+
             <button className="closeButton" onClick={closePopup}>
               {" "}
               Close
@@ -292,6 +296,15 @@ const Propertylist = () => {
           </div>
         </div>
       )}
+      {showBuySuccessPopup && (
+  <div className="popup" >
+    <div className="popup-content">
+    <p>Property Bought successfully! &#10004;</p>
+    </div>
+  </div>
+
+)}
+      
     </div>
   );
 };
