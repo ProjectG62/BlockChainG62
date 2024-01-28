@@ -144,10 +144,7 @@ const Propertylist = () => {
       <div className="properties-container">
         {isLoading && <Loading></Loading>}
         {filteredProperties.map((property) => (
-          <div
-            key={property._id}
-            className="property-item property-card"
-          >
+          <div key={property._id} className="property-item property-card">
             <AiFillHeart
               size={24}
               color={likedProperties.includes(property._id) ? "red" : "white"}
@@ -163,10 +160,7 @@ const Propertylist = () => {
               </div>
             </div>
 
-            <button
-              className="viewButton"
-              onClick={() => openPopup(property)}
-            >
+            <button className="viewButton" onClick={() => openPopup(property)}>
               View Property
             </button>
           </div>
@@ -180,119 +174,123 @@ const Propertylist = () => {
               {/* Left Side */}
 
               <div className="popup-content">
-                <div className="mainBox">
-                <div>
-                <h2>{selectedProperty.title}</h2> <br />
-                <p>{selectedProperty.description}</p>
-                <p>
-                  <br />
-                  Address:<br></br> {selectedProperty.address},{" "}
-                  {selectedProperty.city}, {selectedProperty.country}
-                </p>{" "}
-                <br />
-                <p>
-                  Facilities:<br></br> Bathrooms:{" "}
-                  {selectedProperty.facilities.bathrooms}, Parking:{" "}
-                  {selectedProperty.facilities.parking}, Bedrooms:{" "}
-                  {selectedProperty.facilities.bedrooms}
-                </p>
+                <div className="mainBox" style={{ fontSize: "17px" }}>
+                  <div>
+                    <h2 style={{ color: "rgb(102, 62, 2)" }}>
+                      {selectedProperty.title}
+                    </h2>
+                    <p>{selectedProperty.description}</p>
+                    <p>
+                      <br></br>
+                      <h5 style={{ color: "rgb(102, 62, 2)" }}>Address:</h5>
+                      {selectedProperty.address}, {selectedProperty.city},{" "}
+                      {selectedProperty.country}
+                    </p>{" "}
+                    <p>
+                      <br></br>
+                      <h5 style={{ color: "rgb(102, 62, 2)" }}>Facilities:</h5>
+                      Bathrooms: {selectedProperty.facilities.bathrooms},
+                      Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                      {selectedProperty.facilities.bedrooms}
+                    </p>
+                  </div>
+
+                  {/* Right Side */}
+                  <div className=" prices">
+                    {selectedProperty.imageArray.length === 1 ? (
+                      <img
+                        src={selectedProperty.imageArray[0]}
+                        alt={`property image ${selectedProperty._id}`}
+                        className="single-image"
+                        style={{ width: "90%", height: "50%", borderRadius: "1rem"}}
+                      />
+                    ) : (
+                      <ImageSlider selectedProperty={selectedProperty} />
+                    )}
+
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        textAlign: "right",
+                        fontSize: "30px",
+                        paddingLeft: "4rem",
+                      }}
+                    >
+                      Price: {selectedProperty.price} MATIC{" "}
+                      <img
+                        src="https://res.cloudinary.com/duwadnxwf/image/upload/v1704972760/icons8-polygon-64_kpqfrj.png"
+                        width={30}
+                        height={30}
+                        alt="matic"
+                      ></img>
+                    </p>
+                    {/* Map */}
+                  </div>
                 </div>
-
-              {/* Right Side */}
-              <div className=" prices">
-                {selectedProperty.imageArray.length === 1 ? 
-                (<img
-                    src={selectedProperty.imageArray[0]}
-                    alt={`property image ${selectedProperty._id}`}
-                    className="single-image"
-                    style={{ width: "50%", height: "60%" }}
-                  />
-                ) : (<ImageSlider selectedProperty={selectedProperty} />)}
-
-                <p
-                  style={{
-                    fontWeight: "bolder",
-                    textAlign: "center",
-                    paddingTop: "1rem",
-                    fontSize: "30px",
-                  }}
-                >
-                  Price: {selectedProperty.price} MATIC{" "}
-                  <img
-                    src="https://res.cloudinary.com/duwadnxwf/image/upload/v1704972760/icons8-polygon-64_kpqfrj.png"
-                    width={30}
-                    height={30}
-                    alt="matic"
-                  ></img>
-                </p>
-                {/* Map */}
-            <div className="popup-map">
-              <PopupMap
-                address={selectedProperty.address}
-                city={selectedProperty.city}
-                country={selectedProperty.country}
-              />
-            </div>
-          </div>
-              </div>
-              </div>
-                              {/* Buttons */}
-                <div className="popup-buttons">
-                  <Web3Button
-                    contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
-                    action={(contract) => handleLike(selectedProperty._id)}
-                  >
-                    {likedProperties.includes(selectedProperty._id)
-                      ? "Remove Like"
-                      : "Like"}
-                  </Web3Button>
-
-                  <Web3Button
-                    contractAddress={CONTRACT_ADDRESS}
-                    action={(contract) => {
-                      try {
-                        transferNativeToken({
-                          to: selectedProperty.owner,
-                          amount: selectedProperty.price,
-                        });
-
-                        // If no error occurred, print "Hello, World!"
-                        // Call your buyProperty function after successful transfer
-                        contract.call("buyProperty", [
-                          selectedProperty._id,
-                          buyer,
-                        ]);
-                      } catch (error) {
-                        console.error(
-                          "Error transferring tokens:",
-                          error
-                        );
-                      }
-                    }}
-                  >
-                    Buy Property
-                  </Web3Button>
-                  <button
-                    className="closeButton"
-                    onClick={closePopup}
-                  >
+                <div className="popup-map">
+                  <h5 style={{ paddingTop: "2rem", color: "rgb(102, 62, 2)" }}>
                     {" "}
-                    Close
-                  </button>
+                    Map:
+                  </h5>
+                  <PopupMap
+                    address={selectedProperty.address}
+                    city={selectedProperty.city}
+                    country={selectedProperty.country}
+                  />
                 </div>
               </div>
+              {/* Buttons */}
             </div>
-
-            {/* Map */}
-            {/* <div className="popup-map">
-              <PopupMap
-                address={selectedProperty.address}
-                city={selectedProperty.city}
-                country={selectedProperty.country}
-              />
-            </div> */}
           </div>
-        // </div>
+
+          <div className="popup-buttons">
+          <Web3Button
+  contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
+  action={async (contract) => {
+    try {
+      await handleLike(selectedProperty._id);
+    } catch (error) {
+      if (error.message === "user rejected transaction") {
+        console.log("User rejected transaction");
+      } else {
+        console.error("Error handling like:", error);
+      }
+    }
+  }}
+>
+  {likedProperties.includes(selectedProperty._id) ? "Remove Like" : "Like"}
+</Web3Button>
+
+<Web3Button
+  contractAddress={CONTRACT_ADDRESS}
+  action={async (contract) => {
+    try {
+      await transferNativeToken({
+        to: selectedProperty.owner,
+        amount: selectedProperty.price,
+      });
+
+      await contract.call("buyProperty", [
+        selectedProperty._id,
+        buyer, // Use the variable here
+      ]);
+    } catch (error) {
+      if (error.message === "user rejected transaction") {
+        console.log("User rejected transaction");
+      } else {
+        console.error("Error transferring tokens or buying property:", error);
+      }
+    }
+  }}
+>
+  Buy Property
+</Web3Button>
+            <button className="closeButton" onClick={closePopup}>
+              {" "}
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

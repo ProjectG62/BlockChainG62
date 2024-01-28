@@ -28,7 +28,15 @@ const PopupMap = ({ address, city, country }) => {
 
           const { lat, lng } = response.data.results[0].geometry;
 
-          const marker = L.marker([lat, lng]).addTo(map);
+          // Define a custom icon
+          const customIcon = L.icon({
+            iconUrl: "https://static.vecteezy.com/system/resources/previews/016/314/852/original/map-pointer-icon-gps-location-symbol-maps-pin-location-map-icon-free-png.png", // Provide the path to your custom marker image
+            iconSize: [32, 32], // Size of the icon
+            iconAnchor: [16, 32], // Anchor point of the icon (centered, bottom)
+            popupAnchor: [0, -32], // Anchor point for the popup (top center)
+          });
+
+          const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
 
           marker.bindPopup(value.formData.address).openPopup();
 
@@ -46,7 +54,7 @@ const PopupMap = ({ address, city, country }) => {
     <div
       id="map"
       ref={mapContainer}
-      style={{ height: "350%", width: "200%" }}
+      style={{ height: "100%", width: "100%" }}
     ></div>
   );
 };

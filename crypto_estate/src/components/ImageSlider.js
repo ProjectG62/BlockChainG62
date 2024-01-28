@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
+import "./Propertylist.css"
 
 const ImageSlider = ({ selectedProperty }) => {
   const [current, setCurrent] = useState(0);
@@ -14,9 +15,9 @@ const ImageSlider = ({ selectedProperty }) => {
   };
 
   return (
-    <section className="slider">
+    <div className="slider">
       <SlArrowLeft className="left-arrow" onClick={prevSlide} />
-      <SlArrowRight className="right-arrow" onClick={nextSlide} />
+      {/* <SlArrowRight className="right-arrow" onClick={nextSlide} /> */}
       {images.map((slide, index) => (
         <div
           className={index === current ? "slide active" : "slide"}
@@ -31,7 +32,8 @@ const ImageSlider = ({ selectedProperty }) => {
           )}
         </div>
       ))}
-    </section>
+      <SlArrowRight className="right-arrow" onClick={nextSlide} />
+    </div>
   );
 };
 

@@ -45,11 +45,11 @@ export const Navbar = () => {
         ></img>
       </div>
       <ul className={menuOpen ? "open" : ""}>
-        {address && (
+      
           <li>
            <NavLink to = "/Ledger">Ledger</NavLink>
           </li>
-        )}
+        
         
         <li>
           <NavLink to="/Buy_Property">Buy Property</NavLink>

@@ -6,9 +6,22 @@ import LikedArray from "./LikedArray";
 
 const WishList = () => {
   const x = useAddress();
-  const { contract } = useContract(
-    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
-  );
+  const { contract } = useContract("0xECc91bBec0c259ed3F4B6F84914274a363da7ffe");
+  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const handleCardClick = (propertyId) => {
+    // Set the selected property when a card is clicked
+    const property = allProperties.find(
+      (prop) => parseInt(prop[0]._hex, 16) === propertyId
+    );
+    setSelectedProperty(property);
+  };
+
+  const handleCloseModal = () => {
+    // Close the modal by resetting the selected property
+    setSelectedProperty(null);
+  };
+
 
   // Fetch all properties from the contract
   const { data: allProperties, isLoading: isAllPropertiesLoading } =
@@ -72,7 +85,7 @@ const WishList = () => {
 
         if (isPropertyLiked) {
           return (
-            <div key={propertyId} className="property-item property-card">
+            <div key={propertyId} className="property-item property-card" onClick={() => handleCardClick(propertyId)} >
               <img
                 src={property.images[0]}
                 alt={property.propertyTitle}
@@ -95,6 +108,11 @@ const WishList = () => {
           return null;
         }
       })}
+
+
+
+
+      
     </div>
   );
 };
