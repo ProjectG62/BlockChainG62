@@ -16,6 +16,9 @@ import Loading from "./Loading";
 import LikedArray from "./LikedArray";
 import PopupMap from "./PopupMap";
 import "./ConfirmDetails.css";
+import Pages from "./Pages";
+
+const PropertiesPerPage = 9;
 
 const Propertylist = () => {
   const { contract } = useContract(
@@ -77,6 +80,21 @@ const Propertylist = () => {
 
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [filteredProperties, setFilteredProperties] = useState(JsonData);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(JsonData.length / PropertiesPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const startIndex = (currentPage - 1) * PropertiesPerPage;
+  const endIndex = startIndex + PropertiesPerPage;
+
+  useEffect(() => {
+    // Update filteredProperties with processed data
+    setFilteredProperties(JsonData.slice(startIndex, endIndex));
+  }, [JsonData, startIndex, endIndex]);
 
   useEffect(() => {
     // Update filteredProperties with processed data
@@ -172,6 +190,11 @@ const Propertylist = () => {
           </div>
         ))}
       </div>
+      <Pages
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
 
       {selectedProperty && (
         <div className="popup-container">
@@ -181,7 +204,7 @@ const Propertylist = () => {
 
               <div className="popup-content">
                 <div className="mainBox" style={{ fontSize: "17px" }}>
-                  <div style={{ width: "49%"}}>
+                  <div style={{ width: "49%" }}>
                     <h2 style={{ color: "rgb(102, 62, 2)" }}>
                       {selectedProperty.title}
                     </h2>
@@ -203,7 +226,6 @@ const Propertylist = () => {
                       style={{ paddingTop: "0.5rem", color: "rgb(102, 62, 2)" }}
                     >
                       {" "}
-                      
                       Map:<p> (Scroll down to view location on Map)</p>
                     </h5>
                   </div>
@@ -313,8 +335,8 @@ const Propertylist = () => {
         </div>
       )}
       {showBuySuccessPopup && (
-        <div className="popup success-popup">
-          <div className="popup-content">
+        <div className="success-popup">
+          <div>
             <p>Property Bought successfully! &#10004;</p>
           </div>
         </div>
