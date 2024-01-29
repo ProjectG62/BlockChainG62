@@ -8,6 +8,7 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import { CONTRACT_ADDRESS } from "./pages/addresses";
 import "./ConfirmDetails.css";
 
+
 const { ethers } = require("ethers");
 const LabelContext = createContext();
 
@@ -125,9 +126,25 @@ function ConfirmDetails() {
       ]);
       console.log("Property listed successfully!");
       value.setsubmit(true);
-      {
-        value.setsubmit && value.setShowPopup(true);
-      }
+      
+      value.setsubmit && value.setShowPopup(true);
+      
+      setTimeout(()=>{
+          value.setPage(0);
+          value.setFormData({
+            country: "",
+            city: "",
+            address: "",
+            title: "",
+            description: "",
+            price: 0,
+            numRooms: 0,
+            numBathrooms: 0,
+            numParkingSpaces: 0,
+            images: "",
+          });
+          value.setShowPopup(false);  
+      },5000);
     } catch (error) {
       console.error("Error listing property:", error);
       // Handle error appropriately
@@ -257,7 +274,7 @@ function ConfirmDetails() {
 
       {value.showPopup && (
         <div className="success-popup">
-          <div className="popup-content">
+          <div>
             <p>Property Listed successfully! &#10004;</p>
           </div>
         </div>
