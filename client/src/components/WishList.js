@@ -1,62 +1,87 @@
 import React, { useState, useEffect } from "react";
-import "./WishList.css";
-import profileData from "../profile.json";
-import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
+import {
+  useContract,
+  useContractRead,
+  useAddress,
+  useTransferNativeToken,
+  Web3Button,
+} from "@thirdweb-dev/react";
 import LikedArray from "./LikedArray";
+import { CONTRACT_ADDRESS } from "./pages/addresses";
+import PopupMap from "./PopupMap";
+import ImageSlider from "./ImageSlider";
+import "./Propertylist.css";
 
 const WishList = () => {
-  const x = useAddress();
-  const { contract } = useContract("0xECc91bBec0c259ed3F4B6F84914274a363da7ffe");
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const { contract } = useContract(
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
+  );
+  const [JsonData, setJsonData] = useState([]);
+  const { data, isLoading } = useContractRead(contract, "getAllProperties");
 
-  const handleCardClick = (propertyId) => {
-    // Set the selected property when a card is clicked
-    const property = allProperties.find(
-      (prop) => parseInt(prop[0]._hex, 16) === propertyId
-    );
-    setSelectedProperty(property);
-  };
+  const buyer = useAddress();
 
-  const handleCloseModal = () => {
-    // Close the modal by resetting the selected property
-    setSelectedProperty(null);
-  };
-
-
-  // Fetch all properties from the contract
-  const { data: allProperties, isLoading: isAllPropertiesLoading } =
-    useContractRead(contract, "getAllProperties");
-
-  // Fetch the list of liked properties
   const { likeList } = LikedArray();
-
-  // State to store liked properties
   const [likedProperties, setLikedProperties] = useState([]);
+  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [showBuySuccessPopup, setShowBuySuccessPopup] = useState(false);
 
   useEffect(() => {
-    // Update liked properties when likeList changes
     setLikedProperties(likeList);
   }, [likeList]);
 
-  if (isAllPropertiesLoading) {
-    return <div>Loading...</div>;
+  const openPopup = (property) => {
+    setSelectedProperty(property);
+  };
+
+  const closePopup = () => {
+    setSelectedProperty(null);
+  };
+
+  useEffect(() => {
+    // Check if data is still loading
+    if (isLoading) {
+      // Data is still loading, do nothing for now
+      return;
+    }
+
+    // Data has been loaded, process and save
+    const tempJsonData = data.map((propertyData) => ({
+      owner: propertyData.owner,
+      _id: parseInt(propertyData[0]._hex, 16),
+      title: propertyData[5],
+      description: propertyData.description,
+      price: Number(
+        (parseInt(propertyData[2]._hex, 16) * 10 ** -18).toFixed(2)
+      ),
+      address: propertyData.propertyAddress,
+      city: propertyData.city,
+      country: propertyData.country,
+      image: propertyData.images[0],
+      imageArray: propertyData.images,
+      facilities: {
+        bathrooms: parseInt(propertyData.nBathrooms._hex, 16),
+        parking: parseInt(propertyData.nParking._hex, 16),
+        bedrooms: parseInt(propertyData.nRooms._hex, 16),
+      },
+    }));
+
+    setJsonData(tempJsonData);
+  }, [data, isLoading]);
+
+  const { mutate: transferNativeToken, error } = useTransferNativeToken();
+
+  if (error) {
+    console.error("failed to transfer tokens", error);
   }
 
-  // // Check if there are no liked properties
-  // if (likedProperties.length === 0) {
-  //   return <div>No Properties in your Favourites!</div>;
-  // }
+  console.log(JsonData, "allProperties");
 
-  // Check if there are no liked properties or no intersection with allProperties
-  if (
-    likedProperties.length === 0 ||
-    likedProperties.every(
-      (propertyId) =>
-        allProperties.findIndex(
-          (prop) => parseInt(prop[0]._hex, 16) === propertyId
-        ) === -1
-    )
-  ) {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (likedProperties.length === 0 || JsonData.length === 0) {
     return (
       <div
         style={{
@@ -71,48 +96,183 @@ const WishList = () => {
             src="https://res.cloudinary.com/duwadnxwf/image/upload/v1706375714/empty-box_rw29yi.png"
             height={90}
             width={90}
-          ></img>
+            alt="Empty Box"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  const likedPropertiesData = JsonData.filter((property) =>
+    likedProperties.includes(parseInt(property._id))
+  );
+  console.log(likedPropertiesData, "likedPropData");
+  console.log(likedProperties, "likedProps");
+
+  if (likedPropertiesData.length === 0) {
+    return (
+      <div
+        style={{
+          fontSize: "20px",
+          textAlign: "center",
+          padding: "3rem",
+        }}
+      >
+        No Properties in your Favourites!
+        <div>
+          <img
+            src="https://res.cloudinary.com/duwadnxwf/image/upload/v1706375714/empty-box_rw29yi.png"
+            height={90}
+            width={90}
+            alt="Empty Box"
+          />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="properties-container">
-      {allProperties.map((property) => {
-        const propertyId = parseInt(property[0]._hex, 16); // Extract property ID from the nested structure
-        const isPropertyLiked = likedProperties.includes(propertyId);
+    <div>
+      <div className="properties-container">
+        {likedPropertiesData.map((property) => (
+          <div key={property._id._hex} className="property-item property-card">
+            <img src={property.image} alt={property.title} className="img" />
+            <div className="attributes">
+              <div className="propTitle">{property.title}</div>
+              <div className="price">{property.price} MATIC</div>
+              <div className="address">
+                {property.address}, {property.city}, {property.country}
+              </div>
+              <button
+                className="viewButton"
+                onClick={() => openPopup(property)}
+              >
+                View Property
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      {selectedProperty && (
+        <div className="popup-container">
+          <div className="popup-body">
+            <div className="popup-header">
+              {/* Left Side */}
 
-        if (isPropertyLiked) {
-          return (
-            <div key={propertyId} className="property-item property-card" onClick={() => handleCardClick(propertyId)} >
-              <img
-                src={property.images[0]}
-                alt={property.propertyTitle}
-                className="img"
-              />
-              <div className="attributes">
-                <div className="propTitle">{property.propertyTitle}</div>
-                <div className="price">
-                  {Number((property.price * 10 ** -18).toFixed(2))} MATIC
+              <div className="popup-content">
+                <div className="mainBox" style={{ fontSize: "17px" }}>
+                  <div>
+                    <h2 style={{ color: "rgb(102, 62, 2)" }}>
+                      {selectedProperty.title}
+                    </h2>
+                    <p>{selectedProperty.description}</p>
+                    <p>
+                      <br></br>
+                      <h5 style={{ color: "rgb(102, 62, 2)" }}>Address:</h5>
+                      {selectedProperty.address}, {selectedProperty.city},{" "}
+                      {selectedProperty.country}
+                    </p>{" "}
+                    <p>
+                      <br></br>
+                      <h5 style={{ color: "rgb(102, 62, 2)" }}>Facilities:</h5>
+                      Bathrooms: {selectedProperty.facilities.bathrooms},
+                      Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
+                      {selectedProperty.facilities.bedrooms}
+                    </p>
+                  </div>
+
+                  {/* Right Side */}
+                  <div className=" prices">
+                    {selectedProperty.imageArray.length === 1 ? (
+                      <img
+                        src={selectedProperty.imageArray[0]}
+                        alt={`property image ${selectedProperty._id}`}
+                        className="single-image"
+                        style={{ width: "80%", height: "90%" }}
+                      />
+                    ) : (
+                      <ImageSlider selectedProperty={selectedProperty} />
+                    )}
+
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        textAlign: "right",
+                        fontSize: "30px",
+                        paddingLeft: "4rem",
+                      }}
+                    >
+                      Price: {selectedProperty.price} MATIC{" "}
+                      <img
+                        src="https://res.cloudinary.com/duwadnxwf/image/upload/v1704972760/icons8-polygon-64_kpqfrj.png"
+                        width={30}
+                        height={30}
+                        alt="matic"
+                      ></img>
+                    </p>
+                    {/* Map */}
+                  </div>
                 </div>
-                <div className="address">
-                  {property.propertyAddress}, {property.city},{" "}
-                  {property.country}
+                <div className="popup-map">
+                  <h5 style={{ paddingTop: "2rem", color: "rgb(102, 62, 2)" }}>
+                    {" "}
+                    Map
+                  </h5>
+                  <PopupMap
+                    address={selectedProperty.address}
+                    city={selectedProperty.city}
+                    country={selectedProperty.country}
+                  />
                 </div>
               </div>
+              {/* Buttons */}
             </div>
-          );
-        } else {
-          // You can remove the else block since the message is displayed outside the mapping loop
-          return null;
-        }
-      })}
+          </div>
 
+          <div className="popup-buttons">
+            <Web3Button
+              contractAddress={CONTRACT_ADDRESS}
+              action={async (contract) => {
+                try {
+                  await transferNativeToken({
+                    to: selectedProperty.owner,
+                    amount: selectedProperty.price,
+                  });
 
+                  await contract.call("buyProperty", [
+                    selectedProperty._id,
+                    buyer, // Use the variable here
+                  ]);
+                  setShowBuySuccessPopup(true);
+                } catch (error) {
+                  if (error.message === "user rejected transaction") {
+                    console.log("User rejected transaction");
+                  } else {
+                    console.error(
+                      "Error transferring tokens or buying property:",
+                      error
+                    );
+                  }
+                }
+              }}
+            >
+              Buy Property
+            </Web3Button>
 
-
-      
+            <button className="closeButton" onClick={closePopup}>
+              {" "}
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      {showBuySuccessPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>Property Bought successfully! &#10004;</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
