@@ -39,6 +39,14 @@ const WishList = () => {
   };
 
   useEffect(() => {
+    const buySuccessTimeout = setTimeout(() => {
+      setShowBuySuccessPopup(false);
+    }, 5000);
+
+    return () => clearTimeout(buySuccessTimeout);
+  }, [showBuySuccessPopup]);
+
+  useEffect(() => {
     // Check if data is still loading
     if (isLoading) {
       // Data is still loading, do nothing for now
@@ -188,7 +196,7 @@ const WishList = () => {
                         src={selectedProperty.imageArray[0]}
                         alt={`property image ${selectedProperty._id}`}
                         className="single-image"
-                        style={{ width: "80%", height: "90%" }}
+                        style={{ width: "90%", height: "50%", borderRadius: "1rem"}}
                       />
                     ) : (
                       <ImageSlider selectedProperty={selectedProperty} />
@@ -266,8 +274,8 @@ const WishList = () => {
           </div>
         </div>
       )}
-      {showBuySuccessPopup && (
-        <div className="popup">
+{showBuySuccessPopup && (
+        <div className="success-popup">
           <div className="popup-content">
             <p>Property Bought successfully! &#10004;</p>
           </div>

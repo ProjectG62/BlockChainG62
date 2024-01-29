@@ -1,6 +1,7 @@
-/* .most-liked{
-    background-color: rgba(155, 149, 149, 0.893);
-} */
+.most-liked{
+    background-color: rgb(246, 244, 244);
+    padding: 2rem;
+}
 h1{
     color: #333;
     text-align: center;

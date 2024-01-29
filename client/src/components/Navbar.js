@@ -49,7 +49,10 @@ export const Navbar = () => {
           <li>
            <NavLink to = "/Ledger">Ledger</NavLink>
           </li>
-        
+
+          <li>
+           <NavLink to = "/FAQs">FAQs</NavLink>
+          </li>
         
         <li>
           <NavLink to="/Buy_Property">Buy Property</NavLink>

@@ -8,6 +8,7 @@ import Sell_Property from "./components/pages/Sell_Property";
 import Profile from "./components/pages/Profile";
 import Ledger from "./components/pages/Ledger";
 import AboutUs from "./components/pages/AboutUs";
+import FAQs from "./components/pages/FAQs";
 import { LabelContextProvider } from "./components/ConfirmDetails";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -32,6 +33,8 @@ function App() {
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Reg" element={<Registration />} />
             <Route path="/Ledger" element={<Ledger/>}/>
+            <Route path="/FAQs" element={<FAQs/>}/>
+
           </Routes>
         </LabelContextProvider>
       </Router>

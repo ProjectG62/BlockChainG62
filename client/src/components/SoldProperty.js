@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./WishList.css";
-
 import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 
 import SoldArray from "./SoldArray";

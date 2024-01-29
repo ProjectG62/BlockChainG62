@@ -30,7 +30,7 @@ const Propertylist = () => {
   }, [likeList]);
 
   const [JsonData, setJsonData] = useState([]);
-  const [showBuySuccessPopup ,setShowBuySuccessPopup] = useState(false);
+  const [showBuySuccessPopup, setShowBuySuccessPopup] = useState(false);
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
 
   const buyer = useAddress();
@@ -130,15 +130,19 @@ const Propertylist = () => {
     setFilteredProperties(filtered);
   };
 
-  const {
-    mutate: transferNativeToken,
-
-    error,
-  } = useTransferNativeToken();
+  const { mutate: transferNativeToken, error } = useTransferNativeToken();
 
   if (error) {
     console.error("failed to transfer tokens", error);
   }
+
+  useEffect(() => {
+    const buySuccessTimeout = setTimeout(() => {
+      setShowBuySuccessPopup(false);
+    }, 5000);
+
+    return () => clearTimeout(buySuccessTimeout);
+  }, [showBuySuccessPopup]);
 
   return (
     <div className="property-page">
@@ -177,7 +181,7 @@ const Propertylist = () => {
 
               <div className="popup-content">
                 <div className="mainBox" style={{ fontSize: "17px" }}>
-                  <div>
+                  <div style={{ width: "49%"}}>
                     <h2 style={{ color: "rgb(102, 62, 2)" }}>
                       {selectedProperty.title}
                     </h2>
@@ -195,6 +199,13 @@ const Propertylist = () => {
                       Parking: {selectedProperty.facilities.parking}, Bedrooms:{" "}
                       {selectedProperty.facilities.bedrooms}
                     </p>
+                    <h5
+                      style={{ paddingTop: "0.5rem", color: "rgb(102, 62, 2)" }}
+                    >
+                      {" "}
+                      
+                      Map:<p> (Scroll down to view location on Map)</p>
+                    </h5>
                   </div>
 
                   {/* Right Side */}
@@ -204,7 +215,11 @@ const Propertylist = () => {
                         src={selectedProperty.imageArray[0]}
                         alt={`property image ${selectedProperty._id}`}
                         className="single-image"
-                        style={{ width: "90%", height: "50%", borderRadius: "1rem"}}
+                        style={{
+                          width: "90%",
+                          height: "70%",
+                          borderRadius: "1rem",
+                        }}
                       />
                     ) : (
                       <ImageSlider selectedProperty={selectedProperty} />
@@ -230,10 +245,6 @@ const Propertylist = () => {
                   </div>
                 </div>
                 <div className="popup-map">
-                  <h5 style={{ paddingTop: "2rem", color: "rgb(102, 62, 2)" }}>
-                    {" "}
-                    Map:
-                  </h5>
                   <PopupMap
                     address={selectedProperty.address}
                     city={selectedProperty.city}
@@ -246,48 +257,53 @@ const Propertylist = () => {
           </div>
 
           <div className="popup-buttons">
-          <Web3Button
-  contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
-  action={async (contract) => {
-    try {
-      await handleLike(selectedProperty._id);
-    } catch (error) {
-      if (error.message === "user rejected transaction") {
-        console.log("User rejected transaction");
-      } else {
-        console.error("Error handling like:", error);
-      }
-    }
-  }}
->
-  {likedProperties.includes(selectedProperty._id) ? "Remove Like" : "Like"}
-</Web3Button>
+            <Web3Button
+              contractAddress="0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
+              action={async (contract) => {
+                try {
+                  await handleLike(selectedProperty._id);
+                } catch (error) {
+                  if (error.message === "user rejected transaction") {
+                    console.log("User rejected transaction");
+                  } else {
+                    console.error("Error handling like:", error);
+                  }
+                }
+              }}
+            >
+              {likedProperties.includes(selectedProperty._id)
+                ? "Remove Like"
+                : "Like"}
+            </Web3Button>
 
-<Web3Button
-  contractAddress={CONTRACT_ADDRESS}
-  action={async (contract) => {
-    try {
-      await transferNativeToken({
-        to: selectedProperty.owner,
-        amount: selectedProperty.price,
-      });
+            <Web3Button
+              contractAddress={CONTRACT_ADDRESS}
+              action={async (contract) => {
+                try {
+                  await transferNativeToken({
+                    to: selectedProperty.owner,
+                    amount: selectedProperty.price,
+                  });
 
-      await contract.call("buyProperty", [
-        selectedProperty._id,
-        buyer, // Use the variable here
-      ]);
-      setShowBuySuccessPopup(true);
-    } catch (error) {
-      if (error.message === "user rejected transaction") {
-        console.log("User rejected transaction");
-      } else {
-        console.error("Error transferring tokens or buying property:", error);
-      }
-    }
-  }}
->
-  Buy Property
-</Web3Button>
+                  await contract.call("buyProperty", [
+                    selectedProperty._id,
+                    buyer, // Use the variable here
+                  ]);
+                  setShowBuySuccessPopup(true);
+                } catch (error) {
+                  if (error.message === "user rejected transaction") {
+                    console.log("User rejected transaction");
+                  } else {
+                    console.error(
+                      "Error transferring tokens or buying property:",
+                      error
+                    );
+                  }
+                }
+              }}
+            >
+              Buy Property
+            </Web3Button>
 
             <button className="closeButton" onClick={closePopup}>
               {" "}
@@ -297,14 +313,12 @@ const Propertylist = () => {
         </div>
       )}
       {showBuySuccessPopup && (
-  <div className="popup" >
-    <div className="popup-content">
-    <p>Property Bought successfully! &#10004;</p>
-    </div>
-  </div>
-
-)}
-      
+        <div className="popup success-popup">
+          <div className="popup-content">
+            <p>Property Bought successfully! &#10004;</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

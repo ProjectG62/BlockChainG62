@@ -1,22 +1,28 @@
-import { Web3Button, useAddress , useContract , useContractRead} from "@thirdweb-dev/react";
-import React, { createContext, useState, useContext } from "react";
+import {
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { CONTRACT_ADDRESS } from "./pages/addresses";
 import "./ConfirmDetails.css";
 
 const { ethers } = require("ethers");
 const LabelContext = createContext();
 
-
 const LabelContextProvider = ({ children }) => {
   const [page, setPage] = useState(0);
   const [updateMapFlag, setUpdateMapFlag] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-  const [submit,setsubmit] = useState(false);
+  const [submit, setsubmit] = useState(false);
+  const [showBuySuccessPopup, setShowBuySuccessPopup] = useState(false);
 
-  const { contract } = useContract("0xECc91bBec0c259ed3F4B6F84914274a363da7ffe");
+  const { contract } = useContract(
+    "0xECc91bBec0c259ed3F4B6F84914274a363da7ffe"
+  );
   const { data, isLoading } = useContractRead(contract, "getAllProperties");
   console.log(data);
-
 
   const steps = [
     "Add Location",
@@ -52,7 +58,6 @@ const LabelContextProvider = ({ children }) => {
     setUpdateMapFlag(true); // Set the flag to trigger map update
   };
 
-
   const contextValue = {
     page,
     setPage,
@@ -67,7 +72,8 @@ const LabelContextProvider = ({ children }) => {
     showPopup,
     setShowPopup,
     data,
-    submit,setsubmit,
+    submit,
+    setsubmit,
 
     nextPage: () => {
       setPage(page + 1);
@@ -78,11 +84,18 @@ const LabelContextProvider = ({ children }) => {
     },
   };
 
-  
   if (updateMapFlag) {
     setUpdateMapFlag(false);
   }
   //  console.log(lastProperty);
+
+  useEffect(() => {
+    const buySuccessTimeout = setTimeout(() => {
+      setShowBuySuccessPopup(false);
+    }, 5000);
+
+    return () => clearTimeout(buySuccessTimeout);
+  }, [showBuySuccessPopup]);
 
   return (
     <LabelContext.Provider value={contextValue}>
@@ -113,8 +126,7 @@ function ConfirmDetails() {
       console.log("Property listed successfully!");
       value.setsubmit(true);
       {
-        value.setsubmit &&
-        value.setShowPopup(true);
+        value.setsubmit && value.setShowPopup(true);
       }
     } catch (error) {
       console.error("Error listing property:", error);
@@ -239,17 +251,16 @@ function ConfirmDetails() {
       <Web3Button
         contractAddress={CONTRACT_ADDRESS}
         action={handleWeb3ButtonAction}
-
       >
         SUBMIT
       </Web3Button>
 
       {value.showPopup && (
-        <div className="popup">
-        <div className="popup-content">
-          <p>Property added successfully! &#10004;</p>
+        <div className="success-popup">
+          <div className="popup-content">
+            <p>Property Listed successfully! &#10004;</p>
+          </div>
         </div>
-      </div>
       )}
     </form>
   );

@@ -25,8 +25,8 @@ const UserProfile = () => {
     fetchWalletAddress();
   }, []);
   return (
-    <div style={{ backgroundColor: "rgb(246, 244, 244)", paddingBottom: "8%" }}>
-      <div className="userprofile">
+<div style={{ backgroundColor: "rgb(246, 244, 244)", height: "100vh" }}>    
+  <div className="userprofile">
         {/* UserProfile , showing {activepage} */}
         <div className="userprofilein">
           <div className="left">
