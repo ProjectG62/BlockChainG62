@@ -33,8 +33,11 @@ const LoginForm = () => {
       if (response) {
         // Login successful, you can store the token in local storage or a state
         alert("Login successful");
+        sessionStorage.setItem("isLoggedIn", "true");
+
+      // Redirect to the home page or another route
         // Example: localStorage.setItem("token", data.token);
-        navigate("/dashboard"); // Redirect to the dashboard or another page
+        navigate("/"); // Redirect to the dashboard or another page
       } else {
         // Login failed
         alert("Invalid username or password");

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./Registration.css";
-import LoginForm from "./LoginForm";
 import { GoogleLogin } from 'react-google-login';
-import { useAddress } from "@thirdweb-dev/react";
+import { Link,useNavigate } from "react-router-dom";
 
 const responseGoogle = (response) => {
   console.log(response);
@@ -13,6 +12,8 @@ const Registration = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -38,7 +39,15 @@ const Registration = () => {
       if (response.ok) {
         // Registration successful, you can handle the success case here
         console.log("Registration successful:", data);
-        // <LoginForm /> // This line might not be necessary, check if you want to navigate to login automatically
+        alert("Registration successful");
+        navigate("/LoginForm")
+        setRegistrationSuccess(true);
+
+        // Automatically navigate to the login page after a delay (e.g., 2 seconds)
+        setTimeout(() => {
+          setRegistrationSuccess(false);
+          // You can replace this with your actual route path for the login page
+                });
       } else {
         // Registration failed, you can handle the error case here
         console.error("Registration failed:", data);
@@ -90,7 +99,15 @@ const Registration = () => {
             />
           </div>
 
-          <button type="submit">Register</button>
+          {registrationSuccess && (
+            <div className="registration-success-message">
+              Registration successful! Redirecting to login page...
+            </div>
+          )}
+
+          
+            <button type="submit">Register</button>
+         
 
           <br />
           <br />
@@ -110,34 +127,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-
-
-// import React from "react";
-// import "./Registration.css";
-// const Registration = () => {
-//   return (
-//     <div className="register">
-//     <div className="wrapper">
-//       <form  className="RegistrationForm"action="">
-//         <h1>Register</h1>
-//         <div className="input-box">
-//           <input type="text" placeholder="First Name" required />
-//         </div>
-//         <div className="input-box">
-//           <input type="text" placeholder="Last Name" required />
-//         </div>
-//         <div className="input-box">
-//           <input type="text" placeholder="Username" required />
-//         </div>
-//         <div className="input-box">
-//           <input type="password" placeholder="Password" required />
-//         </div>
-
-//         <button type="submit">Register</button>
-//       </form>
-//     </div>
-//     </div>
-//   );
-// };
-// export default Registration;
