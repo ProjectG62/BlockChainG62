@@ -209,7 +209,7 @@ const Update = () => {
               {/* Left Side */}
               <div className="popup-content">
                 <div className="mainBox" style={{ fontSize: "17px" }}>
-                  <div>
+                  <div style={{ width: "49%" }}>
                     <h2 style={{ color: "rgb(102, 62, 2)" }}>
                       {selectedProperty.title}
                     </h2>

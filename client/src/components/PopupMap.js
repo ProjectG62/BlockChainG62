@@ -54,7 +54,7 @@ const PopupMap = ({ address, city, country }) => {
     <div
       id="map"
       ref={mapContainer}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%"}}
     ></div>
   );
 };

@@ -108,7 +108,7 @@ nav .menu .ham:hover{
     }
 
     nav ul.open {
-        display: flex;
+        display: contents;
     }
 
     nav ul li {

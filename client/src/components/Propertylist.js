@@ -18,7 +18,7 @@ import PopupMap from "./PopupMap";
 import "./ConfirmDetails.css";
 import Pages from "./Pages";
 
-const PropertiesPerPage = 9;
+const PropertiesPerPage = 8;
 
 const Propertylist = () => {
   const { contract } = useContract(

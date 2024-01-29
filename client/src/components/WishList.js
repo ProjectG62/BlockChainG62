@@ -276,7 +276,7 @@ const WishList = () => {
       )}
 {showBuySuccessPopup && (
         <div className="success-popup">
-          <div className="popup-content">
+          <div>
             <p>Property Bought successfully! &#10004;</p>
           </div>
         </div>
