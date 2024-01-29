@@ -38,7 +38,7 @@ const PopupMap = ({ address, city, country }) => {
 
           const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
 
-          marker.bindPopup(value.formData.address).openPopup();
+          // marker.bindPopup(value.formData.address).openPopup();
 
           map.setView([lat, lng], 13);
         } catch (error) {
