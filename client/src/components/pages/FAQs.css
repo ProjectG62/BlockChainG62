@@ -1,10 +1,11 @@
 /* src/components/pages/FAQs.css */
 
-.faq-container {
+.faq-container 
+{
     width: 80%;
     margin: auto;
     text-align: center;
-    //color: #f5f5f5;
+    padding-top: 2%;
   }
   
   .faq-heading {
