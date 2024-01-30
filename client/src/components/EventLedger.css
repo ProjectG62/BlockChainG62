@@ -1,12 +1,12 @@
 .table{
     margin-right: 20px;
-    padding: auto;
+    padding: 10px;
 }
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    margin-right: 20px;
+    /* margin-top: 20px; */
+    /* margin-right: 20px; */
   }
   
   th, td {
