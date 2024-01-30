@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "./Registration.css";
-import { GoogleLogin } from 'react-google-login';
-import { Link,useNavigate } from "react-router-dom";
-
-const responseGoogle = (response) => {
-  console.log(response);
-};
+import { GoogleLogin } from "react-google-login";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +10,14 @@ const Registration = () => {
   const [password, setPassword] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const navigate = useNavigate();
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    // Assuming Google login was successful, redirect to the home page after 20 seconds
+    setTimeout(() => {
+      navigate("/");
+    }, 20000);
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -40,14 +44,9 @@ const Registration = () => {
         // Registration successful, you can handle the success case here
         console.log("Registration successful:", data);
         alert("Registration successful");
-        navigate("/LoginForm")
         setRegistrationSuccess(true);
 
-        // Automatically navigate to the login page after a delay (e.g., 2 seconds)
-        setTimeout(() => {
-          setRegistrationSuccess(false);
-          // You can replace this with your actual route path for the login page
-                });
+        // No need for immediate navigation here; it will be done after 20 seconds
       } else {
         // Registration failed, you can handle the error case here
         console.error("Registration failed:", data);
@@ -101,13 +100,12 @@ const Registration = () => {
 
           {registrationSuccess && (
             <div className="registration-success-message">
-              Registration successful! Redirecting to login page...
+              Registration successful! Redirecting to the home page in 20
+              seconds...
             </div>
           )}
 
-          
-            <button type="submit">Register</button>
-         
+          <button type="submit">Register</button>
 
           <br />
           <br />
@@ -117,7 +115,7 @@ const Registration = () => {
               buttonText="Login with Google"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
-              cookiePolicy={'single_host_origin'}
+              cookiePolicy={"single_host_origin"}
             />
           </div>
         </form>
