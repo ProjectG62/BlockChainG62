@@ -36,6 +36,7 @@ console.log(allEvents)
             <th >Event Name</th>
             <th>Old Owner</th>
             <th>New Owner</th>
+            <th>Price (Matic)</th>
             <th>Transaction Hash</th>
             <th>Block Number</th>
           </tr>
@@ -46,12 +47,16 @@ console.log(allEvents)
             let oldowner;
             let newowner;
             let eventName = event.eventName;
+            let price = 'NA';
             if(event.eventName==='PropertyListed'){
               oldowner = 'NA';
               newowner = 'NA';
+              price = Number((event.data.price * 10 ** -18).toFixed(2));
+              
             }else if(event.eventName === "PropertySold"){
               oldowner = event.data.oldowner;
               newowner = event.data.newowner;
+              price = Number((event.data.price * 10 ** -18).toFixed(2));
               if(address === event.data.newowner){
                 eventName = "PropertyBought";
               }else{
@@ -67,6 +72,7 @@ console.log(allEvents)
               <td>{eventName}</td>
               <td>{oldowner}</td>
               <td>{newowner}</td>
+              <td>{price}</td>
               <td>{event.transaction.blockHash}</td>
               <td>{event.transaction.blockNumber}</td>
 
