@@ -6,6 +6,8 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const uri = "mongodb+srv://g62:projectschool@cluster0.gbjrhhp.mongodb.net/?retryWrites=true&w=majority";
+const  path = require('path');
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -93,9 +95,26 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.post("/saveJson", (req, res) => {
+  const jsonData = req.body;
+  const filePath = path.join(__dirname, "data.json");
+
+  fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Error saving data to file");
+    }
+    console.log("Data saved to file:", filePath);
+    res.status(200).send("Data saved successfully");
+  });
+});
+
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 
 
 

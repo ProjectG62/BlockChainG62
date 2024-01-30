@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Registration.css";
-import { GoogleLogin } from "react-google-login";
 import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
@@ -11,13 +10,6 @@ const Registration = () => {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const responseGoogle = (response) => {
-    console.log(response);
-    // Assuming Google login was successful, redirect to the home page after 20 seconds
-    setTimeout(() => {
-      navigate("/");
-    }, 20000);
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -109,15 +101,6 @@ const Registration = () => {
 
           <br />
           <br />
-          <div className="GoogleLogin">
-            <GoogleLogin
-              clientId="686062209071-0h1r5k1si29lvcmhnda56ktbiifhogqc.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy={"single_host_origin"}
-            />
-          </div>
         </form>
       </div>
     </div>
