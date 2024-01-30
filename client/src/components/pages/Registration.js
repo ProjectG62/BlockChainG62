@@ -36,6 +36,7 @@ const Registration = () => {
         // Registration successful, you can handle the success case here
         console.log("Registration successful:", data);
         alert("Registration successful");
+        navigate("/LoginForm");
         setRegistrationSuccess(true);
 
         // No need for immediate navigation here; it will be done after 20 seconds

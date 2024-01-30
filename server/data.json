@@ -1,24 +1,5 @@
 [
   {
-    "owner": "0x386cE8BD65DD0EB1E2B1620c578AA953b5685972",
-    "_id": 22,
-    "title": "Kailash Nivas",
-    "description": "\nInviting two-story home, open-concept living, gourmet kitchen, master suite, private patio, smart features – your perfect space!",
-    "price": 0.1,
-    "address": "ECIL",
-    "city": "Hyderabad",
-    "country": "India",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFRe_76SKU1YlSITz8lYhyO3B6sw0FZKp-Q&usqp=CAU",
-    "imageArray": [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhFRe_76SKU1YlSITz8lYhyO3B6sw0FZKp-Q&usqp=CAU"
-    ],
-    "facilities": {
-      "bathrooms": 1,
-      "parking": 1,
-      "bedrooms": 2
-    }
-  },
-  {
     "owner": "0x8a7699b828E61F56fcD4AFc1B0b6E5F36B43356b",
     "_id": 25,
     "title": "Lakshmi Nivas",
@@ -221,6 +202,25 @@
     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbGoeZg06hhqGsjJ-DrxjgEmU5o7Jua2vB9Q&usqp=CAU",
     "imageArray": [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbGoeZg06hhqGsjJ-DrxjgEmU5o7Jua2vB9Q&usqp=CAU"
+    ],
+    "facilities": {
+      "bathrooms": 1,
+      "parking": 1,
+      "bedrooms": 2
+    }
+  },
+  {
+    "owner": "0x386cE8BD65DD0EB1E2B1620c578AA953b5685972",
+    "_id": 39,
+    "title": "Devda Nivas",
+    "description": "Beautiful Property",
+    "price": 0.1,
+    "address": "Lakdikapool",
+    "city": "Hyderabad",
+    "country": "India",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLyGyLfYBvnhs3_qEtj1avj3dO_6nP0BgqDw&usqp=CAU",
+    "imageArray": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLyGyLfYBvnhs3_qEtj1avj3dO_6nP0BgqDw&usqp=CAU"
     ],
     "facilities": {
       "bathrooms": 1,
