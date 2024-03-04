@@ -2,7 +2,6 @@ import "./App.css";
 import "./index.css";
 import Home from "./components/pages/Home";
 import Navbar from "./components/Navbar";
-import LoginForm from "./components/pages/LoginForm";
 import Buy_Property from "./components/pages/Buy_Property";
 import Sell_Property from "./components/pages/Sell_Property";
 import Profile from "./components/pages/Profile";
@@ -12,7 +11,6 @@ import FAQs from "./components/pages/FAQs";
 import { LabelContextProvider } from "./components/ConfirmDetails";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Registration from "./components/pages/Registration";
 const activeChain = "mumbai";
 
 function App() {
@@ -29,12 +27,9 @@ function App() {
             <Route path="/Buy_Property" element={<Buy_Property />} />
             <Route path="/Sell_Property" element={<Sell_Property />} />
             <Route path="/user/:activepage" element={<Profile />} />
-            <Route path="/LoginForm" element={<LoginForm />} />
             <Route path="/AboutUs" element={<AboutUs />} />
-            <Route path="/Reg" element={<Registration />} />
-            <Route path="/Ledger" element={<Ledger/>}/>
-            <Route path="/FAQs" element={<FAQs/>}/>
-
+            <Route path="/Ledger" element={<Ledger />} />
+            <Route path="/FAQs" element={<FAQs />} />
           </Routes>
         </LabelContextProvider>
       </Router>

@@ -45,26 +45,22 @@ export const Navbar = () => {
         ></img>
       </div>
       <ul className={menuOpen ? "open" : ""}>
-
         <li>
           <NavLink to="/Buy_Property">Buy Property</NavLink>
         </li>
         <li>
           <NavLink to="/Sell_Property">Sell Property</NavLink>
         </li>
-              
+
         <li>
-           <NavLink to = "/Ledger">Ledger</NavLink>
-          </li>
-        
+          <NavLink to="/Ledger">Ledger</NavLink>
+        </li>
+
         <li>
           <NavLink to="/AboutUs">About Us</NavLink>
         </li>
         <li>
-           <NavLink to = "/FAQs">FAQs</NavLink>
-          </li>
-        <li>
-          <NavLink to="/LoginForm">Login</NavLink>
+          <NavLink to="/FAQs">FAQs</NavLink>
         </li>
         {address && (
           <li>
@@ -80,4 +76,4 @@ export const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;
